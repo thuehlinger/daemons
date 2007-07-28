@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: Releases</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>Releases</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>Releases
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Sat Jul 07 11:04:16 +0200 2007</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/Daemons.html">Daemons</a> Release History</h1>
+<h2>Release 1.0.7: July 7, 2007</h2>
+<ul>
+<li>Patch to fix wrong ARGV when using :exec (in def start_exec:
+Kernel.exec(script(), *(@app_argv || []))) (thanks to Alex McGuire).
+
+</li>
+</ul>
+<h2>Release 1.0.6: Mai 8, 2007</h2>
+<ul>
+<li>New option to pass an ARGV-style array to run and run_proc (thanks to Marc
+Evans).
+
+</li>
+<li>Additional patches for &#8217;/var/log&#8217; (thanks to Marc Evans).
+
+</li>
+</ul>
+<h2>Release 1.0.5: February 24, 2007</h2>
+<ul>
+<li>Applied patch that makes daemons to use &#8217;/var/log&#8217; as logfile
+directory if you use :dir_mode = :system (thanks to Han Holl).
+
+</li>
+<li><a href="../classes/Daemons.html">Daemons</a> should now work with Ruby 1.9
+(at least the basic features).
+
+</li>
+</ul>
+<h2>Release 1.0.4: January 17, 2007</h2>
+<ul>
+<li>Document the :log_output option (thanks to Andrew Kuklewicz).
+
+</li>
+<li>Set STDOUT.sync = true when redirecting to a logfile (thanks to Andrew
+Kuklewicz).
+
+</li>
+<li>Should now run also correctly when there is no working &#8216;ps ax&#8217;
+on the system (thanks to Daniel Kehoe).
+
+</li>
+</ul>
+<h2>Release 1.0.3: November 1, 2006</h2>
+<ul>
+<li>Set the app_name correctly also for the monitor process (thanks to Ilya
+Novoselov).
+
+</li>
+</ul>
+<h2>Release 1.0.2: September 26, 2006</h2>
+<ul>
+<li>Changed the &#8216;ps -ax&#8217; call back to &#8216;ps ax&#8217;.
+
+</li>
+<li>Fixed the documentation for the :normal :dir_mode.
+
+</li>
+<li>As a default for <a
+href="../classes/Daemons.html#M000004">Daemons.run_proc</a>, the pid file
+is now saved in the current directory.
+
+</li>
+<li>In :ontop mode for running a proc (this is equal to calling something like
+&#8216;ruby ctrl_proc.rb run&#8217;), the proc now runs directly in the
+calling script, not in a forked process anymore (thanks to Paul Butcher).
+
+</li>
+<li>Set $0 to app_name in the daemons (thanks to Ilya Novoselov).
+
+</li>
+</ul>
+<h2>Release 1.0.1: August 30, 2006</h2>
+<ul>
+<li>Fixed a regex for parsing the &#8216;ps ax&#8217; system call. (thanks to
+Garance Alistair Drosehn)
+
+</li>
+</ul>
+<h2>Release 1.0.0: August 29, 2006</h2>
+<ul>
+<li>Fix the parsing of the &#8216;ps ax&#8217; system call. (thanks to Garance
+Alistair Drosehn)
+
+</li>
+</ul>
+<h2>Release 0.4.4: February 14, 2006</h2>
+<ul>
+<li>Several fixes that allow us to use the <a
+href="../classes/Daemons/Controller.html">Daemons::Controller</a> with a
+proc instead of wrapping a script file. This gives us all the PID file
+management, monitoring, command line options, etc. without having to
+specify a path to our script which can be tricky, especially when using
+RubyGems. (thanks to John-Mason Shackelford)
+
+</li>
+</ul>
+<h2>Release 0.4.3: November 29, 2005</h2>
+<ul>
+<li>New Option: You can specify the name of the application with :app_name on
+calling <a href="../classes/Daemons.html#M000003">Daemons.run</a>. This
+will be used to contruct the name of the pid files and log files. Defaults
+to the basename of the script. (thanks to Stephen R. Veit)
+
+</li>
+<li>Bugfix: Handle the case where no controller options are given when calling
+<a href="../classes/Daemons.html">Daemons</a>, just options after
+&quot;&#8212;&quot;. (thanks to Stephen R. Veit)
+
+</li>
+</ul>
+<h2>Release 0.4.2: November 15, 2005</h2>
+<ul>
+<li>Bugfix for problem with :normal pid-file directory mode (pid.rb), fixed
+(thanks to Stephen R. Veit)
+
+</li>
+</ul>
+<h2>Release 0.4.1: September 11, 2005</h2>
+<ul>
+<li>Bugfix for &#8216;run&#8217; command line mode: didn&#8216;t work anymore
+in 0.4.0, fixed
+
+</li>
+</ul>
+<h2>Release 0.4.0: July 30, 2005</h2>
+<ul>
+<li>Two completely new operation modes:
+
+<ol>
+<li>Call a block as a daemon (<tt><a
+href="../classes/Daemons.html#M000005">Daemons.call</a> { my_daemon_code
+}</tt>) and control it from the parent process.
+
+</li>
+<li><a href="../classes/Daemonize.html">Daemonize</a> the currently running
+process (<tt><a
+href="../classes/Daemons.html#M000006">Daemons.daemonize</a></tt>)
+
+</li>
+</ol>
+<p>
+plus the already existing mode to control your scripts (<tt><a
+href="../classes/Daemons.html#M000003">Daemons.run</a>(&quot;script.rb&quot;)</tt>)
+</p>
+</li>
+<li>Improved documentation (for example &quot;How does the daemonization
+process work?&quot;)
+
+</li>
+<li>Improved &quot;simulation mode&quot; (<tt>:ontop</tt> option)
+
+</li>
+<li>Some minor bugfixes
+
+</li>
+</ul>
+<h2>Release 0.3.0: April 21, 2005</h2>
+<ul>
+<li>New monitor functionality: automatic restarting of your applications if
+they crash
+
+</li>
+<li>&#8216;restart&#8217; command fixed
+
+</li>
+<li>&#8217;&#8212;force&#8217; command modifier (please refer to the
+documentation)
+
+</li>
+<li>Some more bugfixes and improvements
+
+</li>
+</ul>
+<h2>Release 0.2.1: Mar 21, 2005</h2>
+<ul>
+<li>Bugfix for a problem with the &#8216;status&#8217; command
+
+</li>
+</ul>
+<h2>Release 0.2.0: Mar 21, 2005</h2>
+<ul>
+<li>Exception backtrace functionality added
+
+</li>
+<li>Exec functionality added
+
+</li>
+<li>More examples added
+
+</li>
+<li>New commands: status, zap
+
+</li>
+</ul>
+<h2>Release 0.0.1: Feb 8, 2005</h2>
+<ul>
+<li>Initial release
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
