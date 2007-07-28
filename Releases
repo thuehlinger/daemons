@@ -1,5 +1,8 @@
 = Daemons Release History
 
+== Release 1.0.8:
+
+
 == Release 1.0.7: July 7, 2007
 
 * Patch to fix wrong ARGV when using :exec (in def start_exec: Kernel.exec(script(), *(@app_argv || []))) (thanks to Alex McGuire).
