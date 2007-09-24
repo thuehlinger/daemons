@@ -5,31 +5,46 @@ module Daemons
 
   class Pid
   
-    def Pid.running?(pid, additional = nil)
-      match_pid = Regexp.new("^\\s*#{pid}\\s")
-      got_match = false
-  
-      #ps_all = IO.popen('ps ax') # the correct syntax is without a dash (-) !
-      ps_in, ps_out, ps_err = Open3.popen3('ps ax') # the correct syntax is without a dash (-) !
-      
-      return true unless ps_out.gets
-      
+    def Pid.running?(pid)
+      # Check if process is in existence
+      # The simplest way to do this is to send signal '0'
+      # (which is a single system call) that doesn't actually
+      # sending a signal
       begin
-        ps_out.each { |psline|
-          next unless psline =~ match_pid
-          got_match = true
-          got_match = false if additional and psline !~ /#{additional}/
-          break
-        }
-      ensure
-        begin; begin; ps_in.close; rescue ::Exception; end; ps_out.close rescue nil; ps_err.close; rescue ::Exception; end
+        Process.kill(0, pid)
+        return true
+      rescue Errno::ESRCH
+        return true
+      rescue Errno::EPERM
+        return false
       end
-      
-      # an alternative would be to use the code below, but I don't know whether this is portable
-      # `ps axo pid=`.split.include? pid.to_s
-       
-      return got_match
     end
+    
+  #  def Pid.running?(pid, additional = nil)
+  #    match_pid = Regexp.new("^\\s*#{pid}\\s")
+  #    got_match = false
+  #
+  #    #ps_all = IO.popen('ps ax') # the correct syntax is without a dash (-) !
+  #    ps_in, ps_out, ps_err = Open3.popen3('ps ax') # the correct syntax is without a dash (-) !
+  #    
+  #    return true unless ps_out.gets
+  #    
+  #    begin
+  #      ps_out.each { |psline|
+  #        next unless psline =~ match_pid
+  #        got_match = true
+  #        got_match = false if additional and psline !~ /#{additional}/
+  #        break
+  #      }
+  #    ensure
+  #      begin; begin; ps_in.close; rescue ::Exception; end; ps_out.close rescue nil; ps_err.close; rescue ::Exception; end
+  #    end
+  #    
+  #    # an alternative would be to use the code below, but I don't know whether this is portable
+  #    # `ps axo pid=`.split.include? pid.to_s
+  #     
+  #    return got_match
+  #  end
     
     
     # Returns the directory that should be used to write the pid file to

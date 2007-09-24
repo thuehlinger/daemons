@@ -1,7 +1,8 @@
 = Daemons Release History
 
-== Release 1.0.8:
+== Release 1.0.8: September 24, 2007
 
+* new Pid.running? function. Checking whether a process exists by sending signal '0' (thanks to Dru Nelson).
 
 == Release 1.0.7: July 7, 2007
 
