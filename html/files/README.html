@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Sat May 15 14:46:40 +0200 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/Daemons.html">Daemons</a> Version 1.1.0</h1>
+<p>
+(See Releases for release-specific information)
+</p>
+<h2>What is <a href="../classes/Daemons.html">Daemons</a>?</h2>
+<p>
+<a href="../classes/Daemons.html">Daemons</a> provides an easy way to wrap
+existing ruby scripts (for example a self-written server) to be <em>run as
+a daemon</em> and to be <em>controlled by simple start/stop/restart
+commands</em>.
+</p>
+<p>
+If you want, you can also use daemons to <em>run blocks of ruby code in a
+daemon process</em> and to control these processes from the main
+application.
+</p>
+<p>
+Besides this basic functionality, daemons offers many advanced features
+like <em>exception backtracing</em> and logging (in case your ruby script
+crashes) and <em>monitoring</em> and automatic restarting of your processes
+if they crash.
+</p>
+<p>
+<a href="../classes/Daemons.html">Daemons</a> includes the
+<tt>daemonize.rb</tt> script written by <em>Travis Whitton</em> to do the
+daemonization process.
+</p>
+<h2>Basic Usage</h2>
+<p>
+You can use <a href="../classes/Daemons.html">Daemons</a> in four different
+ways:
+</p>
+<h3>1. Create wrapper scripts for your server scripts or applications</h3>
+<p>
+Layout: suppose you have your self-written server <tt>myserver.rb</tt>:
+</p>
+<pre>
+  # this is myserver.rb
+  # it does nothing really useful at the moment
+
+  loop do
+    sleep(5)
+  end
+</pre>
+<p>
+To use <tt>myserver.rb</tt> in a production environment, you need to be
+able to run <tt>myserver.rb</tt> in the <em>background</em> (this means
+detach it from the console, fork it in the background, release all
+directories and file descriptors).
+</p>
+<p>
+Just create <tt>myserver_control.rb</tt> like this:
+</p>
+<pre>
+  # this is myserver_control.rb
+
+  require 'rubygems'        # if you use RubyGems
+  require 'daemons'
+
+  Daemons.run('myserver.rb')
+</pre>
+<p>
+And use it like this from the console:
+</p>
+<pre>
+  $ ruby myserver_control.rb start
+      (myserver.rb is now running in the background)
+  $ ruby myserver_control.rb restart
+      (...)
+  $ ruby myserver_control.rb stop
+</pre>
+<p>
+For testing purposes you can even run <tt>myserver.rb</tt> <em>without
+forking</em> in the background:
+</p>
+<pre>
+  $ ruby myserver_control.rb run
+</pre>
+<p>
+An additional nice feature of <a href="../classes/Daemons.html">Daemons</a>
+is that you can pass <em>additional arguments</em> to the script that
+should be daemonized by seperating them by two <em>hyphens</em>:
+</p>
+<pre>
+  $ ruby myserver_control.rb start -- --file=anyfile --a_switch another_argument
+</pre>
+<h3>2. Create wrapper scripts that include your server procs</h3>
+<p>
+Layout: suppose you have some code you want to run in the background and
+control that background process from a script:
+</p>
+<pre>
+  # this is your code
+  # it does nothing really useful at the moment
+
+  loop do
+    sleep(5)
+  end
+</pre>
+<p>
+To run this code as a daemon create <tt>myproc_control.rb</tt> like this
+and include your code:
+</p>
+<pre>
+  # this is myproc_control.rb
+
+  require 'rubygems'        # if you use RubyGems
+  require 'daemons'
+
+  Daemons.run_proc('myproc.rb') do
+    loop do
+      sleep(5)
+    end
+  end
+</pre>
+<p>
+And use it like this from the console:
+</p>
+<pre>
+  $ ruby myproc_control.rb start
+      (myproc.rb is now running in the background)
+  $ ruby myproc_control.rb restart
+      (...)
+  $ ruby myproc_control.rb stop
+</pre>
+<p>
+For testing purposes you can even run <tt>myproc.rb</tt> <em>without
+forking</em> in the background:
+</p>
+<pre>
+  $ ruby myproc_control.rb run
+</pre>
+<h3>3. Control a bunch of daemons from another application</h3>
+<p>
+Layout: you have an application <tt>my_app.rb</tt> that wants to run a
+bunch of server tasks as daemon processes.
+</p>
+<pre>
+  # this is my_app.rb
+
+  require 'rubygems'        # if you use RubyGems
+  require 'daemons'
+
+  task1 = Daemons.call(:multiple =&gt; true) do
+    # first server task
+
+    loop {
+      conn = accept_conn()
+      serve(conn)
+    }
+  end
+
+  task2 = Daemons.call do
+    # second server task
+
+    loop {
+      something_different()
+    }
+  end
+
+  # the parent process continues to run
+
+  # we can even control our tasks, for example stop them
+  task1.stop
+  task2.stop
+
+  exit
+</pre>
+<h3>4. <a href="../classes/Daemonize.html">Daemonize</a> the currently running process</h3>
+<p>
+Layout: you have an application <tt>my_daemon.rb</tt> that wants to run as
+a daemon (but without the ability to be controlled by daemons via
+start/stop commands)
+</p>
+<pre>
+  # this is my_daemons.rb
+
+  require 'rubygems'        # if you use RubyGems
+  require 'daemons'
+
+  # Initialize the app while we're not a daemon
+  init()
+
+  # Become a daemon
+  Daemons.daemonize
+
+  # The server loop
+  loop {
+    conn = accept_conn()
+    serve(conn)
+  }
+</pre>
+<p>
+<b>For further documentation, refer to the module documentation of <a
+href="../classes/Daemons.html">Daemons</a>.</b>
+</p>
+<h2>Download and Installation</h2>
+<p>
+<b>Download</b>: just go to <a
+href="http://rubyforge.org/projects/daemons">rubyforge.org/projects/daemons</a>/
+</p>
+<p>
+Installation <b>with</b> RubyGems:
+</p>
+<pre>
+  $ su
+  # gem install daemons
+</pre>
+<p>
+Installation <b>without</b> RubyGems:
+</p>
+<pre>
+  $ tar xfz daemons-x.x.x.tar.gz
+  $ cd daemons-x.x.x
+  $ su
+  # ruby setup.rb
+</pre>
+<h2>Documentation</h2>
+<p>
+For further documentation, refer to the module documentation of <a
+href="../classes/Daemons.html">Daemons</a> (click on <a
+href="../classes/Daemons.html">Daemons</a>).
+</p>
+<p>
+The RDoc documentation is also online at <a
+href="http://daemons.rubyforge.org">daemons.rubyforge.org</a>
+</p>
+<h2>Author</h2>
+<p>
+Written 2005-2010 by Thomas Uehlinger &lt;<a
+href="mailto:th.uehlinger@gmx.ch">th.uehlinger@gmx.ch</a>&gt;. Anonymous
+SVN checkout is available with &quot;svn checkout <a
+href="http://daemons.rubyforge.org/svn">daemons.rubyforge.org/svn</a>/&quot;.
+</p>
+<h2>License</h2>
+<p>
+Copyright (c) 2005-2010 Thomas Uehlinger
+</p>
+<p>
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+&quot;Software&quot;), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+</p>
+<p>
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+</p>
+<p>
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+<p>
+This license does not apply to daemonize.rb, which is was written by Travis
+Whitton und published under the following license:
+</p>
+<p>
+The <a href="../classes/Daemonize.html">Daemonize</a> extension module is
+copywrited free software by Travis Whitton &lt;whitton@atlantic.net&gt;.
+You can redistribute it under the terms specified in the COPYING file of
+the Ruby distribution.
+</p>
+<h2>Feedback and other resources</h2>
+<p>
+At <a
+href="http://rubyforge.org/projects/daemons">rubyforge.org/projects/daemons</a>.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
