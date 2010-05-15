@@ -71,7 +71,7 @@ module Daemons
           @options[:ontop] ||= true
           @group.new_application.start
         when 'stop'
-          @group.stop_all
+          @group.stop_all(@options[:force])
         when 'restart'
           unless @group.applications.empty?
             @group.stop_all

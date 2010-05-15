@@ -184,11 +184,11 @@ documentation.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000065">call_as_daemon</a>&nbsp;&nbsp;
-      <a href="#M000066">daemonize</a>&nbsp;&nbsp;
-      <a href="#M000067">redirect_io</a>&nbsp;&nbsp;
-      <a href="#M000063">safefork</a>&nbsp;&nbsp;
-      <a href="#M000064">simulate</a>&nbsp;&nbsp;
+      <a href="#M000063">call_as_daemon</a>&nbsp;&nbsp;
+      <a href="#M000064">daemonize</a>&nbsp;&nbsp;
+      <a href="#M000065">redirect_io</a>&nbsp;&nbsp;
+      <a href="#M000061">safefork</a>&nbsp;&nbsp;
+      <a href="#M000062">simulate</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -223,19 +223,19 @@ documentation.
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000065" class="method-detail">
-        <a name="M000065"></a>
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
 
         <div class="method-heading">
-          <a href="#M000065" class="method-signature">
+          <a href="#M000063" class="method-signature">
           <span class="method-name">call_as_daemon</span><span class="method-args">(block, logfile_name = nil, app_name = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000065-source">
+            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000063-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/daemons/daemonize.rb, line 142</span>
 142:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call_as_daemon</span>(<span class="ruby-identifier">block</span>, <span class="ruby-identifier">logfile_name</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">app_name</span> = <span class="ruby-keyword kw">nil</span>)
@@ -298,11 +298,11 @@ documentation.
         </div>
       </div>
 
-      <div id="method-M000066" class="method-detail">
-        <a name="M000066"></a>
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
 
         <div class="method-heading">
-          <a href="#M000066" class="method-signature">
+          <a href="#M000064" class="method-signature">
           <span class="method-name">daemonize</span><span class="method-args">(logfile_name = nil, app_name = nil)</span>
           </a>
         </div>
@@ -312,8 +312,8 @@ documentation.
 This method causes the current running process to become a daemon
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000066-source">
+            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000064-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/daemons/daemonize.rb, line 201</span>
 201:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">logfile_name</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">app_name</span> = <span class="ruby-keyword kw">nil</span>)
@@ -358,11 +358,11 @@ This method causes the current running process to become a daemon
         </div>
       </div>
 
-      <div id="method-M000067" class="method-detail">
-        <a name="M000067"></a>
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
 
         <div class="method-heading">
-          <a href="#M000067" class="method-signature">
+          <a href="#M000065" class="method-signature">
           <span class="method-name">redirect_io</span><span class="method-args">(logfile_name)</span>
           </a>
         </div>
@@ -373,8 +373,8 @@ Free file descriptors and point them somewhere sensible STDOUT/STDERR
 should go to a logfile
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000067-source">
+            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000065-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/daemons/daemonize.rb, line 244</span>
 244:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">redirect_io</span>(<span class="ruby-identifier">logfile_name</span>)
@@ -399,11 +399,11 @@ should go to a logfile
         </div>
       </div>
 
-      <div id="method-M000063" class="method-detail">
-        <a name="M000063"></a>
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
 
         <div class="method-heading">
-          <a href="#M000063" class="method-signature">
+          <a href="#M000061" class="method-signature">
           <span class="method-name">safefork</span><span class="method-args">()</span>
           </a>
         </div>
@@ -414,8 +414,8 @@ Try to fork if at all possible retrying every 5 sec if the maximum process
 limit for the system has been reached
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000063-source">
+            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000061-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/daemons/daemonize.rb, line 97</span>
  97:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">safefork</span>
@@ -438,19 +438,19 @@ limit for the system has been reached
         </div>
       </div>
 
-      <div id="method-M000064" class="method-detail">
-        <a name="M000064"></a>
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
 
         <div class="method-heading">
-          <a href="#M000064" class="method-signature">
+          <a href="#M000062" class="method-signature">
           <span class="method-name">simulate</span><span class="method-args">(logfile_name = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000064-source">
+            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000062-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/daemons/daemonize.rb, line 115</span>
 115:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">logfile_name</span> = <span class="ruby-keyword kw">nil</span>)

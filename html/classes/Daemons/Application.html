@@ -86,22 +86,22 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000028">exception_log</a>&nbsp;&nbsp;
-      <a href="#M000022">logfile</a>&nbsp;&nbsp;
-      <a href="#M000018">new</a>&nbsp;&nbsp;
-      <a href="#M000021">output_logfile</a>&nbsp;&nbsp;
-      <a href="#M000020">pidfile_dir</a>&nbsp;&nbsp;
-      <a href="#M000033">running?</a>&nbsp;&nbsp;
-      <a href="#M000019">script</a>&nbsp;&nbsp;
-      <a href="#M000032">show_status</a>&nbsp;&nbsp;
-      <a href="#M000027">start</a>&nbsp;&nbsp;
-      <a href="#M000024">start_exec</a>&nbsp;&nbsp;
-      <a href="#M000025">start_load</a>&nbsp;&nbsp;
-      <a href="#M000023">start_none</a>&nbsp;&nbsp;
-      <a href="#M000026">start_proc</a>&nbsp;&nbsp;
-      <a href="#M000029">stop</a>&nbsp;&nbsp;
-      <a href="#M000030">zap</a>&nbsp;&nbsp;
-      <a href="#M000031">zap!</a>&nbsp;&nbsp;
+      <a href="#M000026">exception_log</a>&nbsp;&nbsp;
+      <a href="#M000020">logfile</a>&nbsp;&nbsp;
+      <a href="#M000016">new</a>&nbsp;&nbsp;
+      <a href="#M000019">output_logfile</a>&nbsp;&nbsp;
+      <a href="#M000018">pidfile_dir</a>&nbsp;&nbsp;
+      <a href="#M000031">running?</a>&nbsp;&nbsp;
+      <a href="#M000017">script</a>&nbsp;&nbsp;
+      <a href="#M000030">show_status</a>&nbsp;&nbsp;
+      <a href="#M000025">start</a>&nbsp;&nbsp;
+      <a href="#M000022">start_exec</a>&nbsp;&nbsp;
+      <a href="#M000023">start_load</a>&nbsp;&nbsp;
+      <a href="#M000021">start_none</a>&nbsp;&nbsp;
+      <a href="#M000024">start_proc</a>&nbsp;&nbsp;
+      <a href="#M000027">stop</a>&nbsp;&nbsp;
+      <a href="#M000028">zap</a>&nbsp;&nbsp;
+      <a href="#M000029">zap!</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -113,6 +113,19 @@
     <div id="section">
 
 
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SIGNAL</td>
+          <td>=</td>
+          <td class="context-item-value">(RUBY_PLATFORM =~ /win32/ ? 'KILL' : 'TERM')</td>
+        </tr>
+        </table>
+      </div>
+    </div>
 
 
 
@@ -166,36 +179,36 @@ the <a href="Pid.html">Pid</a> instance belonging to this application
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000018" class="method-detail">
-        <a name="M000018"></a>
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
 
         <div class="method-heading">
-          <a href="#M000018" class="method-signature">
+          <a href="#M000016" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(group, add_options = {}, pid = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000018-source">
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 22</span>
-22:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">group</span>, <span class="ruby-identifier">add_options</span> = {}, <span class="ruby-identifier">pid</span> = <span class="ruby-keyword kw">nil</span>)
-23:       <span class="ruby-ivar">@group</span> = <span class="ruby-identifier">group</span>
-24:       <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
-25:       <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">add_options</span>)
-26:       
-27:       <span class="ruby-ivar">@dir_mode</span> = <span class="ruby-ivar">@dir</span> = <span class="ruby-ivar">@script</span> = <span class="ruby-keyword kw">nil</span>
-28:       
-29:       <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@pid</span> = <span class="ruby-identifier">pid</span>
-30:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">pidfile_dir</span>
-31:           <span class="ruby-ivar">@pid</span> = <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">multiple</span>)
-32:         <span class="ruby-keyword kw">else</span>
-33:           <span class="ruby-ivar">@pid</span> = <span class="ruby-constant">PidMem</span>.<span class="ruby-identifier">new</span>
-34:         <span class="ruby-keyword kw">end</span>
-35:       <span class="ruby-keyword kw">end</span>
-36:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 25</span>
+25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">group</span>, <span class="ruby-identifier">add_options</span> = {}, <span class="ruby-identifier">pid</span> = <span class="ruby-keyword kw">nil</span>)
+26:       <span class="ruby-ivar">@group</span> = <span class="ruby-identifier">group</span>
+27:       <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+28:       <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">add_options</span>)
+29:       
+30:       <span class="ruby-ivar">@dir_mode</span> = <span class="ruby-ivar">@dir</span> = <span class="ruby-ivar">@script</span> = <span class="ruby-keyword kw">nil</span>
+31:       
+32:       <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@pid</span> = <span class="ruby-identifier">pid</span>
+33:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">pidfile_dir</span>
+34:           <span class="ruby-ivar">@pid</span> = <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">multiple</span>)
+35:         <span class="ruby-keyword kw">else</span>
+36:           <span class="ruby-ivar">@pid</span> = <span class="ruby-constant">PidMem</span>.<span class="ruby-identifier">new</span>
+37:         <span class="ruby-keyword kw">end</span>
+38:       <span class="ruby-keyword kw">end</span>
+39:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -203,11 +216,11 @@ the <a href="Pid.html">Pid</a> instance belonging to this application
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000028" class="method-detail">
-        <a name="M000028"></a>
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
 
         <div class="method-heading">
-          <a href="#M000028" class="method-signature">
+          <a href="#M000026" class="method-signature">
           <span class="method-name">exception_log</span><span class="method-args">()</span>
           </a>
         </div>
@@ -215,7 +228,7 @@ the <a href="Pid.html">Pid</a> instance belonging to this application
         <div class="method-description">
           <p>
 This is a nice little function for debugging purposes: In case a
-multi-threaded ruby <a href="Application.html#M000019">script</a> exits due
+multi-threaded ruby <a href="Application.html#M000017">script</a> exits due
 to an uncaught exception it may be difficult to find out where the
 exception came from because one cannot catch exceptions that are thrown in
 threads other than the main thread.
@@ -225,86 +238,40 @@ This function searches for all exceptions in memory and outputs them to
 STDERR (if it is connected) and to a log file in the pid-file directory.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000028-source">
+            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000026-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 266</span>
-266:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exception_log</span>
-267:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">logfile</span>
-268:       
-269:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'logger'</span>
-270:       
-271:       <span class="ruby-identifier">l_file</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">logfile</span>)
-272:       
-273:       <span class="ruby-comment cmt"># the code below only logs the last exception</span>
-274: <span class="ruby-comment cmt">#       e = nil</span>
-275: <span class="ruby-comment cmt">#       </span>
-276: <span class="ruby-comment cmt">#       ObjectSpace.each_object {|o|</span>
-277: <span class="ruby-comment cmt">#         if ::Exception === o</span>
-278: <span class="ruby-comment cmt">#           e = o</span>
-279: <span class="ruby-comment cmt">#         end</span>
-280: <span class="ruby-comment cmt">#       }</span>
-281: <span class="ruby-comment cmt">#       </span>
-282: <span class="ruby-comment cmt">#       l_file.error e</span>
-283: <span class="ruby-comment cmt">#       l_file.close</span>
-284:       
-285:       <span class="ruby-comment cmt"># this code logs every exception found in memory</span>
-286:       <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">each_object</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
-287:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">o</span>
-288:           <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">error</span> <span class="ruby-identifier">o</span>
-289:         <span class="ruby-keyword kw">end</span>
-290:       }
-291:       
-292:       <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">close</span>
-293:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000022" class="method-detail">
-        <a name="M000022"></a>
-
-        <div class="method-heading">
-          <a href="#M000022" class="method-signature">
-          <span class="method-name">logfile</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000022-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 51</span>
-51:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">logfile</span>
-52:       <span class="ruby-identifier">logdir</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:system</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'/var/log'</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">pidfile_dir</span>
-53:       <span class="ruby-identifier">logdir</span> <span class="ruby-value">? </span><span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">logdir</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'.log'</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
-54:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000021" class="method-detail">
-        <a name="M000021"></a>
-
-        <div class="method-heading">
-          <a href="#M000021" class="method-signature">
-          <span class="method-name">output_logfile</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000021-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 46</span>
-46:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">output_logfile</span>
-47:       <span class="ruby-identifier">logdir</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:system</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'/var/log'</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">pidfile_dir</span>
-48:       (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:log_output</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">logdir</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">logdir</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'.output'</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
-49:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 302</span>
+302:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exception_log</span>
+303:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">logfile</span>
+304:       
+305:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'logger'</span>
+306:       
+307:       <span class="ruby-identifier">l_file</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">logfile</span>)
+308:       
+309:       <span class="ruby-comment cmt"># the code below finds the last exception</span>
+310:       <span class="ruby-identifier">e</span> = <span class="ruby-keyword kw">nil</span>
+311:       
+312:       <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">each_object</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+313:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">o</span>
+314:           <span class="ruby-identifier">e</span> = <span class="ruby-identifier">o</span>
+315:         <span class="ruby-keyword kw">end</span>
+316:       }
+317:      
+318:       <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">info</span> <span class="ruby-value str">&quot;*** below you find the most recent exception thrown, this will be likely (but not certainly) the exception that made the application exit abnormally ***&quot;</span>
+319:       <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">error</span> <span class="ruby-identifier">e</span>
+320:       
+321:       <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">info</span> <span class="ruby-value str">&quot;*** below you find all exception objects found in memory, some of them may have been thrown in your application, others may just be in memory because they are standard exceptions ***&quot;</span>
+322:       
+323:       <span class="ruby-comment cmt"># this code logs every exception found in memory</span>
+324:       <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">each_object</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+325:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">o</span>
+326:           <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">error</span> <span class="ruby-identifier">o</span>
+327:         <span class="ruby-keyword kw">end</span>
+328:       }
+329:       
+330:       <span class="ruby-identifier">l_file</span>.<span class="ruby-identifier">close</span>
+331:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -315,7 +282,7 @@ STDERR (if it is connected) and to a log file in the pid-file directory.
 
         <div class="method-heading">
           <a href="#M000020" class="method-signature">
-          <span class="method-name">pidfile_dir</span><span class="method-args">()</span>
+          <span class="method-name">logfile</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -324,20 +291,68 @@ STDERR (if it is connected) and to a log file in the pid-file directory.
             onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000020-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 42</span>
-42:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pidfile_dir</span>
-43:       <span class="ruby-constant">Pid</span>.<span class="ruby-identifier">dir</span>(<span class="ruby-ivar">@dir_mode</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">dir_mode</span>, <span class="ruby-ivar">@dir</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">dir</span>, <span class="ruby-ivar">@script</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">script</span>)
-44:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 54</span>
+54:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">logfile</span>
+55:       <span class="ruby-identifier">logdir</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:system</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'/var/log'</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">pidfile_dir</span>
+56:       <span class="ruby-identifier">logdir</span> <span class="ruby-value">? </span><span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">logdir</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'.log'</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+57:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000033" class="method-detail">
-        <a name="M000033"></a>
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
 
         <div class="method-heading">
-          <a href="#M000033" class="method-signature">
+          <a href="#M000019" class="method-signature">
+          <span class="method-name">output_logfile</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000019-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 49</span>
+49:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">output_logfile</span>
+50:       <span class="ruby-identifier">logdir</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:system</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'/var/log'</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">pidfile_dir</span>
+51:       (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:log_output</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">logdir</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">logdir</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'.output'</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+52:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="#M000018" class="method-signature">
+          <span class="method-name">pidfile_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000018-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 45</span>
+45:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pidfile_dir</span>
+46:       <span class="ruby-constant">Pid</span>.<span class="ruby-identifier">dir</span>(<span class="ruby-ivar">@dir_mode</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">dir_mode</span>, <span class="ruby-ivar">@dir</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">dir</span>, <span class="ruby-ivar">@script</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">script</span>)
+47:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="#M000031" class="method-signature">
           <span class="method-name">running?</span><span class="method-args">()</span>
           </a>
         </div>
@@ -351,388 +366,40 @@ a good idea in some cases. Alternatives would be to use a direct access
 method the unix process control system.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000033-source">
+            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000031-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 340</span>
-340:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">running?</span>
-341:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">exist?</span>
-342:         <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Pid</span>.<span class="ruby-identifier">running?</span>(<span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span>)
-343:       <span class="ruby-keyword kw">end</span>
-344:       
-345:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-346:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 378</span>
+378:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">running?</span>
+379:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">exist?</span>
+380:         <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Pid</span>.<span class="ruby-identifier">running?</span>(<span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span>)
+381:       <span class="ruby-keyword kw">end</span>
+382:       
+383:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+384:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000019" class="method-detail">
-        <a name="M000019"></a>
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
 
         <div class="method-heading">
-          <a href="#M000019" class="method-signature">
+          <a href="#M000017" class="method-signature">
           <span class="method-name">script</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000019-source">
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 38</span>
-38:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">script</span>
-39:       <span class="ruby-ivar">@script</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">script</span>
-40:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000032" class="method-detail">
-        <a name="M000032"></a>
-
-        <div class="method-heading">
-          <a href="#M000032" class="method-signature">
-          <span class="method-name">show_status</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000032-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 327</span>
-327:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_status</span>
-328:       <span class="ruby-identifier">running</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">running?</span>
-329:       
-330:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{self.group.app_name}: #{running ? '' : 'not '}running#{(running and @pid.exist?) ? ' [pid ' + @pid.pid.to_s + ']' : ''}#{(@pid.exist? and not running) ? ' (but pid-file exists: ' + @pid.pid.to_s + ')' : ''}&quot;</span>
-331:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000027" class="method-detail">
-        <a name="M000027"></a>
-
-        <div class="method-heading">
-          <a href="#M000027" class="method-signature">
-          <span class="method-name">start</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000027-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 222</span>
-222:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>
-223:       <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">create_monitor</span>(<span class="ruby-ivar">@group</span>.<span class="ruby-identifier">applications</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]  <span class="ruby-comment cmt"># we don't monitor applications in the foreground</span>
-224:       
-225:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mode</span>]
-226:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:none</span>
-227:           <span class="ruby-comment cmt"># this is only used to daemonize the currently running process</span>
-228:           <span class="ruby-identifier">start_none</span>
-229:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:exec</span>
-230:           <span class="ruby-identifier">start_exec</span>
-231:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:load</span>
-232:           <span class="ruby-identifier">start_load</span>
-233:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:proc</span>
-234:           <span class="ruby-identifier">start_proc</span>
-235:         <span class="ruby-keyword kw">else</span>
-236:           <span class="ruby-identifier">start_load</span>
-237:       <span class="ruby-keyword kw">end</span>
-238:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000024" class="method-detail">
-        <a name="M000024"></a>
-
-        <div class="method-heading">
-          <a href="#M000024" class="method-signature">
-          <span class="method-name">start_exec</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000024-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 96</span>
- 96:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_exec</span>
- 97:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
- 98:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">output_logfile</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>)
- 99:       <span class="ruby-keyword kw">else</span>
-100:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">output_logfile</span>)
-101:       <span class="ruby-keyword kw">end</span>
-102:       
-103:       <span class="ruby-comment cmt"># note that we cannot remove the pid file if we run in :ontop mode (i.e. 'ruby ctrl_exec.rb run')</span>
-104:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
-105:         
-106:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'DAEMONS_ARGV'</span>] = <span class="ruby-ivar">@controller_argv</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)      
-107:       <span class="ruby-comment cmt"># haven't tested yet if this is really passed to the exec'd process...</span>
-108:       
-109:       <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-identifier">script</span>(), <span class="ruby-operator">*</span>(<span class="ruby-ivar">@app_argv</span> <span class="ruby-operator">||</span> []))
-110:       <span class="ruby-comment cmt">#Kernel.exec(script(), *ARGV)</span>
-111:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000025" class="method-detail">
-        <a name="M000025"></a>
-
-        <div class="method-heading">
-          <a href="#M000025" class="method-signature">
-          <span class="method-name">start_load</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000025-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 113</span>
-113:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_load</span>
-114:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
-115:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">output_logfile</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>)
-116:       <span class="ruby-keyword kw">else</span>
-117:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">output_logfile</span>)
-118:       <span class="ruby-keyword kw">end</span>
-119:       
-120:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
-121:       
-122:       
-123:       <span class="ruby-comment cmt"># We need this to remove the pid-file if the applications exits by itself.</span>
-124:       <span class="ruby-comment cmt"># Note that &lt;tt&gt;at_text&lt;/tt&gt; will only be run if the applications exits by calling </span>
-125:       <span class="ruby-comment cmt"># &lt;tt&gt;exit&lt;/tt&gt;, and not if it calls &lt;tt&gt;exit!&lt;/tt&gt; (so please don't call &lt;tt&gt;exit!&lt;/tt&gt;</span>
-126:       <span class="ruby-comment cmt"># in your application!</span>
-127:       <span class="ruby-comment cmt">#</span>
-128:       <span class="ruby-identifier">at_exit</span> {
-129:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-130:         
-131:         <span class="ruby-comment cmt"># If the option &lt;tt&gt;:backtrace&lt;/tt&gt; is used and the application did exit by itself</span>
-132:         <span class="ruby-comment cmt"># create a exception log.</span>
-133:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$daemons_sigterm</span>
-134:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">exception_log</span>(); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-135:         <span class="ruby-keyword kw">end</span>
-136:           
-137:       }
-138:       
-139:       <span class="ruby-comment cmt"># This part is needed to remove the pid-file if the application is killed by </span>
-140:       <span class="ruby-comment cmt"># daemons or manually by the user.</span>
-141:       <span class="ruby-comment cmt"># Note that the applications is not supposed to overwrite the signal handler for</span>
-142:       <span class="ruby-comment cmt"># 'TERM'.</span>
-143:       <span class="ruby-comment cmt">#</span>
-144:       <span class="ruby-identifier">trap</span>(<span class="ruby-value str">'TERM'</span>) {
-145:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-146:         <span class="ruby-identifier">$daemons_sigterm</span> = <span class="ruby-keyword kw">true</span>
-147:         
-148:         <span class="ruby-identifier">exit</span>
-149:       }
-150:       
-151:       <span class="ruby-comment cmt"># Now we really start the script...</span>
-152:       <span class="ruby-identifier">$DAEMONS_ARGV</span> = <span class="ruby-ivar">@controller_argv</span>
-153:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'DAEMONS_ARGV'</span>] = <span class="ruby-ivar">@controller_argv</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)
-154:       
-155:       <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">clear</span>
-156:       <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">concat</span> <span class="ruby-ivar">@app_argv</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@app_argv</span>
-157:       
-158:       <span class="ruby-comment cmt"># TODO: begin - rescue - end around this and exception logging</span>
-159:       <span class="ruby-identifier">load</span> <span class="ruby-identifier">script</span>()
-160:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000023" class="method-detail">
-        <a name="M000023"></a>
-
-        <div class="method-heading">
-          <a href="#M000023" class="method-signature">
-          <span class="method-name">start_none</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-this function is only used to daemonize the currently running process (<a
-href="../Daemons.html#M000006">Daemons.daemonize</a>)
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000023-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 57</span>
-57:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_none</span>
-58:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
-59:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>) <span class="ruby-comment cmt">#(logfile)</span>
-60:       <span class="ruby-keyword kw">else</span>
-61:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>
-62:       <span class="ruby-keyword kw">end</span>
-63:       
-64:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
-65:       
-66:       
-67:       <span class="ruby-comment cmt"># We need this to remove the pid-file if the applications exits by itself.</span>
-68:       <span class="ruby-comment cmt"># Note that &lt;tt&gt;at_text&lt;/tt&gt; will only be run if the applications exits by calling </span>
-69:       <span class="ruby-comment cmt"># &lt;tt&gt;exit&lt;/tt&gt;, and not if it calls &lt;tt&gt;exit!&lt;/tt&gt; (so please don't call &lt;tt&gt;exit!&lt;/tt&gt;</span>
-70:       <span class="ruby-comment cmt"># in your application!</span>
-71:       <span class="ruby-comment cmt">#</span>
-72:       <span class="ruby-identifier">at_exit</span> {
-73:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-74:         
-75:         <span class="ruby-comment cmt"># If the option &lt;tt&gt;:backtrace&lt;/tt&gt; is used and the application did exit by itself</span>
-76:         <span class="ruby-comment cmt"># create a exception log.</span>
-77:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$daemons_sigterm</span>
-78:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">exception_log</span>(); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-79:         <span class="ruby-keyword kw">end</span>
-80:           
-81:       }
-82:       
-83:       <span class="ruby-comment cmt"># This part is needed to remove the pid-file if the application is killed by </span>
-84:       <span class="ruby-comment cmt"># daemons or manually by the user.</span>
-85:       <span class="ruby-comment cmt"># Note that the applications is not supposed to overwrite the signal handler for</span>
-86:       <span class="ruby-comment cmt"># 'TERM'.</span>
-87:       <span class="ruby-comment cmt">#</span>
-88:       <span class="ruby-identifier">trap</span>(<span class="ruby-value str">'TERM'</span>) {
-89:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-90:         <span class="ruby-identifier">$daemons_sigterm</span> = <span class="ruby-keyword kw">true</span>
-91:         
-92:         <span class="ruby-identifier">exit</span>
-93:       }
-94:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
-
-        <div class="method-heading">
-          <a href="#M000026" class="method-signature">
-          <span class="method-name">start_proc</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000026-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 162</span>
-162:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_proc</span>
-163:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">p</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:proc</span>]
-164:       
-165:       <span class="ruby-identifier">myproc</span> = <span class="ruby-identifier">proc</span> <span class="ruby-keyword kw">do</span>
-166:         <span class="ruby-comment cmt"># We need this to remove the pid-file if the applications exits by itself.</span>
-167:         <span class="ruby-comment cmt"># Note that &lt;tt&gt;at_text&lt;/tt&gt; will only be run if the applications exits by calling </span>
-168:         <span class="ruby-comment cmt"># &lt;tt&gt;exit&lt;/tt&gt;, and not if it calls &lt;tt&gt;exit!&lt;/tt&gt; (so please don't call &lt;tt&gt;exit!&lt;/tt&gt;</span>
-169:         <span class="ruby-comment cmt"># in your application!</span>
-170:         <span class="ruby-comment cmt">#</span>
-171:         <span class="ruby-identifier">at_exit</span> {
-172:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-173: 
-174:           <span class="ruby-comment cmt"># If the option &lt;tt&gt;:backtrace&lt;/tt&gt; is used and the application did exit by itself</span>
-175:           <span class="ruby-comment cmt"># create a exception log.</span>
-176:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$daemons_sigterm</span>
-177:             <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">exception_log</span>(); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-178:           <span class="ruby-keyword kw">end</span>
-179: 
-180:         }
-181: 
-182:         <span class="ruby-comment cmt"># This part is needed to remove the pid-file if the application is killed by </span>
-183:         <span class="ruby-comment cmt"># daemons or manually by the user.</span>
-184:         <span class="ruby-comment cmt"># Note that the applications is not supposed to overwrite the signal handler for</span>
-185:         <span class="ruby-comment cmt"># 'TERM'.</span>
-186:         <span class="ruby-comment cmt">#</span>
-187:         <span class="ruby-identifier">trap</span>(<span class="ruby-value str">'TERM'</span>) {
-188:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-189:           <span class="ruby-identifier">$daemons_sigterm</span> = <span class="ruby-keyword kw">true</span>
-190: 
-191:           <span class="ruby-identifier">exit</span>
-192:         }
-193:         
-194:         <span class="ruby-identifier">p</span>.<span class="ruby-identifier">call</span>()
-195:       <span class="ruby-keyword kw">end</span>
-196:       
-197:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
-198:         <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">call_as_daemon</span>(<span class="ruby-identifier">myproc</span>, <span class="ruby-identifier">output_logfile</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>)
-199:       <span class="ruby-keyword kw">else</span>
-200:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">output_logfile</span>)
-201:         
-202:         <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
-203:         
-204:         <span class="ruby-identifier">myproc</span>.<span class="ruby-identifier">call</span>
-205:         
-206: <span class="ruby-comment cmt"># why did we use this??</span>
-207: <span class="ruby-comment cmt">#         Thread.new(&amp;options[:proc])</span>
-208: 
-209: <span class="ruby-comment cmt"># why did we use the code below??</span>
-210:         <span class="ruby-comment cmt"># unless pid = Process.fork</span>
-211:         <span class="ruby-comment cmt">#   @pid.pid = pid</span>
-212:         <span class="ruby-comment cmt">#   Daemonize.simulate(logfile)</span>
-213:         <span class="ruby-comment cmt">#   options[:proc].call</span>
-214:         <span class="ruby-comment cmt">#   exit</span>
-215:         <span class="ruby-comment cmt"># else</span>
-216:         <span class="ruby-comment cmt">#   Process.detach(@pid.pid)</span>
-217:         <span class="ruby-comment cmt"># end</span>
-218:       <span class="ruby-keyword kw">end</span>
-219:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000029" class="method-detail">
-        <a name="M000029"></a>
-
-        <div class="method-heading">
-          <a href="#M000029" class="method-signature">
-          <span class="method-name">stop</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000029-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 296</span>
-296:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop</span>
-297:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">running?</span>
-298:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">zap</span>
-299:         <span class="ruby-keyword kw">return</span>
-300:       <span class="ruby-keyword kw">end</span>
-301:       
-302:       <span class="ruby-comment cmt"># Catch errors when trying to kill a process that doesn't</span>
-303:       <span class="ruby-comment cmt"># exist. This happens when the process quits and hasn't been</span>
-304:       <span class="ruby-comment cmt"># restarted by the monitor yet. By catching the error, we allow the</span>
-305:       <span class="ruby-comment cmt"># pid file clean-up to occur.</span>
-306:       <span class="ruby-keyword kw">begin</span>
-307:         <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-value str">'TERM'</span>, <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span>)
-308:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESRCH</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-309:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{e} #{@pid.pid}&quot;</span>
-310:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;deleting pid-file.&quot;</span>
-311:       <span class="ruby-keyword kw">end</span>
-312:       
-313:       <span class="ruby-comment cmt"># We try to remove the pid-files by ourselves, in case the application</span>
-314:       <span class="ruby-comment cmt"># didn't clean it up.</span>
-315:       <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-316:       
-317:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 41</span>
+41:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">script</span>
+42:       <span class="ruby-ivar">@script</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">script</span>
+43:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -743,7 +410,7 @@ href="../Daemons.html#M000006">Daemons.daemonize</a>)
 
         <div class="method-heading">
           <a href="#M000030" class="method-signature">
-          <span class="method-name">zap</span><span class="method-args">()</span>
+          <span class="method-name">show_status</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -752,33 +419,414 @@ href="../Daemons.html#M000006">Daemons.daemonize</a>)
             onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000030-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 319</span>
-319:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">zap</span>
-320:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>
-321:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 365</span>
+365:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_status</span>
+366:       <span class="ruby-identifier">running</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">running?</span>
+367:       
+368:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{self.group.app_name}: #{running ? '' : 'not '}running#{(running and @pid.exist?) ? ' [pid ' + @pid.pid.to_s + ']' : ''}#{(@pid.exist? and not running) ? ' (but pid-file exists: ' + @pid.pid.to_s + ')' : ''}&quot;</span>
+369:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000031" class="method-detail">
-        <a name="M000031"></a>
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
 
         <div class="method-heading">
-          <a href="#M000031" class="method-signature">
+          <a href="#M000025" class="method-signature">
+          <span class="method-name">start</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000025-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 258</span>
+258:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>
+259:       <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">create_monitor</span>(<span class="ruby-ivar">@group</span>.<span class="ruby-identifier">applications</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]  <span class="ruby-comment cmt"># we don't monitor applications in the foreground</span>
+260:       
+261:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mode</span>]
+262:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:none</span>
+263:           <span class="ruby-comment cmt"># this is only used to daemonize the currently running process</span>
+264:           <span class="ruby-identifier">start_none</span>
+265:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:exec</span>
+266:           <span class="ruby-identifier">start_exec</span>
+267:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:load</span>
+268:           <span class="ruby-identifier">start_load</span>
+269:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:proc</span>
+270:           <span class="ruby-identifier">start_proc</span>
+271:         <span class="ruby-keyword kw">else</span>
+272:           <span class="ruby-identifier">start_load</span>
+273:       <span class="ruby-keyword kw">end</span>
+274:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="#M000022" class="method-signature">
+          <span class="method-name">start_exec</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000022-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 103</span>
+103:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_exec</span>
+104:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>]
+105:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;option :backtrace is not supported with :mode =&gt; :exec, ignoring&quot;</span>
+106:       <span class="ruby-keyword kw">end</span>
+107:       
+108:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
+109:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">output_logfile</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>)
+110:       <span class="ruby-keyword kw">else</span>
+111:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">output_logfile</span>)
+112:       <span class="ruby-keyword kw">end</span>
+113:       
+114:       <span class="ruby-comment cmt"># note that we cannot remove the pid file if we run in :ontop mode (i.e. 'ruby ctrl_exec.rb run')</span>
+115:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
+116:         
+117:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'DAEMONS_ARGV'</span>] = <span class="ruby-ivar">@controller_argv</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)      
+118:       <span class="ruby-comment cmt"># haven't tested yet if this is really passed to the exec'd process...</span>
+119:       
+120:       
+121:       
+122:       <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-identifier">script</span>(), <span class="ruby-operator">*</span>(<span class="ruby-ivar">@app_argv</span> <span class="ruby-operator">||</span> []))
+123:       <span class="ruby-comment cmt">#Kernel.exec(script(), *ARGV)</span>
+124:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="#M000023" class="method-signature">
+          <span class="method-name">start_load</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 126</span>
+126:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_load</span>
+127:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
+128:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">output_logfile</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>)
+129:       <span class="ruby-keyword kw">else</span>
+130:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">output_logfile</span>)
+131:       <span class="ruby-keyword kw">end</span>
+132:       
+133:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
+134:       
+135:       <span class="ruby-comment cmt"># We need this to remove the pid-file if the applications exits by itself.</span>
+136:       <span class="ruby-comment cmt"># Note that &lt;tt&gt;at_exit&lt;/tt&gt; will only be run if the applications exits by calling </span>
+137:       <span class="ruby-comment cmt"># &lt;tt&gt;exit&lt;/tt&gt;, and not if it calls &lt;tt&gt;exit!&lt;/tt&gt; (so please don't call &lt;tt&gt;exit!&lt;/tt&gt;</span>
+138:       <span class="ruby-comment cmt"># in your application!</span>
+139:       <span class="ruby-comment cmt">#</span>
+140:       <span class="ruby-identifier">at_exit</span> {
+141:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+142:         
+143:         <span class="ruby-comment cmt"># If the option &lt;tt&gt;:backtrace&lt;/tt&gt; is used and the application did exit by itself</span>
+144:         <span class="ruby-comment cmt"># create a exception log.</span>
+145:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$daemons_sigterm</span>
+146:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">exception_log</span>(); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+147:         <span class="ruby-keyword kw">end</span>
+148:           
+149:       }
+150:       
+151:       <span class="ruby-comment cmt"># This part is needed to remove the pid-file if the application is killed by </span>
+152:       <span class="ruby-comment cmt"># daemons or manually by the user.</span>
+153:       <span class="ruby-comment cmt"># Note that the applications is not supposed to overwrite the signal handler for</span>
+154:       <span class="ruby-comment cmt"># 'TERM'.</span>
+155:       <span class="ruby-comment cmt">#</span>
+156:       <span class="ruby-identifier">$daemons_stop_proc</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:stop_proc</span>]
+157:       <span class="ruby-identifier">trap</span>(<span class="ruby-constant">SIGNAL</span>) {
+158:         <span class="ruby-keyword kw">begin</span>
+159:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$daemons_stop_proc</span>
+160:           <span class="ruby-identifier">$daemons_stop_proc</span>.<span class="ruby-identifier">call</span>
+161:         <span class="ruby-keyword kw">end</span>
+162:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>
+163:         <span class="ruby-keyword kw">end</span>
+164:         
+165:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+166:         <span class="ruby-identifier">$daemons_sigterm</span> = <span class="ruby-keyword kw">true</span>
+167:         
+168:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:hard_exit</span>]
+169:           <span class="ruby-identifier">exit!</span>
+170:         <span class="ruby-keyword kw">else</span>
+171:           <span class="ruby-identifier">exit</span>
+172:         <span class="ruby-keyword kw">end</span>
+173:       }
+174:       
+175:       <span class="ruby-comment cmt"># Now we really start the script...</span>
+176:       <span class="ruby-identifier">$DAEMONS_ARGV</span> = <span class="ruby-ivar">@controller_argv</span>
+177:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'DAEMONS_ARGV'</span>] = <span class="ruby-ivar">@controller_argv</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)
+178:       
+179:       <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">clear</span>
+180:       <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">concat</span> <span class="ruby-ivar">@app_argv</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@app_argv</span>
+181:       
+182:       <span class="ruby-comment cmt"># TODO: begin - rescue - end around this and exception logging</span>
+183:       <span class="ruby-identifier">load</span> <span class="ruby-identifier">script</span>()
+184:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="#M000021" class="method-signature">
+          <span class="method-name">start_none</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+this function is only used to daemonize the currently running process (<a
+href="../Daemons.html#M000004">Daemons.daemonize</a>)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 60</span>
+ 60:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_none</span>
+ 61:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
+ 62:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>) <span class="ruby-comment cmt">#(logfile)</span>
+ 63:       <span class="ruby-keyword kw">else</span>
+ 64:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>
+ 65:       <span class="ruby-keyword kw">end</span>
+ 66:       
+ 67:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
+ 68:       
+ 69:       
+ 70:       <span class="ruby-comment cmt"># We need this to remove the pid-file if the applications exits by itself.</span>
+ 71:       <span class="ruby-comment cmt"># Note that &lt;tt&gt;at_text&lt;/tt&gt; will only be run if the applications exits by calling </span>
+ 72:       <span class="ruby-comment cmt"># &lt;tt&gt;exit&lt;/tt&gt;, and not if it calls &lt;tt&gt;exit!&lt;/tt&gt; (so please don't call &lt;tt&gt;exit!&lt;/tt&gt;</span>
+ 73:       <span class="ruby-comment cmt"># in your application!</span>
+ 74:       <span class="ruby-comment cmt">#</span>
+ 75:       <span class="ruby-identifier">at_exit</span> {
+ 76:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+ 77:         
+ 78:         <span class="ruby-comment cmt"># If the option &lt;tt&gt;:backtrace&lt;/tt&gt; is used and the application did exit by itself</span>
+ 79:         <span class="ruby-comment cmt"># create a exception log.</span>
+ 80:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$daemons_sigterm</span>
+ 81:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">exception_log</span>(); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+ 82:         <span class="ruby-keyword kw">end</span>
+ 83:           
+ 84:       }
+ 85:       
+ 86:       <span class="ruby-comment cmt"># This part is needed to remove the pid-file if the application is killed by </span>
+ 87:       <span class="ruby-comment cmt"># daemons or manually by the user.</span>
+ 88:       <span class="ruby-comment cmt"># Note that the applications is not supposed to overwrite the signal handler for</span>
+ 89:       <span class="ruby-comment cmt"># 'TERM'.</span>
+ 90:       <span class="ruby-comment cmt">#</span>
+ 91:       <span class="ruby-identifier">trap</span>(<span class="ruby-constant">SIGNAL</span>) {
+ 92:         <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+ 93:         <span class="ruby-identifier">$daemons_sigterm</span> = <span class="ruby-keyword kw">true</span>
+ 94:         
+ 95:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:hard_exit</span>]
+ 96:           <span class="ruby-identifier">exit!</span>
+ 97:         <span class="ruby-keyword kw">else</span>
+ 98:           <span class="ruby-identifier">exit</span>
+ 99:         <span class="ruby-keyword kw">end</span>
+100:       }
+101:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="#M000024" class="method-signature">
+          <span class="method-name">start_proc</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 186</span>
+186:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_proc</span>
+187:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">p</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:proc</span>]
+188:     
+189:       <span class="ruby-identifier">myproc</span> = <span class="ruby-identifier">proc</span> <span class="ruby-keyword kw">do</span> 
+190:         <span class="ruby-comment cmt"># We need this to remove the pid-file if the applications exits by itself.</span>
+191:         <span class="ruby-comment cmt"># Note that &lt;tt&gt;at_text&lt;/tt&gt; will only be run if the applications exits by calling </span>
+192:         <span class="ruby-comment cmt"># &lt;tt&gt;exit&lt;/tt&gt;, and not if it calls &lt;tt&gt;exit!&lt;/tt&gt; (so please don't call &lt;tt&gt;exit!&lt;/tt&gt;</span>
+193:         <span class="ruby-comment cmt"># in your application!</span>
+194:         <span class="ruby-comment cmt">#</span>
+195:         <span class="ruby-identifier">at_exit</span> {
+196:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+197: 
+198:           <span class="ruby-comment cmt"># If the option &lt;tt&gt;:backtrace&lt;/tt&gt; is used and the application did exit by itself</span>
+199:           <span class="ruby-comment cmt"># create a exception log.</span>
+200:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:backtrace</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$daemons_sigterm</span>
+201:             <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">exception_log</span>(); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+202:           <span class="ruby-keyword kw">end</span>
+203: 
+204:         }
+205: 
+206:         <span class="ruby-comment cmt"># This part is needed to remove the pid-file if the application is killed by </span>
+207:         <span class="ruby-comment cmt"># daemons or manually by the user.</span>
+208:         <span class="ruby-comment cmt"># Note that the applications is not supposed to overwrite the signal handler for</span>
+209:         <span class="ruby-comment cmt"># 'TERM'.</span>
+210:         <span class="ruby-comment cmt">#</span>
+211:         <span class="ruby-identifier">$daemons_stop_proc</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:stop_proc</span>]
+212:         <span class="ruby-identifier">trap</span>(<span class="ruby-constant">SIGNAL</span>) {
+213:           <span class="ruby-keyword kw">begin</span>
+214:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$daemons_stop_proc</span>
+215:             <span class="ruby-identifier">$daemons_stop_proc</span>.<span class="ruby-identifier">call</span>
+216:           <span class="ruby-keyword kw">end</span>
+217:           <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>
+218:           <span class="ruby-keyword kw">end</span>
+219:           
+220:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+221:           <span class="ruby-identifier">$daemons_sigterm</span> = <span class="ruby-keyword kw">true</span>
+222: 
+223:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:hard_exit</span>]
+224:             <span class="ruby-identifier">exit!</span>
+225:           <span class="ruby-keyword kw">else</span>
+226:             <span class="ruby-identifier">exit</span>
+227:           <span class="ruby-keyword kw">end</span>
+228:         }
+229:         
+230:         <span class="ruby-identifier">p</span>.<span class="ruby-identifier">call</span>()
+231:       <span class="ruby-keyword kw">end</span>
+232:       
+233:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ontop</span>]
+234:         <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">call_as_daemon</span>(<span class="ruby-identifier">myproc</span>, <span class="ruby-identifier">output_logfile</span>, <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">app_name</span>)
+235:       <span class="ruby-keyword kw">else</span>
+236:         <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">simulate</span>(<span class="ruby-identifier">output_logfile</span>)
+237:         
+238:         <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
+239:         
+240:         <span class="ruby-identifier">myproc</span>.<span class="ruby-identifier">call</span>
+241:         
+242: <span class="ruby-comment cmt"># why did we use this??</span>
+243: <span class="ruby-comment cmt">#         Thread.new(&amp;options[:proc])</span>
+244: 
+245: <span class="ruby-comment cmt"># why did we use the code below??</span>
+246:         <span class="ruby-comment cmt"># unless pid = Process.fork</span>
+247:         <span class="ruby-comment cmt">#   @pid.pid = pid</span>
+248:         <span class="ruby-comment cmt">#   Daemonize.simulate(logfile)</span>
+249:         <span class="ruby-comment cmt">#   options[:proc].call</span>
+250:         <span class="ruby-comment cmt">#   exit</span>
+251:         <span class="ruby-comment cmt"># else</span>
+252:         <span class="ruby-comment cmt">#   Process.detach(@pid.pid)</span>
+253:         <span class="ruby-comment cmt"># end</span>
+254:       <span class="ruby-keyword kw">end</span>
+255:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="#M000027" class="method-signature">
+          <span class="method-name">stop</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000027-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 334</span>
+334:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop</span>
+335:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">running?</span>
+336:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">zap</span>
+337:         <span class="ruby-keyword kw">return</span>
+338:       <span class="ruby-keyword kw">end</span>
+339:       
+340:       <span class="ruby-comment cmt"># Catch errors when trying to kill a process that doesn't</span>
+341:       <span class="ruby-comment cmt"># exist. This happens when the process quits and hasn't been</span>
+342:       <span class="ruby-comment cmt"># restarted by the monitor yet. By catching the error, we allow the</span>
+343:       <span class="ruby-comment cmt"># pid file clean-up to occur.</span>
+344:       <span class="ruby-keyword kw">begin</span>
+345:         <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-constant">SIGNAL</span>, <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">pid</span>)
+346:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESRCH</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+347:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{e} #{@pid.pid}&quot;</span>
+348:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;deleting pid-file.&quot;</span>
+349:       <span class="ruby-keyword kw">end</span>
+350:       
+351:       <span class="ruby-comment cmt"># We try to remove the pid-files by ourselves, in case the application</span>
+352:       <span class="ruby-comment cmt"># didn't clean it up.</span>
+353:       <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+354:       
+355:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="#M000028" class="method-signature">
+          <span class="method-name">zap</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000028-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 357</span>
+357:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">zap</span>
+358:       <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>
+359:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="#M000029" class="method-signature">
           <span class="method-name">zap!</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000031-source">
+            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000029-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 323</span>
-323:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">zap!</span>
-324:       <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-325:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application.rb, line 361</span>
+361:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">zap!</span>
+362:       <span class="ruby-keyword kw">begin</span>; <span class="ruby-ivar">@pid</span>.<span class="ruby-identifier">cleanup</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+363:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

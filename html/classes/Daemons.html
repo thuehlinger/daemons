@@ -118,7 +118,7 @@ reside in this module.
 following four ways:
 </p>
 <ol>
-<li><tt><a href="Daemons.html#M000003">Daemons.run</a>(script, options)</tt>:
+<li><tt><a href="Daemons.html#M000001">Daemons.run</a>(script, options)</tt>:
 This is used in wrapper-scripts that are supposed to control other ruby
 scripts or external applications. Control is completely passed to the
 daemons library. Such wrapper script need to be invoked with command line
@@ -126,21 +126,21 @@ options like &#8216;start&#8217; or &#8216;stop&#8217; to do anything
 useful.
 
 </li>
-<li><tt><a href="Daemons.html#M000004">Daemons.run_proc</a>(app_name, options)
+<li><tt><a href="Daemons.html#M000002">Daemons.run_proc</a>(app_name, options)
 { (&#8230;) }</tt>: This is used in wrapper-scripts that are supposed to
 control a proc. Control is completely passed to the daemons library. Such
 wrapper script need to be invoked with command line options like
 &#8216;start&#8217; or &#8216;stop&#8217; to do anything useful.
 
 </li>
-<li><tt><a href="Daemons.html#M000005">Daemons.call(options)</a> { block
+<li><tt><a href="Daemons.html#M000003">Daemons.call(options)</a> { block
 }</tt>: Execute the block in a new daemon. <tt><a
-href="Daemons.html#M000005">Daemons.call</a></tt> will return immediately
+href="Daemons.html#M000003">Daemons.call</a></tt> will return immediately
 after spawning the daemon with the new <a
 href="Daemons/Application.html">Application</a> object as a return value.
 
 </li>
-<li><tt><a href="Daemons.html#M000006">Daemons.daemonize(options)</a></tt>: <a
+<li><tt><a href="Daemons.html#M000004">Daemons.daemonize(options)</a></tt>: <a
 href="Daemonize.html">Daemonize</a> the currently runnig process, i.e. the
 calling process will become a daemon.
 
@@ -152,7 +152,7 @@ calling process will become a daemon.
 
 </td></tr>
 <tr><td valign="top"><b>or</b>:</td><td>why can I not see any output from the daemon on the console (when using for
-example <tt>puts</tt>?
+example <tt>puts</tt>)?
 
 </td></tr>
 </table>
@@ -175,7 +175,7 @@ potential of acquiring a controlling terminal.
 <li>Changes the current working directory to &quot;/&quot;.
 
 </li>
-<li>Clears the file creation mask (sets <tt>umask</tt> to +0000+).
+<li>Clears the file creation mask (sets <tt>umask</tt> to 0000).
 
 </li>
 <li>Closes file descriptors (reopens <tt>STDOUT</tt> and <tt>STDERR</tt> to
@@ -216,12 +216,12 @@ the so called <em>PidFiles</em> are stored.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000005">call</a>&nbsp;&nbsp;
-      <a href="#M000008">controller</a>&nbsp;&nbsp;
-      <a href="#M000006">daemonize</a>&nbsp;&nbsp;
-      <a href="#M000007">group</a>&nbsp;&nbsp;
-      <a href="#M000003">run</a>&nbsp;&nbsp;
-      <a href="#M000004">run_proc</a>&nbsp;&nbsp;
+      <a href="#M000003">call</a>&nbsp;&nbsp;
+      <a href="#M000006">controller</a>&nbsp;&nbsp;
+      <a href="#M000004">daemonize</a>&nbsp;&nbsp;
+      <a href="#M000005">group</a>&nbsp;&nbsp;
+      <a href="#M000001">run</a>&nbsp;&nbsp;
+      <a href="#M000002">run_proc</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -259,7 +259,7 @@ Class <a href="Daemons/SystemError.html" class="link">Daemons::SystemError</a><b
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">VERSION</td>
           <td>=</td>
-          <td class="context-item-value">&quot;1.0.7&quot;</td>
+          <td class="context-item-value">&quot;1.0.11&quot;</td>
         </tr>
         </table>
       </div>
@@ -274,11 +274,11 @@ Class <a href="Daemons/SystemError.html" class="link">Daemons::SystemError</a><b
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000005" class="method-detail">
-        <a name="M000005"></a>
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
 
         <div class="method-heading">
-          <a href="#M000005" class="method-signature">
+          <a href="#M000003" class="method-signature">
           <span class="method-name">call</span><span class="method-args">(options = {}, &amp;block)</span>
           </a>
         </div>
@@ -286,7 +286,7 @@ Class <a href="Daemons/SystemError.html" class="link">Daemons::SystemError</a><b
         <div class="method-description">
           <p>
 Execute the block in a new daemon. <tt><a
-href="Daemons.html#M000005">Daemons.call</a></tt> will return immediately
+href="Daemons.html#M000003">Daemons.call</a></tt> will return immediately
 after spawning the daemon with the new <a
 href="Daemons/Application.html">Application</a> object as a return value.
 </p>
@@ -294,18 +294,18 @@ href="Daemons/Application.html">Application</a> object as a return value.
 <tr><td valign="top"><tt>options</tt>:</td><td>A hash that may contain one or more of the options listed below
 
 </td></tr>
-<tr><td valign="top"><tt>block</tt>:</td><td>The block to <a href="Daemons.html#M000005">call</a> in the daemon.
+<tr><td valign="top"><tt>block</tt>:</td><td>The block to <a href="Daemons.html#M000003">call</a> in the daemon.
 
 </td></tr>
 </table>
 <h3>Options:</h3>
 <table>
 <tr><td valign="top"><tt>:multiple</tt>:</td><td>Specifies whether multiple instances of the same script are allowed to <a
-href="Daemons.html#M000003">run</a> at the same time
+href="Daemons.html#M000001">run</a> at the same time
 
 </td></tr>
 <tr><td valign="top"><tt>:ontop</tt>:</td><td>When given, stay on top, i.e. do not <a
-href="Daemons.html#M000006">daemonize</a> the application
+href="Daemons.html#M000004">daemonize</a> the application
 
 </td></tr>
 <tr><td valign="top"><tt>:backtrace</tt>:</td><td>Write a backtrace of the last exceptions to the file
@@ -331,50 +331,25 @@ exits due to an uncaught exception
   end
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000005-source">
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons.rb, line 224</span>
-224:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-225:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">block_given?</span>
-226:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Daemons.call: no block given&quot;</span>
-227:     <span class="ruby-keyword kw">end</span>
-228:     
-229:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:proc</span>] = <span class="ruby-identifier">block</span>
-230:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mode</span>] = <span class="ruby-identifier">:proc</span>
-231:     
-232:     <span class="ruby-ivar">@group</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ApplicationGroup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'proc'</span>, <span class="ruby-identifier">options</span>)
-233:     
-234:     <span class="ruby-identifier">new_app</span> = <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">new_application</span>(<span class="ruby-identifier">options</span>)
-235:     <span class="ruby-identifier">new_app</span>.<span class="ruby-identifier">start</span>
-236: 
-237:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">new_app</span>
-238:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
-
-        <div class="method-heading">
-          <a href="#M000008" class="method-signature">
-          <span class="method-name">controller</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Return the internal <a href="Daemons/Controller.html">Controller</a>
-instance.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000008-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons.rb, line 278</span>
-278:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">controller</span>; <span class="ruby-ivar">@controller</span>; <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons.rb, line 231</span>
+231:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+232:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">block_given?</span>
+233:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Daemons.call: no block given&quot;</span>
+234:     <span class="ruby-keyword kw">end</span>
+235:     
+236:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:proc</span>] = <span class="ruby-identifier">block</span>
+237:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mode</span>] = <span class="ruby-identifier">:proc</span>
+238:     
+239:     <span class="ruby-ivar">@group</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ApplicationGroup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'proc'</span>, <span class="ruby-identifier">options</span>)
+240:     
+241:     <span class="ruby-identifier">new_app</span> = <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">new_application</span>(<span class="ruby-identifier">options</span>)
+242:     <span class="ruby-identifier">new_app</span>.<span class="ruby-identifier">start</span>
+243: 
+244:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">new_app</span>
+245:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -385,6 +360,31 @@ instance.
 
         <div class="method-heading">
           <a href="#M000006" class="method-signature">
+          <span class="method-name">controller</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the internal <a href="Daemons/Controller.html">Controller</a>
+instance.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons.rb, line 285</span>
+285:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">controller</span>; <span class="ruby-ivar">@controller</span>; <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
           <span class="method-name">daemonize</span><span class="method-args">(options = {})</span>
           </a>
         </div>
@@ -402,7 +402,7 @@ the calling process will become a daemon.
 <h3>Options:</h3>
 <table>
 <tr><td valign="top"><tt>:ontop</tt>:</td><td>When given, stay on top, i.e. do not <a
-href="Daemons.html#M000006">daemonize</a> the application
+href="Daemons.html#M000004">daemonize</a> the application
 
 </td></tr>
 <tr><td valign="top"><tt>:backtrace</tt>:</td><td>Write a backtrace of the last exceptions to the file
@@ -427,25 +427,25 @@ exits due to an uncaught exception
   }
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000006-source">
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons.rb, line 266</span>
-266:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">options</span> = {})
-267:     <span class="ruby-ivar">@group</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ApplicationGroup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'self'</span>, <span class="ruby-identifier">options</span>)
-268:     
-269:     <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">new_application</span>(<span class="ruby-identifier">:mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:none</span>).<span class="ruby-identifier">start</span>
-270:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons.rb, line 273</span>
+273:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>(<span class="ruby-identifier">options</span> = {})
+274:     <span class="ruby-ivar">@groups</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ApplicationGroup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:app_name</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">'self'</span>, <span class="ruby-identifier">options</span>)
+275:     
+276:     <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">new_application</span>(<span class="ruby-identifier">:mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:none</span>).<span class="ruby-identifier">start</span>
+277:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
 
         <div class="method-heading">
-          <a href="#M000007" class="method-signature">
+          <a href="#M000005" class="method-signature">
           <span class="method-name">group</span><span class="method-args">()</span>
           </a>
         </div>
@@ -456,21 +456,21 @@ Return the internal <a
 href="Daemons/ApplicationGroup.html">ApplicationGroup</a> instance.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000007-source">
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons.rb, line 274</span>
-274:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">group</span>; <span class="ruby-ivar">@group</span>; <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons.rb, line 281</span>
+281:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">group</span>; <span class="ruby-ivar">@group</span>; <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000003" class="method-detail">
-        <a name="M000003"></a>
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
 
         <div class="method-heading">
-          <a href="#M000003" class="method-signature">
+          <a href="#M000001" class="method-signature">
           <span class="method-name">run</span><span class="method-args">(script, options = {})</span>
           </a>
         </div>
@@ -485,12 +485,12 @@ wrapper script should be invoked with command line options like
 </p>
 <table>
 <tr><td valign="top"><tt>script</tt>:</td><td>This is the path to the script that should be <a
-href="Daemons.html#M000003">run</a> as a daemon. Please note that <a
+href="Daemons.html#M000001">run</a> as a daemon. Please note that <a
 href="Daemons.html">Daemons</a> runs this script with <tt>load
 &lt;script&gt;</tt>. Also note that <a href="Daemons.html">Daemons</a>
 cannot detect the directory in which the controlling script resides, so
 this has to be either an absolute path or you have to <a
-href="Daemons.html#M000003">run</a> the controlling script from the
+href="Daemons.html#M000001">run</a> the controlling script from the
 appropriate directory.
 
 </td></tr>
@@ -505,8 +505,12 @@ pid files and log files. Defaults to the basename of the script.
 
 </td></tr>
 <tr><td valign="top"><tt>:ARGV</tt>:</td><td>An array of strings containing parameters and switches for <a
-href="Daemons.html">Daemons</a>. If not given, ARGV (the parameters given
-to the Ruby process) will be used.
+href="Daemons.html">Daemons</a>. This includes both parameters for <a
+href="Daemons.html">Daemons</a> itself and the controlled scripted. These
+are assumed to be separated by an array element &#8217;&#8212;&#8217;,
+.e.g. [&#8216;start&#8217;, &#8216;f&#8217;, &#8217;&#8212;&#8217;,
+&#8216;param1_for_script&#8217;, &#8216;param2_for_script&#8217;]. If not
+given, ARGV (the parameters given to the Ruby process) will be used.
 
 </td></tr>
 <tr><td valign="top"><tt>:dir_mode</tt>:</td><td>Either <tt>:script</tt> (the directory for writing the pid files to given
@@ -520,15 +524,16 @@ is interpreted as a (absolute or relative) path) or <tt>:system</tt>
 
 </td></tr>
 <tr><td valign="top"><tt>:multiple</tt>:</td><td>Specifies whether multiple instances of the same script are allowed to <a
-href="Daemons.html#M000003">run</a> at the same time
+href="Daemons.html#M000001">run</a> at the same time
 
 </td></tr>
 <tr><td valign="top"><tt>:ontop</tt>:</td><td>When given (i.e. set to true), stay on top, i.e. do not <a
-href="Daemons.html#M000006">daemonize</a> the application (but the pid-file
+href="Daemons.html#M000004">daemonize</a> the application (but the pid-file
 and other things are written as usual)
 
 </td></tr>
-<tr><td valign="top"><tt>:mode</tt>:</td><td><tt>:load</tt> Load the script with <tt>Kernel.load</tt>; <tt>:exec</tt>
+<tr><td valign="top"><tt>:mode</tt>:</td><td><tt>:load</tt> Load the script with <tt>Kernel.load</tt>; note that
+:stop_proc only works for the :load (and :proc) mode. <tt>:exec</tt>
 Execute the script file with <tt>Kernel.exec</tt>
 
 </td></tr>
@@ -542,55 +547,64 @@ instances
 
 </td></tr>
 <tr><td valign="top"><tt>:log_output</tt>:</td><td>When given (i.e. set to true), redirect both STDOUT and STDERR to a logfile
+named &#8217;[app_name].output&#8217; in the pid-file directory
+
+</td></tr>
+<tr><td valign="top"><tt>:keep_pid_files</tt>:</td><td>When given do not delete lingering pid-files (files for which the process
+is no longer running).
+
+</td></tr>
+<tr><td valign="top"><tt>:hard_exit</tt>:</td><td>When given use exit! to end a daemons instead of exit (this will for
+example not <a href="Daemons.html#M000003">call</a> at_exit handlers).
+
+</td></tr>
+<tr><td valign="top"><tt>:stop_proc</tt>:</td><td>A proc that will be called when the daemonized process receives a request
+to stop (works only for :load and :proc mode)
 
 </td></tr>
 </table>
-<pre>
-                      named '[app_name].output' in the pid-file directory
-</pre>
 <hr size="3"></hr><h3>Example:</h3>
 <pre>
   options = {
     :app_name   =&gt; &quot;my_app&quot;,
-    :ARGV       =&gt; ['start', '-f']
+    :ARGV       =&gt; ['start', '-f', '--', 'param_for_myscript']
     :dir_mode   =&gt; :script,
     :dir        =&gt; 'pids',
     :multiple   =&gt; true,
     :ontop      =&gt; true,
     :mode       =&gt; :exec,
     :backtrace  =&gt; true,
-    :monitor    =&gt; true,
-    :script     =&gt; &quot;path/to/script.rb&quot;
+    :monitor    =&gt; true
   }
 
   Daemons.run(File.join(File.dirname(__FILE__), 'myscript.rb'), options)
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000003-source">
+            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000001-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons.rb, line 131</span>
-131:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">script</span>, <span class="ruby-identifier">options</span> = {})
-132:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:script</span>] = <span class="ruby-identifier">script</span>
-133:     <span class="ruby-ivar">@controller</span> = <span class="ruby-constant">Controller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ARGV</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ARGV</span>)
-134:     
-135:     <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">catch_exceptions</span> {
-136:       <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">run</span>
-137:     }
-138:     
-139:     <span class="ruby-comment cmt"># I don't think anybody will ever use @group, as this location should not be reached under non-error conditions</span>
-140:     <span class="ruby-ivar">@group</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">group</span>
-141:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons.rb, line 137</span>
+137:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">script</span>, <span class="ruby-identifier">options</span> = {})
+138:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:script</span>] = <span class="ruby-identifier">script</span>
+139:     <span class="ruby-ivar">@controller</span> = <span class="ruby-constant">Controller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ARGV</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ARGV</span>)
+140:     
+141:     <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">catch_exceptions</span> {
+142:       <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">run</span>
+143:     }
+144:     
+145:     <span class="ruby-comment cmt"># I don't think anybody will ever use @group, as this location should not be reached under non-error conditions</span>
+146:     <span class="ruby-ivar">@group</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">group</span>
+147:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000004" class="method-detail">
-        <a name="M000004"></a>
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
 
         <div class="method-heading">
-          <a href="#M000004" class="method-signature">
+          <a href="#M000002" class="method-signature">
           <span class="method-name">run_proc</span><span class="method-args">(app_name, options = {}, &amp;block)</span>
           </a>
         </div>
@@ -598,8 +612,8 @@ instances
         <div class="method-description">
           <p>
 Passes control to <a href="Daemons.html">Daemons</a>. This function does
-the same as <a href="Daemons.html#M000003">Daemons.run</a> except that not
-a script but a proc will be <a href="Daemons.html#M000003">run</a> as a
+the same as <a href="Daemons.html#M000001">Daemons.run</a> except that not
+a script but a proc will be <a href="Daemons.html#M000001">run</a> as a
 daemon while this script provides command line options like
 &#8216;start&#8217; or &#8216;stop&#8217; and the whole pid-file management
 to control the proc.
@@ -610,7 +624,7 @@ pid files and log files. Defaults to the basename of the script.
 
 </td></tr>
 <tr><td valign="top"><tt>options</tt>:</td><td>A hash that may contain one or more of the options listed in the
-documentation for <a href="Daemons.html#M000003">Daemons.run</a>
+documentation for <a href="Daemons.html#M000001">Daemons.run</a>
 
 </td></tr>
 </table>
@@ -630,30 +644,30 @@ entry in the options hash.
   end
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000004-source">
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons.rb, line 171</span>
-171:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_proc</span>(<span class="ruby-identifier">app_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-172:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:app_name</span>] = <span class="ruby-identifier">app_name</span>
-173:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mode</span>] = <span class="ruby-identifier">:proc</span>
-174:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:proc</span>] = <span class="ruby-identifier">block</span>
-175:     
-176:     <span class="ruby-comment cmt"># we do not have a script location so the the :script option cannot be used, change it to :normal</span>
-177:     <span class="ruby-keyword kw">if</span> [<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:script</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>]
-178:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] = <span class="ruby-identifier">:normal</span>
-179:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">'.'</span>)
-180:     <span class="ruby-keyword kw">end</span>
-181:     
-182:     <span class="ruby-ivar">@controller</span> = <span class="ruby-constant">Controller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ARGV</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ARGV</span>)
-183:     
-184:     <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">catch_exceptions</span> {
-185:       <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">run</span>
-186:     }
-187:     
-188:     <span class="ruby-comment cmt"># I don't think anybody will ever use @group, as this location should not be reached under non-error conditions</span>
-189:     <span class="ruby-ivar">@group</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">group</span>
-190:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons.rb, line 178</span>
+178:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_proc</span>(<span class="ruby-identifier">app_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+179:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:app_name</span>] = <span class="ruby-identifier">app_name</span>
+180:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mode</span>] = <span class="ruby-identifier">:proc</span>
+181:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:proc</span>] = <span class="ruby-identifier">block</span>
+182:     
+183:     <span class="ruby-comment cmt"># we do not have a script location so the the :script :dir_mode cannot be used, change it to :normal</span>
+184:     <span class="ruby-keyword kw">if</span> [<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:script</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>]
+185:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] = <span class="ruby-identifier">:normal</span>
+186:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">'.'</span>)
+187:     <span class="ruby-keyword kw">end</span>
+188:     
+189:     <span class="ruby-ivar">@controller</span> = <span class="ruby-constant">Controller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ARGV</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ARGV</span>)
+190:     
+191:     <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">catch_exceptions</span> {
+192:       <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">run</span>
+193:     }
+194:     
+195:     <span class="ruby-comment cmt"># I don't think anybody will ever use @group, as this location should not be reached under non-error conditions</span>
+196:     <span class="ruby-ivar">@group</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">group</span>
+197:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

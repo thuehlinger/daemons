@@ -2,7 +2,7 @@ require 'rubygems'
 Gem::manage_gems
 
 require 'rake/gempackagetask'
-require 'rake/testtask'
+#require 'rake/testtask'
 require 'rake/packagetask'
 require 'rake/rdoctask'
 
@@ -16,7 +16,7 @@ PKG_FILES = FileList[
   "Rakefile", "Releases", "TODO", "README", "LICENSE",
   "setup.rb",
   "lib/**/*.rb",
-  "test/**/*",
+  #"test/**/*",
   "examples/**/*"
 ]
 #PKG_FILES.exclude(%r(^test/tmp/.+))
@@ -48,7 +48,6 @@ spec = Gem::Specification.new do |s|
   s.files = PKG_FILES
   s.require_path = "lib"
   s.autorequire = "daemons"
-  s.test_file = "test/tc_main.rb"
   s.has_rdoc = true
   s.extra_rdoc_files = ["README", "Releases", "TODO"]
 end
@@ -67,11 +66,8 @@ end
 #end
 
  
-task :default => [:test]
+task :default => [:package]
 
-Rake::TestTask.new(:test) do |t|
-  t.test_files = FileList['test/tc_*.rb']
-end
 
 task :upload do
   sh "scp -r html/* uehli@rubyforge.org:/var/www/gforge-projects/daemons"
@@ -85,5 +81,4 @@ rd = Rake::RDocTask.new("rdoc") { |rdoc|
   rdoc.options << '--line-numbers' << '--inline-source' << '--main' << 'README'
   rdoc.rdoc_files.include('README', 'TODO', 'Releases')
   rdoc.rdoc_files.include('lib/**/*.rb')
-  rdoc.rdoc_files.include('test/**/*.rb')
 }

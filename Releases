@@ -1,5 +1,26 @@
 = Daemons Release History
 
+== Release 1.0.11: July 5, 2008
+
+* Honour the options[:app_name] in Daemons.daemonize (thanks to Ryan Tecco).
+* Included a new option :stop_proc to specify a proc that will be called when a daemonized
+  process receives a request to stop (thanks to Dave Dupre).
+* 
+
+== Release 1.0.10: March 21, 2008
+
+* By default, we now delete stray pid-files (i.e. pid-files which result for 
+  example from a killed daemon) automatically. This function can be deactivated by
+  passing :keep_pid_files => true as an option.
+* All pid files of :multiple daemons new get deleted correctly upon exit of the daemons (reported by Han Holl).
+* Use the signal 'KILL' instead of 'TERM' on Windows platforms.
+* Use exit! in trap('TERM') instead of exit when option :hard_exit is given (thanks to Han Holl).
+* Did some clarification on the exception log.
+
+== Release 1.0.9: October 29, 2007
+
+* fixed a severe bug in the new Pid.running? function: function returned true if the process did not exist (thanks to Jeremy Lawler).
+
 == Release 1.0.8: September 24, 2007
 
 * new Pid.running? function. Checking whether a process exists by sending signal '0' (thanks to Dru Nelson).

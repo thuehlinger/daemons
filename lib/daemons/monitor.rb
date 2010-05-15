@@ -6,7 +6,7 @@ module Daemons
   class Monitor
     
     def self.find(dir, app_name)
-      pid = PidFile.find_files(dir, app_name)[0]
+      pid = PidFile.find_files(dir, app_name, false)[0]
       
       if pid
         pid = PidFile.existing(pid)
@@ -116,7 +116,7 @@ module Daemons
     
     
     def stop
-      begin; Process.kill('TERM', @pid.pid); rescue ::Exception; end
+      begin; Process.kill(Application::SIGNAL, @pid.pid); rescue ::Exception; end
       
       # We try to remove the pid-files by ourselves, in case the application
       # didn't clean it up.

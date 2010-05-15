@@ -21,7 +21,7 @@ module Daemons
   #
   # Each file just contains one line with the pid as string (for example <tt>6432</tt>).
   #  
-  # === Where are Pid-Files stored?
+  # === Where are the Pid-Files stored?
   # 
   # Daemons is configurable to store the Pid-Files relative to three different locations:
   # 1.  in a directory relative to the directory where the script (the one that is supposed to run
@@ -33,11 +33,22 @@ module Daemons
 
     attr_reader :dir, :progname, :multiple, :number
 
-    def PidFile.find_files(dir, progname)
+    def PidFile.find_files(dir, progname, delete = false)
       files = Dir[File.join(dir, "#{progname}*.pid")]
       
       files.delete_if {|f| not (File.file?(f) and File.readable?(f))}
-      
+      if delete 
+        files.delete_if do |f|
+          pid = File.open(f) {|h| h.read}.to_i
+          rsl =  ! Pid.running?(pid)
+          if rsl
+            puts "pid-file for killed process #{pid} found (#{f}), deleting."
+            begin; File.unlink(f); rescue ::Exception; end
+          end
+          rsl
+        end
+      end
+    
       return files
     end
     
@@ -59,6 +70,16 @@ module Daemons
       @multiple = multiple
       @number = nil
       @number = 0 if multiple
+      
+      if multiple
+        while File.exist?(filename) and @number < 1024
+          @number += 1
+        end
+        
+        if @number == 1024
+          raise RuntimeException('cannot run more than 1024 instances of the application')
+        end
+      end
     end
     
     def filename
@@ -70,16 +91,6 @@ module Daemons
     end
     
     def pid=(p)
-      if multiple
-        while File.exist?(filename) and @number < 1024
-          @number += 1
-        end
-        
-        if @number == 1024
-          raise RuntimeException('cannot run more than 1024 instances of the application')
-        end
-      end
-      
       File.open(filename, 'w') {|f|
         f.puts p   #Process.pid
       }
@@ -90,9 +101,13 @@ module Daemons
     end
 
     def pid
-      File.open(filename) {|f|
-        return f.gets.to_i
-      }
+      begin
+        File.open(filename) {|f|
+          return f.gets.to_i
+        }
+      rescue ::Exception
+        return nil
+      end
     end
 
   end

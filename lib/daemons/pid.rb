@@ -6,17 +6,21 @@ module Daemons
   class Pid
   
     def Pid.running?(pid)
+      return false unless pid
+      
       # Check if process is in existence
       # The simplest way to do this is to send signal '0'
       # (which is a single system call) that doesn't actually
-      # sending a signal
+      # send a signal
       begin
         Process.kill(0, pid)
         return true
       rescue Errno::ESRCH
-        return true
-      rescue Errno::EPERM
         return false
+      rescue ::Exception   # for example on EPERM (process exists but does not belong to us)
+        return true
+      #rescue Errno::EPERM
+      #  return false
       end
     end
     
@@ -37,7 +41,7 @@ module Daemons
   #        break
   #      }
   #    ensure
-  #      begin; begin; ps_in.close; rescue ::Exception; end; ps_out.close rescue nil; ps_err.close; rescue ::Exception; end
+  #      begin; begin; ps_in.close; rescue ::Exception; end; begin; ps_out.close; rescue ::Exception; end; ps_err.close; rescue ::Exception; end
   #    end
   #    
   #    # an alternative would be to use the code below, but I don't know whether this is portable
@@ -45,6 +49,7 @@ module Daemons
   #     
   #    return got_match
   #  end
+    
     
     
     # Returns the directory that should be used to write the pid file to
@@ -84,11 +89,16 @@ module Daemons
     def pid=(p)
     end
     
+    # Check whether the process is running
+    def running?
+      return Pid.running?(pid())
+    end
+    
     # Cleanup method
     def cleanup
     end
     
-    # Exists? method
+    # Exist? method
     def exist?
       true
     end

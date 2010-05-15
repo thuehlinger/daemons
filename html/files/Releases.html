@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Sat Jul 07 11:04:16 +0200 2007</td>
+      <td>Sat Apr 05 19:17:05 +0200 2008</td>
     </tr>
     </table>
   </div>
@@ -70,6 +70,55 @@
 
     <div id="description">
       <h1><a href="../classes/Daemons.html">Daemons</a> Release History</h1>
+<h2>Release 1.0.11:</h2>
+<ul>
+<li>Honour the options[:app_name] in <a
+href="../classes/Daemons.html#M000004">Daemons.daemonize</a> (thanks to
+Ryan Tecco).
+
+</li>
+<li>Included a new option :stop_proc to specify a proc that will be called when
+a daemonized process receives a request to stop (thanks to Dave Dupre).
+
+</li>
+</ul>
+<h2>Release 1.0.10: March 21, 2008</h2>
+<ul>
+<li>By default, we now delete stray pid-files (i.e. pid-files which result for
+example from a killed daemon) automatically. This function can be
+deactivated by passing :keep_pid_files =&gt; true as an option.
+
+</li>
+<li>All pid files of :multiple daemons new get deleted correctly upon exit of
+the daemons (reported by Han Holl).
+
+</li>
+<li>Use the signal &#8216;KILL&#8217; instead of &#8216;TERM&#8217; on Windows
+platforms.
+
+</li>
+<li>Use exit! in trap(&#8216;TERM&#8217;) instead of exit when option
+:hard_exit is given (thanks to Han Holl).
+
+</li>
+<li>Did some clarification on the exception log.
+
+</li>
+</ul>
+<h2>Release 1.0.9: October 29, 2007</h2>
+<ul>
+<li>fixed a severe bug in the new Pid.running? function: function returned true
+if the process did not exist (thanks to Jeremy Lawler).
+
+</li>
+</ul>
+<h2>Release 1.0.8: September 24, 2007</h2>
+<ul>
+<li>new Pid.running? function. Checking whether a process exists by sending
+signal &#8216;0&#8217; (thanks to Dru Nelson).
+
+</li>
+</ul>
 <h2>Release 1.0.7: July 7, 2007</h2>
 <ul>
 <li>Patch to fix wrong ARGV when using :exec (in def start_exec:
@@ -128,7 +177,7 @@ Novoselov).
 
 </li>
 <li>As a default for <a
-href="../classes/Daemons.html#M000004">Daemons.run_proc</a>, the pid file
+href="../classes/Daemons.html#M000002">Daemons.run_proc</a>, the pid file
 is now saved in the current directory.
 
 </li>
@@ -169,7 +218,7 @@ RubyGems. (thanks to John-Mason Shackelford)
 <h2>Release 0.4.3: November 29, 2005</h2>
 <ul>
 <li>New Option: You can specify the name of the application with :app_name on
-calling <a href="../classes/Daemons.html#M000003">Daemons.run</a>. This
+calling <a href="../classes/Daemons.html#M000001">Daemons.run</a>. This
 will be used to contruct the name of the pid files and log files. Defaults
 to the basename of the script. (thanks to Stephen R. Veit)
 
@@ -200,19 +249,19 @@ in 0.4.0, fixed
 
 <ol>
 <li>Call a block as a daemon (<tt><a
-href="../classes/Daemons.html#M000005">Daemons.call</a> { my_daemon_code
+href="../classes/Daemons.html#M000003">Daemons.call</a> { my_daemon_code
 }</tt>) and control it from the parent process.
 
 </li>
 <li><a href="../classes/Daemonize.html">Daemonize</a> the currently running
 process (<tt><a
-href="../classes/Daemons.html#M000006">Daemons.daemonize</a></tt>)
+href="../classes/Daemons.html#M000004">Daemons.daemonize</a></tt>)
 
 </li>
 </ol>
 <p>
 plus the already existing mode to control your scripts (<tt><a
-href="../classes/Daemons.html#M000003">Daemons.run</a>(&quot;script.rb&quot;)</tt>)
+href="../classes/Daemons.html#M000001">Daemons.run</a>(&quot;script.rb&quot;)</tt>)
 </p>
 </li>
 <li>Improved documentation (for example &quot;How does the daemonization

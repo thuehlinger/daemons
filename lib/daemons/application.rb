@@ -1,6 +1,8 @@
 require 'daemons/pidfile'
 require 'daemons/pidmem'
 
+require 'timeout'
+
 
 module Daemons
 
@@ -19,6 +21,9 @@ module Daemons
     attr_reader :options
     
     
+    SIGNAL = (RUBY_PLATFORM =~ /win32/ ? 'KILL' : 'TERM')
+    
+    
     def initialize(group, add_options = {}, pid = nil)
       @group = group
       @options = group.options.dup
@@ -26,8 +31,12 @@ module Daemons
       
       @dir_mode = @dir = @script = nil
       
+      @force_kill_waittime = @options[:force_kill_waittime] || 10
+      
       unless @pid = pid
-        if dir = pidfile_dir
+        if @options[:no_pidfiles]
+          @pid = PidMem.new
+        elsif dir = pidfile_dir
           @pid = PidFile.new(dir, @group.app_name, @group.multiple)
         else
           @pid = PidMem.new
@@ -85,15 +94,23 @@ module Daemons
       # Note that the applications is not supposed to overwrite the signal handler for
       # 'TERM'.
       #
-      trap('TERM') {
+      trap(SIGNAL) {
         begin; @pid.cleanup; rescue ::Exception; end
         $daemons_sigterm = true
         
-        exit
+        if options[:hard_exit]
+          exit!
+        else
+          exit
+        end
       }
     end
     
     def start_exec
+      if options[:backtrace]
+        puts "option :backtrace is not supported with :mode => :exec, ignoring"
+      end
+      
       unless options[:ontop]
         Daemonize.daemonize(output_logfile, @group.app_name)
       else
@@ -102,10 +119,11 @@ module Daemons
       
       # note that we cannot remove the pid file if we run in :ontop mode (i.e. 'ruby ctrl_exec.rb run')
       @pid.pid = Process.pid
-        
+      
       ENV['DAEMONS_ARGV'] = @controller_argv.join(' ')      
       # haven't tested yet if this is really passed to the exec'd process...
       
+      started()
       Kernel.exec(script(), *(@app_argv || []))
       #Kernel.exec(script(), *ARGV)
     end
@@ -119,9 +137,8 @@ module Daemons
       
       @pid.pid = Process.pid
       
-      
       # We need this to remove the pid-file if the applications exits by itself.
-      # Note that <tt>at_text</tt> will only be run if the applications exits by calling 
+      # Note that <tt>at_exit</tt> will only be run if the applications exits by calling 
       # <tt>exit</tt>, and not if it calls <tt>exit!</tt> (so please don't call <tt>exit!</tt>
       # in your application!
       #
@@ -141,11 +158,23 @@ module Daemons
       # Note that the applications is not supposed to overwrite the signal handler for
       # 'TERM'.
       #
-      trap('TERM') {
+      $daemons_stop_proc = options[:stop_proc]
+      trap(SIGNAL) {
+        begin
+        if $daemons_stop_proc
+          $daemons_stop_proc.call
+        end
+        rescue ::Exception
+        end
+        
         begin; @pid.cleanup; rescue ::Exception; end
         $daemons_sigterm = true
         
-        exit
+        if options[:hard_exit]
+          exit!
+        else
+          exit
+        end
       }
       
       # Now we really start the script...
@@ -155,14 +184,15 @@ module Daemons
       ARGV.clear
       ARGV.concat @app_argv if @app_argv
       
+      started()
       # TODO: begin - rescue - end around this and exception logging
       load script()
     end
     
     def start_proc
       return unless p = options[:proc]
-      
-      myproc = proc do
+    
+      myproc = proc do 
         # We need this to remove the pid-file if the applications exits by itself.
         # Note that <tt>at_text</tt> will only be run if the applications exits by calling 
         # <tt>exit</tt>, and not if it calls <tt>exit!</tt> (so please don't call <tt>exit!</tt>
@@ -184,11 +214,23 @@ module Daemons
         # Note that the applications is not supposed to overwrite the signal handler for
         # 'TERM'.
         #
-        trap('TERM') {
+        $daemons_stop_proc = options[:stop_proc]
+        trap(SIGNAL) {
+          begin
+          if $daemons_stop_proc
+            $daemons_stop_proc.call
+          end
+          rescue ::Exception
+          end
+          
           begin; @pid.cleanup; rescue ::Exception; end
           $daemons_sigterm = true
 
-          exit
+          if options[:hard_exit]
+            exit!
+          else
+            exit
+          end
         }
         
         p.call()
@@ -196,6 +238,7 @@ module Daemons
       
       unless options[:ontop]
         @pid.pid = Daemonize.call_as_daemon(myproc, output_logfile, @group.app_name)
+        
       else
         Daemonize.simulate(output_logfile)
         
@@ -216,6 +259,8 @@ module Daemons
         #   Process.detach(@pid.pid)
         # end
       end
+      
+      started()
     end
     
     
@@ -236,6 +281,14 @@ module Daemons
           start_load
       end
     end
+    
+    def started
+      if pid = @pid.pid
+        puts "#{self.group.app_name}: process with pid #{pid} started."
+        STDOUT.flush
+      end
+    end
+    
     
 #     def run
 #       if @group.controller.options[:exec]
@@ -270,17 +323,19 @@ module Daemons
       
       l_file = Logger.new(logfile)
       
-      # the code below only logs the last exception
-#       e = nil
-#       
-#       ObjectSpace.each_object {|o|
-#         if ::Exception === o
-#           e = o
-#         end
-#       }
-#       
-#       l_file.error e
-#       l_file.close
+      # the code below finds the last exception
+      e = nil
+      
+      ObjectSpace.each_object {|o|
+        if ::Exception === o
+          e = o
+        end
+      }
+     
+      l_file.info "*** below you find the most recent exception thrown, this will be likely (but not certainly) the exception that made the application exit abnormally ***"
+      l_file.error e
+      
+      l_file.info "*** below you find all exception objects found in memory, some of them may have been thrown in your application, others may just be in memory because they are standard exceptions ***"
       
       # this code logs every exception found in memory
       ObjectSpace.each_object {|o|
@@ -293,26 +348,70 @@ module Daemons
     end
     
     
-    def stop
-      if options[:force] and not running?
+    def stop(force = false)
+      if force and not running?
         self.zap
         return
       end
+      
+      pid = @pid.pid
       
       # Catch errors when trying to kill a process that doesn't
       # exist. This happens when the process quits and hasn't been
       # restarted by the monitor yet. By catching the error, we allow the
       # pid file clean-up to occur.
       begin
-        Process.kill('TERM', @pid.pid)
+        Process.kill(SIGNAL, pid)
       rescue Errno::ESRCH => e
         puts "#{e} #{@pid.pid}"
         puts "deleting pid-file."
       end
       
-      # We try to remove the pid-files by ourselves, in case the application
-      # didn't clean it up.
-      begin; @pid.cleanup; rescue ::Exception; end
+      if force
+        if @force_kill_waittime > 0
+          puts "#{self.group.app_name}: trying to stop process with pid #{pid}..."
+          STDOUT.flush
+          
+          begin
+            Timeout::timeout(@force_kill_waittime) {
+              while @pid.running?
+                sleep(0.2)
+              end
+            }
+          rescue Timeout::Error
+            puts "#{self.group.app_name}: process with pid #{pid} won't stop, we forcefully kill it..."
+            STDOUT.flush
+            
+            begin
+              Process.kill('KILL', pid)
+            rescue Errno::ESRCH
+            end
+            
+            begin
+              Timeout::timeout(20) {
+                while @pid.running?
+                  sleep(1)
+                end
+              }
+            rescue Timeout::Error
+              puts "#{self.group.app_name}: unable to forcefully kill process with pid #{pid}."
+              STDOUT.flush
+            end
+          end
+        end
+        
+        
+      end
+      
+      sleep(0.1)
+      unless @pid.running?
+        # We try to remove the pid-files by ourselves, in case the application
+        # didn't clean it up.
+        begin; @pid.cleanup; rescue ::Exception; end
+        
+        puts "#{self.group.app_name}: process with pid #{pid} successfully stopped."
+        STDOUT.flush
+      end
       
     end
     

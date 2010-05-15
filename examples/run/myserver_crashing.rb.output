@@ -13,3 +13,18 @@
 ping from myserver.rb!
 this example server will crash in 3 seconds...
 CRASH!
+ping from myserver.rb!
+this example server will crash in 3 seconds...
+CRASH!
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:13: CRASH! (RuntimeError)
+	from /Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:6:in `loop'
+	from /Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:6
+	from /Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:176:in `load'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:176:in `start_load'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:257:in `start'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons/controller.rb:69:in `run'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons.rb:139:in `run'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons/cmdline.rb:105:in `call'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons/cmdline.rb:105:in `catch_exceptions'
+	from /Users/uehli/Projects/daemons-proj/lib/daemons.rb:138:in `run'
+	from ctrl_crash.rb:17

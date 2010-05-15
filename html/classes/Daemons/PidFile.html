@@ -85,13 +85,13 @@
 <p>
 A <em><a href="Pid.html">Pid</a>-File</em> is a file containing the
 <em>process identification number</em> (<a
-href="PidFile.html#M000047">pid</a>) that is stored in a well-defined
+href="PidFile.html#M000045">pid</a>) that is stored in a well-defined
 location of the filesystem thus allowing other programs to find out the <a
-href="PidFile.html#M000047">pid</a> of a running script.
+href="PidFile.html#M000045">pid</a> of a running script.
 </p>
 <p>
 <a href="../Daemons.html">Daemons</a> needs the <a
-href="PidFile.html#M000047">pid</a> of the scripts that are currently
+href="PidFile.html#M000045">pid</a> of the scripts that are currently
 running in the background to send them so called <em>signals</em>. <a
 href="../Daemons.html">Daemons</a> uses the <tt>TERM</tt> signal to tell
 the script to exit when you issue a <tt>stop</tt> command.
@@ -110,9 +110,9 @@ script can run at any time)
 </p>
 <p>
 Each file just contains one line with the <a
-href="PidFile.html#M000047">pid</a> as string (for example <tt>6432</tt>).
+href="PidFile.html#M000045">pid</a> as string (for example <tt>6432</tt>).
 </p>
-<h3>Where are <a href="Pid.html">Pid</a>-Files stored?</h3>
+<h3>Where are the <a href="Pid.html">Pid</a>-Files stored?</h3>
 <p>
 <a href="../Daemons.html">Daemons</a> is configurable to store the <a
 href="Pid.html">Pid</a>-Files relative to three different locations:
@@ -142,14 +142,14 @@ for <tt>:dir_mode</tt>)
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000046">cleanup</a>&nbsp;&nbsp;
-      <a href="#M000044">exist?</a>&nbsp;&nbsp;
-      <a href="#M000041">existing</a>&nbsp;&nbsp;
-      <a href="#M000043">filename</a>&nbsp;&nbsp;
-      <a href="#M000040">find_files</a>&nbsp;&nbsp;
-      <a href="#M000042">new</a>&nbsp;&nbsp;
-      <a href="#M000047">pid</a>&nbsp;&nbsp;
-      <a href="#M000045">pid=</a>&nbsp;&nbsp;
+      <a href="#M000044">cleanup</a>&nbsp;&nbsp;
+      <a href="#M000042">exist?</a>&nbsp;&nbsp;
+      <a href="#M000039">existing</a>&nbsp;&nbsp;
+      <a href="#M000041">filename</a>&nbsp;&nbsp;
+      <a href="#M000038">find_files</a>&nbsp;&nbsp;
+      <a href="#M000040">new</a>&nbsp;&nbsp;
+      <a href="#M000045">pid</a>&nbsp;&nbsp;
+      <a href="#M000043">pid=</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -199,32 +199,70 @@ for <tt>:dir_mode</tt>)
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000041" class="method-detail">
-        <a name="M000041"></a>
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
 
         <div class="method-heading">
-          <a href="#M000041" class="method-signature">
+          <a href="#M000039" class="method-signature">
           <span class="method-name">existing</span><span class="method-args">(path)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000041-source">
+            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000039-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 44</span>
-44:     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">existing</span>(<span class="ruby-identifier">path</span>)
-45:       <span class="ruby-identifier">new_instance</span> = <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">allocate</span>
-46:       
-47:       <span class="ruby-identifier">new_instance</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">:@path</span>, <span class="ruby-identifier">path</span>)
-48:       
-49:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_instance</span>.<span class="ruby-identifier">filename</span>
-50:         <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@path</span>
-51:       <span class="ruby-keyword kw">end</span>
-52:       
-53:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">new_instance</span>
-54:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 55</span>
+55:     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">existing</span>(<span class="ruby-identifier">path</span>)
+56:       <span class="ruby-identifier">new_instance</span> = <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">allocate</span>
+57:       
+58:       <span class="ruby-identifier">new_instance</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">:@path</span>, <span class="ruby-identifier">path</span>)
+59:       
+60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_instance</span>.<span class="ruby-identifier">filename</span>
+61:         <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@path</span>
+62:       <span class="ruby-keyword kw">end</span>
+63:       
+64:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">new_instance</span>
+65:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="#M000038" class="method-signature">
+          <span class="method-name">find_files</span><span class="method-args">(dir, progname, delete = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000038-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 36</span>
+36:     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">find_files</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">progname</span>, <span class="ruby-identifier">delete</span> = <span class="ruby-keyword kw">false</span>)
+37:       <span class="ruby-identifier">files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-node">&quot;#{progname}*.pid&quot;</span>)]
+38:       
+39:       <span class="ruby-identifier">files</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">not</span> (<span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">f</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">f</span>))}
+40:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">delete</span> 
+41:         <span class="ruby-identifier">files</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+42:           <span class="ruby-identifier">pid</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">read</span>}.<span class="ruby-identifier">to_i</span>
+43:           <span class="ruby-identifier">rsl</span> =  <span class="ruby-operator">!</span> <span class="ruby-constant">Pid</span>.<span class="ruby-identifier">running?</span>(<span class="ruby-identifier">pid</span>)
+44:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rsl</span>
+45:             <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;pid-file for killed process #{pid} found (#{f}), deleting.&quot;</span>
+46:             <span class="ruby-keyword kw">begin</span>; <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-identifier">f</span>); <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+47:           <span class="ruby-keyword kw">end</span>
+48:           <span class="ruby-identifier">rsl</span>
+49:         <span class="ruby-keyword kw">end</span>
+50:       <span class="ruby-keyword kw">end</span>
+51:     
+52:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">files</span>
+53:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -235,7 +273,7 @@ for <tt>:dir_mode</tt>)
 
         <div class="method-heading">
           <a href="#M000040" class="method-signature">
-          <span class="method-name">find_files</span><span class="method-args">(dir, progname)</span>
+          <span class="method-name">new</span><span class="method-args">(dir, progname, multiple = false)</span>
           </a>
         </div>
       
@@ -244,14 +282,49 @@ for <tt>:dir_mode</tt>)
             onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000040-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 36</span>
-36:     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">find_files</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">progname</span>)
-37:       <span class="ruby-identifier">files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-node">&quot;#{progname}*.pid&quot;</span>)]
-38:       
-39:       <span class="ruby-identifier">files</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">not</span> (<span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">f</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">f</span>))}
-40:       
-41:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">files</span>
-42:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 67</span>
+67:     <span class="ruby-keyword kw">def</span>  <span class="ruby-identifier">initialize</span><span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">progname</span>, <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword kw">false</span>)
+68:       <span class="ruby-ivar">@dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)
+69:       <span class="ruby-ivar">@progname</span> = <span class="ruby-identifier">progname</span>
+70:       <span class="ruby-ivar">@multiple</span> = <span class="ruby-identifier">multiple</span>
+71:       <span class="ruby-ivar">@number</span> = <span class="ruby-keyword kw">nil</span>
+72:       <span class="ruby-ivar">@number</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">multiple</span>
+73:       
+74:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">multiple</span>
+75:         <span class="ruby-keyword kw">while</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1024</span>
+76:           <span class="ruby-ivar">@number</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+77:         <span class="ruby-keyword kw">end</span>
+78:         
+79:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@number</span> <span class="ruby-operator">==</span> <span class="ruby-value">1024</span>
+80:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeException</span>(<span class="ruby-value str">'cannot run more than 1024 instances of the application'</span>)
+81:         <span class="ruby-keyword kw">end</span>
+82:       <span class="ruby-keyword kw">end</span>
+83:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="#M000044" class="method-signature">
+          <span class="method-name">cleanup</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000044-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000044-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 99</span>
+ 99:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cleanup</span>
+100:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">filename</span>)
+101:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -262,7 +335,7 @@ for <tt>:dir_mode</tt>)
 
         <div class="method-heading">
           <a href="#M000042" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(dir, progname, multiple = false)</span>
+          <span class="method-name">exist?</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -271,110 +344,33 @@ for <tt>:dir_mode</tt>)
             onclick="toggleCode('M000042-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000042-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 56</span>
-56:     <span class="ruby-keyword kw">def</span>  <span class="ruby-identifier">initialize</span><span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">progname</span>, <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword kw">false</span>)
-57:       <span class="ruby-ivar">@dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)
-58:       <span class="ruby-ivar">@progname</span> = <span class="ruby-identifier">progname</span>
-59:       <span class="ruby-ivar">@multiple</span> = <span class="ruby-identifier">multiple</span>
-60:       <span class="ruby-ivar">@number</span> = <span class="ruby-keyword kw">nil</span>
-61:       <span class="ruby-ivar">@number</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">multiple</span>
-62:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 89</span>
+89:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exist?</span>
+90:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">filename</span>
+91:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000046" class="method-detail">
-        <a name="M000046"></a>
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
 
         <div class="method-heading">
-          <a href="#M000046" class="method-signature">
-          <span class="method-name">cleanup</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000046-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 88</span>
-88:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cleanup</span>
-89:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">filename</span>)
-90:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000044" class="method-detail">
-        <a name="M000044"></a>
-
-        <div class="method-heading">
-          <a href="#M000044" class="method-signature">
-          <span class="method-name">exist?</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000044-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000044-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 68</span>
-68:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exist?</span>
-69:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">filename</span>
-70:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000043" class="method-detail">
-        <a name="M000043"></a>
-
-        <div class="method-heading">
-          <a href="#M000043" class="method-signature">
+          <a href="#M000041" class="method-signature">
           <span class="method-name">filename</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000043-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000043-source">
+            onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000041-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 64</span>
-64:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filename</span>
-65:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@dir</span>, <span class="ruby-node">&quot;#{@progname}#{ @number or '' }.pid&quot;</span>)
-66:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000047" class="method-detail">
-        <a name="M000047"></a>
-
-        <div class="method-heading">
-          <a href="#M000047" class="method-signature">
-          <span class="method-name">pid</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000047-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 92</span>
-92:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pid</span>
-93:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-94:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">to_i</span>
-95:       }
-96:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 85</span>
+85:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filename</span>
+86:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@dir</span>, <span class="ruby-node">&quot;#{@progname}#{ @number or '' }.pid&quot;</span>)
+87:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -385,7 +381,7 @@ for <tt>:dir_mode</tt>)
 
         <div class="method-heading">
           <a href="#M000045" class="method-signature">
-          <span class="method-name">pid=</span><span class="method-args">(p)</span>
+          <span class="method-name">pid</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -394,22 +390,37 @@ for <tt>:dir_mode</tt>)
             onclick="toggleCode('M000045-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000045-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 72</span>
-72:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pid=</span>(<span class="ruby-identifier">p</span>)
-73:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">multiple</span>
-74:         <span class="ruby-keyword kw">while</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1024</span>
-75:           <span class="ruby-ivar">@number</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-76:         <span class="ruby-keyword kw">end</span>
-77:         
-78:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@number</span> <span class="ruby-operator">==</span> <span class="ruby-value">1024</span>
-79:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeException</span>(<span class="ruby-value str">'cannot run more than 1024 instances of the application'</span>)
-80:         <span class="ruby-keyword kw">end</span>
-81:       <span class="ruby-keyword kw">end</span>
-82:       
-83:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-value str">'w'</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-84:         <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">p</span>   <span class="ruby-comment cmt">#Process.pid</span>
-85:       }
-86:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 103</span>
+103:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pid</span>
+104:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+105:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">to_i</span>
+106:       }
+107:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="#M000043" class="method-signature">
+          <span class="method-name">pid=</span><span class="method-args">(p)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000043-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000043-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/pidfile.rb, line 93</span>
+93:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pid=</span>(<span class="ruby-identifier">p</span>)
+94:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-value str">'w'</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+95:         <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">p</span>   <span class="ruby-comment cmt">#Process.pid</span>
+96:       }
+97:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

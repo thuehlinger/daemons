@@ -1,4 +1,4 @@
-= Daemons Version 1.0.8
+= Daemons Version 1.0.11
 
 (See Releases for release-specific information)
 
@@ -184,12 +184,11 @@ The RDoc documentation is also online at http://daemons.rubyforge.org
 
 == Author
 
-Written in 2005-2007 by Thomas Uehlinger <mailto:th.uehlinger@gmx.ch>.
-Homepage: http://physiker.ch
+Written in 2005-2008 by Thomas Uehlinger <mailto:th.uehlinger@gmx.ch>.
 
 == License
 
-Copyright (c) 2005-2007 Thomas Uehlinger
+Copyright (c) 2005-2008 Thomas Uehlinger
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

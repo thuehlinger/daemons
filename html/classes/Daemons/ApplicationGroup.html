@@ -86,16 +86,16 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000058">create_monitor</a>&nbsp;&nbsp;
-      <a href="#M000056">find_applications</a>&nbsp;&nbsp;
-      <a href="#M000053">new</a>&nbsp;&nbsp;
-      <a href="#M000057">new_application</a>&nbsp;&nbsp;
-      <a href="#M000055">pidfile_dir</a>&nbsp;&nbsp;
-      <a href="#M000054">setup</a>&nbsp;&nbsp;
-      <a href="#M000062">show_status</a>&nbsp;&nbsp;
-      <a href="#M000059">start_all</a>&nbsp;&nbsp;
-      <a href="#M000060">stop_all</a>&nbsp;&nbsp;
-      <a href="#M000061">zap_all</a>&nbsp;&nbsp;
+      <a href="#M000056">create_monitor</a>&nbsp;&nbsp;
+      <a href="#M000054">find_applications</a>&nbsp;&nbsp;
+      <a href="#M000051">new</a>&nbsp;&nbsp;
+      <a href="#M000055">new_application</a>&nbsp;&nbsp;
+      <a href="#M000053">pidfile_dir</a>&nbsp;&nbsp;
+      <a href="#M000052">setup</a>&nbsp;&nbsp;
+      <a href="#M000060">show_status</a>&nbsp;&nbsp;
+      <a href="#M000057">start_all</a>&nbsp;&nbsp;
+      <a href="#M000058">stop_all</a>&nbsp;&nbsp;
+      <a href="#M000059">zap_all</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -181,19 +181,19 @@ attr_reader :controller
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000053" class="method-detail">
-        <a name="M000053"></a>
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
 
         <div class="method-heading">
-          <a href="#M000053" class="method-signature">
+          <a href="#M000051" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(app_name, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000053-source">
+            onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000051-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 26</span>
 26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">app_name</span>, <span class="ruby-identifier">options</span> = {})
@@ -214,9 +214,11 @@ attr_reader :controller
 41:       <span class="ruby-ivar">@dir_mode</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir_mode</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">:script</span>
 42:       <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dir</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">''</span>
 43:       
-44:       <span class="ruby-comment cmt">#@applications = find_applications(pidfile_dir())</span>
-45:       <span class="ruby-ivar">@applications</span> = []
-46:     <span class="ruby-keyword kw">end</span>
+44:       <span class="ruby-ivar">@keep_pid_files</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:keep_pid_files</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword kw">false</span>
+45:       
+46:       <span class="ruby-comment cmt">#@applications = find_applications(pidfile_dir())</span>
+47:       <span class="ruby-ivar">@applications</span> = []
+48:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -224,41 +226,12 @@ attr_reader :controller
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000058" class="method-detail">
-        <a name="M000058"></a>
-
-        <div class="method-heading">
-          <a href="#M000058" class="method-signature">
-          <span class="method-name">create_monitor</span><span class="method-args">(an_app)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000058-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 105</span>
-105:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_monitor</span>(<span class="ruby-identifier">an_app</span>)
-106:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
-107:       
-108:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:monitor</span>]
-109:         <span class="ruby-ivar">@monitor</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">an_app</span>)
-110: 
-111:         <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">start</span>(<span class="ruby-ivar">@applications</span>)
-112:       <span class="ruby-keyword kw">end</span>
-113:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000056" class="method-detail">
         <a name="M000056"></a>
 
         <div class="method-heading">
           <a href="#M000056" class="method-signature">
-          <span class="method-name">find_applications</span><span class="method-args">(dir)</span>
+          <span class="method-name">create_monitor</span><span class="method-args">(an_app)</span>
           </a>
         </div>
       
@@ -267,87 +240,16 @@ attr_reader :controller
             onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000056-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 60</span>
-60:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_applications</span>(<span class="ruby-identifier">dir</span>)
-61:       <span class="ruby-identifier">pid_files</span> = <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">find_files</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">app_name</span>)
-62:       
-63:       <span class="ruby-comment cmt">#pp pid_files</span>
-64:       
-65:       <span class="ruby-ivar">@monitor</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">app_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'_monitor'</span>)
-66:       
-67:       <span class="ruby-identifier">pid_files</span>.<span class="ruby-identifier">reject!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/_monitor.pid$/</span>}
-68:       
-69:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">pid_files</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-70:         <span class="ruby-identifier">app</span> = <span class="ruby-constant">Application</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, {}, <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">existing</span>(<span class="ruby-identifier">f</span>))
-71:         <span class="ruby-identifier">setup_app</span>(<span class="ruby-identifier">app</span>)
-72:         <span class="ruby-identifier">app</span>
-73:       }
-74:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000057" class="method-detail">
-        <a name="M000057"></a>
-
-        <div class="method-heading">
-          <a href="#M000057" class="method-signature">
-          <span class="method-name">new_application</span><span class="method-args">(add_options = {})</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000057-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 76</span>
-76:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_application</span>(<span class="ruby-identifier">add_options</span> = {})
-77:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@multiple</span>
-78:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>]
-79:           <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
-80:             <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">running?</span>
-81:               <span class="ruby-identifier">a</span>.<span class="ruby-identifier">zap</span>
-82:               <span class="ruby-keyword kw">true</span>
-83:             <span class="ruby-keyword kw">end</span>
-84:           }
-85:         <span class="ruby-keyword kw">end</span>
-86:         
-87:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'there is already one or more instance(s) of the program running'</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">empty?</span>
-88:       <span class="ruby-keyword kw">end</span>
-89:       
-90:       <span class="ruby-identifier">app</span> = <span class="ruby-constant">Application</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">add_options</span>)
-91:       
-92:       <span class="ruby-identifier">setup_app</span>(<span class="ruby-identifier">app</span>)
-93:       
-94:       <span class="ruby-ivar">@applications</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">app</span>
-95:       
-96:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">app</span>
-97:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000055" class="method-detail">
-        <a name="M000055"></a>
-
-        <div class="method-heading">
-          <a href="#M000055" class="method-signature">
-          <span class="method-name">pidfile_dir</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000055-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 56</span>
-56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pidfile_dir</span>
-57:       <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">dir</span>(<span class="ruby-ivar">@dir_mode</span>, <span class="ruby-ivar">@dir</span>, <span class="ruby-identifier">script</span>)
-58:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 107</span>
+107:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_monitor</span>(<span class="ruby-identifier">an_app</span>)
+108:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
+109:       
+110:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:monitor</span>]
+111:         <span class="ruby-ivar">@monitor</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">an_app</span>)
+112: 
+113:         <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">start</span>(<span class="ruby-ivar">@applications</span>)
+114:       <span class="ruby-keyword kw">end</span>
+115:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -358,6 +260,106 @@ attr_reader :controller
 
         <div class="method-heading">
           <a href="#M000054" class="method-signature">
+          <span class="method-name">find_applications</span><span class="method-args">(dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000054-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 62</span>
+62:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_applications</span>(<span class="ruby-identifier">dir</span>)
+63:       <span class="ruby-identifier">pid_files</span> = <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">find_files</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">app_name</span>, <span class="ruby-operator">!</span> <span class="ruby-ivar">@keep_pid_files</span>)
+64:       
+65:       <span class="ruby-comment cmt">#pp pid_files</span>
+66:       
+67:       <span class="ruby-ivar">@monitor</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">app_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'_monitor'</span>)
+68:       
+69:       <span class="ruby-identifier">pid_files</span>.<span class="ruby-identifier">reject!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/_monitor.pid$/</span>}
+70:       
+71:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">pid_files</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+72:         <span class="ruby-identifier">app</span> = <span class="ruby-constant">Application</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, {}, <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">existing</span>(<span class="ruby-identifier">f</span>))
+73:         <span class="ruby-identifier">setup_app</span>(<span class="ruby-identifier">app</span>)
+74:         <span class="ruby-identifier">app</span>
+75:       }
+76:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000055" class="method-detail">
+        <a name="M000055"></a>
+
+        <div class="method-heading">
+          <a href="#M000055" class="method-signature">
+          <span class="method-name">new_application</span><span class="method-args">(add_options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000055-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 78</span>
+78:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_application</span>(<span class="ruby-identifier">add_options</span> = {})
+79:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@multiple</span>
+80:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>]
+81:           <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+82:             <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">running?</span>
+83:               <span class="ruby-identifier">a</span>.<span class="ruby-identifier">zap</span>
+84:               <span class="ruby-keyword kw">true</span>
+85:             <span class="ruby-keyword kw">end</span>
+86:           }
+87:         <span class="ruby-keyword kw">end</span>
+88:         
+89:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'there is already one or more instance(s) of the program running'</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">empty?</span>
+90:       <span class="ruby-keyword kw">end</span>
+91:       
+92:       <span class="ruby-identifier">app</span> = <span class="ruby-constant">Application</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">add_options</span>)
+93:       
+94:       <span class="ruby-identifier">setup_app</span>(<span class="ruby-identifier">app</span>)
+95:       
+96:       <span class="ruby-ivar">@applications</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">app</span>
+97:       
+98:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">app</span>
+99:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
+
+        <div class="method-heading">
+          <a href="#M000053" class="method-signature">
+          <span class="method-name">pidfile_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000053-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 58</span>
+58:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pidfile_dir</span>
+59:       <span class="ruby-constant">PidFile</span>.<span class="ruby-identifier">dir</span>(<span class="ruby-ivar">@dir_mode</span>, <span class="ruby-ivar">@dir</span>, <span class="ruby-identifier">script</span>)
+60:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="#M000052" class="method-signature">
           <span class="method-name">setup</span><span class="method-args">()</span>
           </a>
         </div>
@@ -365,71 +367,18 @@ attr_reader :controller
         <div class="method-description">
           <p>
 Setup the application group. Currently this functions calls <tt><a
-href="ApplicationGroup.html#M000056">find_applications</a></tt> which finds
+href="ApplicationGroup.html#M000054">find_applications</a></tt> which finds
 all running instances of the application and populates the application
 array.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000054-source">
+            onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000052-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 52</span>
-52:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
-53:       <span class="ruby-ivar">@applications</span> = <span class="ruby-identifier">find_applications</span>(<span class="ruby-identifier">pidfile_dir</span>())
-54:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000062" class="method-detail">
-        <a name="M000062"></a>
-
-        <div class="method-heading">
-          <a href="#M000062" class="method-signature">
-          <span class="method-name">show_status</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000062-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 144</span>
-144:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_status</span>
-145:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">show_status</span>}
-146:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000059" class="method-detail">
-        <a name="M000059"></a>
-
-        <div class="method-heading">
-          <a href="#M000059" class="method-signature">
-          <span class="method-name">start_all</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000059-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000059-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 115</span>
-115:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_all</span>
-116:       <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
-117:       <span class="ruby-ivar">@monitor</span> = <span class="ruby-keyword kw">nil</span>
-118:       
-119:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> 
-120:         <span class="ruby-identifier">fork</span> { 
-121:           <span class="ruby-identifier">a</span>.<span class="ruby-identifier">start</span> 
-122:         } 
-123:       }
-124:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 54</span>
+54:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
+55:       <span class="ruby-ivar">@applications</span> = <span class="ruby-identifier">find_applications</span>(<span class="ruby-identifier">pidfile_dir</span>())
+56:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -440,7 +389,7 @@ array.
 
         <div class="method-heading">
           <a href="#M000060" class="method-signature">
-          <span class="method-name">stop_all</span><span class="method-args">(force = false)</span>
+          <span class="method-name">show_status</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -449,43 +398,96 @@ array.
             onclick="toggleCode('M000060-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000060-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 126</span>
-126:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop_all</span>(<span class="ruby-identifier">force</span> = <span class="ruby-keyword kw">false</span>)
-127:       <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
-128:       
-129:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> 
-130:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">force</span>
-131:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">a</span>.<span class="ruby-identifier">stop</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
-132:         <span class="ruby-keyword kw">else</span>
-133:           <span class="ruby-identifier">a</span>.<span class="ruby-identifier">stop</span>
-134:         <span class="ruby-keyword kw">end</span>
-135:       }
-136:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 146</span>
+146:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_status</span>
+147:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">show_status</span>}
+148:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000061" class="method-detail">
-        <a name="M000061"></a>
+      <div id="method-M000057" class="method-detail">
+        <a name="M000057"></a>
 
         <div class="method-heading">
-          <a href="#M000061" class="method-signature">
+          <a href="#M000057" class="method-signature">
+          <span class="method-name">start_all</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000057-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 117</span>
+117:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_all</span>
+118:       <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
+119:       <span class="ruby-ivar">@monitor</span> = <span class="ruby-keyword kw">nil</span>
+120:       
+121:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> 
+122:         <span class="ruby-identifier">fork</span> { 
+123:           <span class="ruby-identifier">a</span>.<span class="ruby-identifier">start</span> 
+124:         } 
+125:       }
+126:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+          <a href="#M000058" class="method-signature">
+          <span class="method-name">stop_all</span><span class="method-args">(force = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000058-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 128</span>
+128:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop_all</span>(<span class="ruby-identifier">force</span> = <span class="ruby-keyword kw">false</span>)
+129:       <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
+130:       
+131:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> 
+132:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">force</span>
+133:           <span class="ruby-keyword kw">begin</span>; <span class="ruby-identifier">a</span>.<span class="ruby-identifier">stop</span>; <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>; <span class="ruby-keyword kw">end</span>
+134:         <span class="ruby-keyword kw">else</span>
+135:           <span class="ruby-identifier">a</span>.<span class="ruby-identifier">stop</span>
+136:         <span class="ruby-keyword kw">end</span>
+137:       }
+138:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000059" class="method-detail">
+        <a name="M000059"></a>
+
+        <div class="method-heading">
+          <a href="#M000059" class="method-signature">
           <span class="method-name">zap_all</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000061-source">
+            onclick="toggleCode('M000059-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000059-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 138</span>
-138:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">zap_all</span>
-139:       <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
-140:       
-141:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">zap</span>}
-142:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/daemons/application_group.rb, line 140</span>
+140:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">zap_all</span>
+141:       <span class="ruby-ivar">@monitor</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@monitor</span>
+142:       
+143:       <span class="ruby-ivar">@applications</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">zap</span>}
+144:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
