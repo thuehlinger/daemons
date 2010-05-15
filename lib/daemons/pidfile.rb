@@ -92,6 +92,7 @@ module Daemons
     
     def pid=(p)
       File.open(filename, 'w') {|f|
+        f.chmod(0644)
         f.puts p   #Process.pid
       }
     end

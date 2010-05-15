@@ -1,5 +1,6 @@
 require 'daemons/pidfile'
 require 'daemons/pidmem'
+require 'daemons/change_privilege'
 
 require 'timeout'
 
@@ -44,6 +45,12 @@ module Daemons
       end
     end
     
+    def change_privilege
+      user = options[:user]
+      group = options[:group]
+      CurrentProcess.change_privilege(user, group) if user
+    end
+    
     def script
       @script || @group.script
     end
@@ -52,13 +59,19 @@ module Daemons
       Pid.dir(@dir_mode || @group.dir_mode, @dir || @group.dir, @script || @group.script)
     end
     
+    def logdir
+      logdir = options[:log_dir]
+      unless logdir
+        logdir = options[:dir_mode] == :system ? '/var/log' : pidfile_dir
+      end
+      logdir
+    end
+    
     def output_logfile
-      logdir = options[:dir_mode] == :system ? '/var/log' : pidfile_dir
       (options[:log_output] && logdir) ? File.join(logdir, @group.app_name + '.output') : nil
     end
     
     def logfile
-      logdir = options[:dir_mode] == :system ? '/var/log' : pidfile_dir
       logdir ? File.join(logdir, @group.app_name + '.log') : nil
     end
     
@@ -266,6 +279,7 @@ module Daemons
     
     
     def start
+      change_privilege
       @group.create_monitor(@group.applications[0] || self) unless options[:ontop]  # we don't monitor applications in the foreground
       
       case options[:mode]
@@ -364,7 +378,7 @@ module Daemons
       begin
         Process.kill(SIGNAL, pid)
       rescue Errno::ESRCH => e
-        puts "#{e} #{@pid.pid}"
+        puts "#{e} #{pid}"
         puts "deleting pid-file."
       end
       

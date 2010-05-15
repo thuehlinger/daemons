@@ -12,6 +12,9 @@
   kill them automatically it if they do not stop within a given time 
   (force_kill_waittime). Use the option --no_wait to not wait for processes to 
   stop.
+* Set log files mode to 0644 (mikehale).
+* Set pid file permissions to 0644 (mikehale).
+* Added ability to change process uid/gid (mikehale).
 
 == Release 1.0.10: March 21, 2008
 
