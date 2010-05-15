@@ -1,0 +1,35 @@
+# Logfile created on Fri Mar 21 18:15:08 +0100 2008 by /
+I, [2008-03-21T18:15:08.941062 #16119]  INFO -- : *** below you find the most recent exception thrown, this will be likely (but not certainly) the exception that made the application end ***
+E, [2008-03-21T18:15:08.941152 #16119] ERROR -- : CRASH! (RuntimeError)
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:13
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:6:in `loop'
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:6
+/Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:176:in `load'
+/Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:176:in `start_load'
+/Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:257:in `start'
+/Users/uehli/Projects/daemons-proj/lib/daemons/controller.rb:69:in `run'
+/Users/uehli/Projects/daemons-proj/lib/daemons.rb:139:in `run'
+/Users/uehli/Projects/daemons-proj/lib/daemons/cmdline.rb:105:in `call'
+/Users/uehli/Projects/daemons-proj/lib/daemons/cmdline.rb:105:in `catch_exceptions'
+/Users/uehli/Projects/daemons-proj/lib/daemons.rb:138:in `run'
+ctrl_crash.rb:17
+I, [2008-03-21T18:15:08.941233 #16119]  INFO -- : *** below you find all exception objects found in memory, some of them may be been thrown in your application, others may just be in memory, because they are standard exceptions ***
+E, [2008-03-21T18:15:08.941430 #16119] ERROR -- : failed to allocate memory (NoMemoryError)
+
+E, [2008-03-21T18:15:08.941503 #16119] ERROR -- : stack level too deep (SystemStackError)
+
+E, [2008-03-21T18:15:08.941567 #16119] ERROR -- : exception reentered (fatal)
+
+E, [2008-03-21T18:15:08.942074 #16119] ERROR -- : CRASH! (RuntimeError)
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:13
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:6:in `loop'
+/Users/uehli/Projects/daemons-proj/examples/run/myserver_crashing.rb:6
+/Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:176:in `load'
+/Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:176:in `start_load'
+/Users/uehli/Projects/daemons-proj/lib/daemons/application.rb:257:in `start'
+/Users/uehli/Projects/daemons-proj/lib/daemons/controller.rb:69:in `run'
+/Users/uehli/Projects/daemons-proj/lib/daemons.rb:139:in `run'
+/Users/uehli/Projects/daemons-proj/lib/daemons/cmdline.rb:105:in `call'
+/Users/uehli/Projects/daemons-proj/lib/daemons/cmdline.rb:105:in `catch_exceptions'
+/Users/uehli/Projects/daemons-proj/lib/daemons.rb:138:in `run'
+ctrl_crash.rb:17

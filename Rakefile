@@ -1,5 +1,5 @@
 require 'rubygems'
-Gem::manage_gems
+#Gem::manage_gems
 
 require 'rake/gempackagetask'
 #require 'rake/testtask'
@@ -68,6 +68,10 @@ end
  
 task :default => [:package]
 
+desc 'Show information about the gem.'
+task :debug_gem do
+  puts spec.to_ruby
+end
 
 task :upload do
   sh "scp -r html/* uehli@rubyforge.org:/var/www/gforge-projects/daemons"

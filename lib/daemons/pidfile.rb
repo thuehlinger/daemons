@@ -97,7 +97,7 @@ module Daemons
     end
 
     def cleanup
-      File.delete(filename)
+      File.delete(filename) if pid == Process.pid
     end
 
     def pid

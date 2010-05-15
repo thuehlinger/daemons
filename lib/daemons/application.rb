@@ -31,7 +31,7 @@ module Daemons
       
       @dir_mode = @dir = @script = nil
       
-      @force_kill_waittime = @options[:force_kill_waittime] || 10
+      @force_kill_waittime = @options[:force_kill_waittime] || 20
       
       unless @pid = pid
         if @options[:no_pidfiles]
@@ -136,6 +136,7 @@ module Daemons
       end
       
       @pid.pid = Process.pid
+      
       
       # We need this to remove the pid-file if the applications exits by itself.
       # Note that <tt>at_exit</tt> will only be run if the applications exits by calling 
@@ -348,8 +349,8 @@ module Daemons
     end
     
     
-    def stop(force = false)
-      if force and not running?
+    def stop(no_wait = false)
+      if not running?
         self.zap
         return
       end
@@ -367,7 +368,7 @@ module Daemons
         puts "deleting pid-file."
       end
       
-      if force
+      if not no_wait
         if @force_kill_waittime > 0
           puts "#{self.group.app_name}: trying to stop process with pid #{pid}..."
           STDOUT.flush

@@ -26,6 +26,10 @@ module Daemons
           @options[:force] = t
         end
         
+        opts.on("-n", "--no_wait", "Do not wait for processes to stop") do |t|
+          @options[:no_wait] = t
+        end
+        
         #opts.separator ""
         #opts.separator "Specific options:"
 
@@ -56,6 +60,7 @@ module Daemons
         @usage = <<END
             -t, --ontop                      Stay on top (does not daemonize)
             -f, --force                      Force operation
+            -n, --no_wait                    Do not wait for processes to stop
 
         Common options:
             -h, --help                       Show this message

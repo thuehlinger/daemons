@@ -71,12 +71,15 @@ module Daemons
           @options[:ontop] ||= true
           @group.new_application.start
         when 'stop'
-          @group.stop_all(@options[:force])
+          @group.stop_all(@options[:no_wait])
         when 'restart'
           unless @group.applications.empty?
             @group.stop_all
-            sleep 1
+            sleep(1)
             @group.start_all
+          else
+            puts "Warning: no instances running. Starting..."
+            @group.new_application.start
           end
         when 'zap'
           @group.zap_all

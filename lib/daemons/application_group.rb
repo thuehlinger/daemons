@@ -161,19 +161,14 @@ module Daemons
       }
     end
     
-    def stop_all(force = false)
+    def stop_all(no_wait = false)
       @monitor.stop if @monitor
       
       threads = []
       
       @applications.each {|a| 
         threads << Thread.new do
-          if force
-            a.stop(true)
-            #begin; a.stop(true); rescue ::Exception; end
-          else
-            a.stop
-          end
+          a.stop(no_wait)
         end
       }
       

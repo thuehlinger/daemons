@@ -1,6 +1,6 @@
 #--
 ###############################################################################
-# daemonize.rb is a slightly modified version of daemonize.rb                 #
+# daemonize.rb is a slightly modified version of daemonize.rb was             #
 # from the Daemonize Library written by Travis Whitton                        #
 # for details, read the notice below                                          #
 ###############################################################################

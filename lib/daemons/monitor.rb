@@ -116,7 +116,18 @@ module Daemons
     
     
     def stop
-      begin; Process.kill(Application::SIGNAL, @pid.pid); rescue ::Exception; end
+      begin
+        pid = @pid.pid
+        Process.kill(Application::SIGNAL, pid)
+		Timeout::timeout(5) {      
+          while Pid.running?(pid)
+            sleep(0.1)
+          end
+        }
+      rescue ::Exception => e
+        puts "#{e} #{pid}"
+        puts "deleting pid-file."
+      end
       
       # We try to remove the pid-files by ourselves, in case the application
       # didn't clean it up.

@@ -65,7 +65,7 @@ require 'daemons/controller'
 #
 module Daemons
 
-  VERSION = "1.0.11"
+  VERSION = "1.1.0"
   
   require 'daemons/daemonize'
   
@@ -271,7 +271,7 @@ module Daemons
   #   }
   #
   def daemonize(options = {})
-    @groups ||= ApplicationGroup.new(options[:app_name] || 'self', options)
+    @group ||= ApplicationGroup.new(options[:app_name] || 'self', options)
     
     @group.new_application(:mode => :none).start
   end
