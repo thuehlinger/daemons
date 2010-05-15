@@ -321,6 +321,11 @@ module Daemons
 #       
 #     end
 
+	def reload
+      Process.kill('HUP', @pid.pid)
+    rescue
+      # ignore
+    end
 
     # This is a nice little function for debugging purposes:
     # In case a multi-threaded ruby script exits due to an uncaught exception

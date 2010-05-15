@@ -175,6 +175,10 @@ module Daemons
       threads.each {|t| t.join}
     end
     
+    def reload_all
+      @applications.each {|a| a.reload}
+    end
+
     def zap_all
       @monitor.stop if @monitor
       

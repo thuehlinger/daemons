@@ -97,8 +97,10 @@ END
       puts "  start         start an instance of the application"
       puts "  stop          stop all instances of the application"
       puts "  restart       stop all instances and restart them afterwards"
+      puts "  reload        send a SIGHUP to all instances of the application"
       puts "  run           start the application and stay on top"
       puts "  zap           set the application to a stopped state"
+      puts "  status        show status (PID) of application instances"
       puts
       puts "* and where <options> may contain several of the following:"
       

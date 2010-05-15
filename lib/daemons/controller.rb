@@ -15,6 +15,7 @@ module Daemons
       'restart',
       'run',
       'zap',
+      'reload',
       'status'
     ]
     
@@ -81,6 +82,8 @@ module Daemons
             puts "Warning: no instances running. Starting..."
             @group.new_application.start
           end
+        when 'reload'
+          @group.reload_all
         when 'zap'
           @group.zap_all
         when 'status'
