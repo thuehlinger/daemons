@@ -1,6 +1,6 @@
 = Daemons Release History
 
-== Release 1.1.0: May 15, 2010
+== Release 1.1.0: June 20, 2010
 
 * Honour the options[:app_name] in Daemons.daemonize (thanks to Ryan Tecco).
 * Included a new option :stop_proc to specify a proc that will be called when a 
