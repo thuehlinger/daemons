@@ -10,10 +10,8 @@ module Daemons
       @options = {}
       
       @opts = OptionParser.new do |opts|
-        #opts.banner = "Usage: example.rb [options]"
         opts.banner = ""
         
-        # Boolean switch.
 #         opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
 #           @options[:verbose] = v
 #         end
@@ -37,8 +35,7 @@ module Daemons
         opts.separator ""
         opts.separator "Common options:"
 
-        # No argument, shows at tail.  This will print an options summary.
-        # Try it and see!
+        # No argument, shows at tail.  This will print an options summary
         opts.on_tail("-h", "--help", "Show this message") do
           #puts opts
           #@usage = 
@@ -47,7 +44,7 @@ module Daemons
           exit
         end
 
-        # Another typical switch to print the version.
+        # Switch to print the version.
         opts.on_tail("--version", "Show version") do
           puts "daemons version #{Daemons::VERSION}"
           exit

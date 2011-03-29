@@ -1,5 +1,10 @@
 = Daemons Release History
 
+== Release 1.1.1: March 29, 201
+
+* Make the logging facilities work in :mode => :none (i.e. when calling 
+  Daemons.daemonize) (thanks to the input from Peter Hegedus).
+  
 == Release 1.1.0: June 20, 2010
 
 * Honour the options[:app_name] in Daemons.daemonize (thanks to Ryan Tecco).

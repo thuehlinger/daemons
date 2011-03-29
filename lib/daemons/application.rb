@@ -78,9 +78,9 @@ module Daemons
     # this function is only used to daemonize the currently running process (Daemons.daemonize)
     def start_none
       unless options[:ontop]
-        Daemonize.daemonize(nil, @group.app_name) #(logfile)
+        Daemonize.daemonize(output_logfile, @group.app_name)
       else
-        Daemonize.simulate
+        Daemonize.simulate(output_logfile)
       end
       
       @pid.pid = Process.pid
@@ -138,7 +138,6 @@ module Daemons
       
       started()
       Kernel.exec(script(), *(@app_argv || []))
-      #Kernel.exec(script(), *ARGV)
     end
     
     def start_load
