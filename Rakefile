@@ -17,11 +17,13 @@ PKG_FILES = FileList[
   "setup.rb",
   "lib/**/*.rb",
   #"test/**/*",
-  "examples/**/*"
+  "examples/**/*.rb"
 ]
 #PKG_FILES.exclude(%r(^test/tmp/.+))
 PKG_FILES.exclude(%r(\.pid$))
 PKG_FILES.exclude(%r(\.log$))
+PKG_FILES.exclude(%r(\.output$))
+PKG_FILES.exclude(%r(\.txt$))
 
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME

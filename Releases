@@ -1,10 +1,15 @@
 = Daemons Release History
 
-== Release 1.1.2: March 29, 201
+== Release 1.1.3: April 14, 2011
+
+* Fixed a bug in Application.stop: the cached pid number needs to
+  be used to check for the status of a killed process (thanks to Jimmy Sieben).
+  
+== Release 1.1.2: March 29, 2011
 
 * Fixed gemspec to include all needed files.
   
-== Release 1.1.1: March 29, 201
+== Release 1.1.1: March 29, 2011
 
 * Make the logging facilities work in :mode => :none (i.e. when calling 
   Daemons.daemonize) (thanks to the input from Peter Hegedus).

@@ -393,7 +393,7 @@ module Daemons
           
           begin
             Timeout::timeout(@force_kill_waittime) {
-              while @pid.running?
+              while Pid.running?(pid)
                 sleep(0.2)
               end
             }
@@ -408,7 +408,7 @@ module Daemons
             
             begin
               Timeout::timeout(20) {
-                while @pid.running?
+                while Pid.running?(pid)
                   sleep(1)
                 end
               }
@@ -423,7 +423,7 @@ module Daemons
       end
       
       sleep(0.1)
-      unless @pid.running?
+      unless Pid.running?(pid)
         # We try to remove the pid-files by ourselves, in case the application
         # didn't clean it up.
         begin; @pid.cleanup; rescue ::Exception; end
