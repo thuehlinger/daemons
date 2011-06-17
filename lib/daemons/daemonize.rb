@@ -187,7 +187,7 @@ module Daemonize
       
       ios = Array.new(8192){|i| IO.for_fd(i) rescue nil}.compact
       ios.each do |io|
-        next if io.fileno < 3u
+        next if io.fileno < 3
         io.close
       end
 
