@@ -1,5 +1,10 @@
 = Daemons Release History
 
+== Release 1.1.4: June 17, 2011
+
+* Do not change the umask to 0000 when daemonizing anymore, just leave it as it 
+  was (thanks to Jon Botelho).
+
 == Release 1.1.3: April 14, 2011
 
 * Fixed a bug in Application.stop: the cached pid number needs to
