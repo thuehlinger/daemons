@@ -169,6 +169,9 @@ module Daemonize
       wr.write Process.pid
       wr.close
       
+      # Always handle INT signal (thanks to Vit Ondruch)
+      #trap 'INT', 'DEFAULT'  # make sure we always handle the 'INT' signal
+      
       $0 = app_name if app_name
       
       Dir.chdir "/"   # Release old working directory
@@ -218,6 +221,9 @@ module Daemonize
       exit if pid = safefork
     #end
 
+    # Always handle INT signal (thanks to Vit Ondruch)
+    #trap 'INT', 'DEFAULT'  # make sure we always handle the 'INT' signal
+    
     $0 = app_name if app_name
     
     Dir.chdir "/"   # Release old working directory

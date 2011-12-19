@@ -320,10 +320,17 @@ module Daemons
 #       
 #     end
 
-	def reload
-      Process.kill('HUP', @pid.pid)
-    rescue
-      # ignore
+	  def reload
+      if @pid.pid == 0
+        zap
+        start
+      else
+        begin
+          Process.kill('HUP', @pid.pid)
+        rescue
+          # ignore
+        end
+      end
     end
 
     # This is a nice little function for debugging purposes:

@@ -1,5 +1,10 @@
 = Daemons Release History
 
+== Release 1.1.5: December 19, 2011
+
+* Catch the case where the pidfile is empty but not deleted 
+  and restart the app (thanks to Rich Healey)
+
 == Release 1.1.4: June 17, 2011
 
 * Do not change the umask to 0000 when daemonizing anymore, just leave it as it 
