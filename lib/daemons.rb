@@ -81,7 +81,9 @@ module Daemons
   #             Please note that Daemons runs this script with <tt>load <script></tt>.
   #             Also note that Daemons cannot detect the directory in which the controlling
   #             script resides, so this has to be either an absolute path or you have to run
-  #             the controlling script from the appropriate directory.
+  #             the controlling script from the appropriate directory. Your script name should not
+  #             end with _monitor because that name is reserved for a monitor process which is 
+  #             there to restart your daemon if it crashes.
   #
   # +options+:: A hash that may contain one or more of the options listed below
   #
