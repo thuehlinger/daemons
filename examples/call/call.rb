@@ -18,6 +18,7 @@ testfile = File.expand_path(__FILE__) + '.log'
 #
 
 options = {
+  :app_name => 'mytask',
 #  :ontop => true,
   :multiple => true
 }

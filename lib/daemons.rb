@@ -27,7 +27,7 @@ require 'timeout'
 # 2.  <tt>Daemons.run_proc(app_name, options) { (...) }</tt>:
 #     This is used in wrapper-scripts that are supposed to control a proc. 
 #     Control is completely passed to the daemons library.
-#     Such wrapper script need to be invoked with command line options like 'start' or 'stop'
+#     Such wrapper scripts need to be invoked with command line options like 'start' or 'stop'
 #     to do anything useful.
 #
 # 3.  <tt>Daemons.call(options) { block }</tt>:
@@ -66,7 +66,7 @@ require 'timeout'
 #
 module Daemons
 
-  VERSION = "1.1.5"
+  VERSION = "1.1.6"
   
   require 'daemons/daemonize'
   
@@ -206,6 +206,8 @@ module Daemons
   # Execute the block in a new daemon. <tt>Daemons.call</tt> will return immediately
   # after spawning the daemon with the new Application object as a return value.
   #
+  # +app_name+::  The name of the application.
+  #
   # +options+:: A hash that may contain one or more of the options listed below
   #
   # +block+::   The block to call in the daemon.
@@ -220,6 +222,7 @@ module Daemons
   # 
   # === Example:
   #   options = {
+  #     :app_name   => "myproc",
   #     :backtrace  => true,
   #     :monitor    => true,
   #     :ontop      => true
@@ -241,7 +244,9 @@ module Daemons
     options[:proc] = block
     options[:mode] = :proc
     
-    @group ||= ApplicationGroup.new('proc', options)
+    options[:app_name] ||= 'proc'
+    
+    @group ||= ApplicationGroup.new(options[:app_name], options)
     
     new_app = @group.new_application(options)
     new_app.start

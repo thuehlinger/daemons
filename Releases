@@ -1,5 +1,9 @@
 = Daemons Release History
 
+== Release 1.1.6: January 18, 2012
+
+* Add the :app_name option for the "call" daemonization mode.
+
 == Release 1.1.5: December 19, 2011
 
 * Catch the case where the pidfile is empty but not deleted 
