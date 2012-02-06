@@ -1,5 +1,10 @@
 = Daemons Release History
 
+== Release 1.1.7: February 6, 2012
+
+* start_proc: Write out the PID file in the newly created proc to avoid race conditions.
+* daemonize.rb: remove to simplify licensing (replaced by daemonization.rb).
+
 == Release 1.1.6: January 18, 2012
 
 * Add the :app_name option for the "call" daemonization mode.

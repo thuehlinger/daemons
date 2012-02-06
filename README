@@ -1,4 +1,4 @@
-= Daemons Version 1.1.6
+= Daemons Version 1.1.7
 
 (See Releases for release-specific information)
 
@@ -13,9 +13,6 @@ these processes from the main application.
 Besides this basic functionality, daemons offers many advanced features like <i>exception backtracing</i> 
 and logging (in case your ruby script crashes) and <i>monitoring</i> and automatic restarting of your processes
 if they crash.
-
-Daemons includes the <tt>daemonize.rb</tt> script written by <i>Travis Whitton</i> to do the daemonization
-process.
 
 == Basic Usage
 
@@ -211,13 +208,6 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-
-This license does not apply to daemonize.rb, which is was written by 
-Travis Whitton und published under the following license:
-
-The Daemonize extension module is copywrited free software by Travis Whitton
-<whitton@atlantic.net>. You can redistribute it under the terms specified in
-the COPYING file of the Ruby distribution.
 
 == Feedback and other resources
 
