@@ -1,7 +1,7 @@
 
 module Daemons
 
-  require 'daemons/daemonization'
+  require 'daemons/daemonize'
    
   class Monitor
     
@@ -62,7 +62,7 @@ module Daemons
     
     def start_with_pidfile(applications)
       fork do
-        Daemonization.daemonize(nil, @app_name)
+        Daemonize.daemonize(nil, @app_name)
         
         begin  
           @pid.pid = Process.pid

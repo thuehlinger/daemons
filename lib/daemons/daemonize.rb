@@ -1,8 +1,8 @@
-module Daemonization
+module Daemonize
   
   # Try to fork if at all possible retrying every 5 sec if the
   # maximum process limit for the system has been reached
-  def safe_fork
+  def safefork
     tryagain = true
 
     while tryagain
@@ -17,7 +17,7 @@ module Daemonization
       end
     end
   end
-  module_function :safe_fork
+  module_function :safefork
   
   
   # Simulate the daemonization process (:ontop mode)
@@ -40,7 +40,7 @@ module Daemonization
     # we use a pipe to return the PID of the daemon
     rd, wr = IO.pipe
     
-    if tmppid = safe_fork
+    if tmppid = safefork
       # in the parent
       
       wr.close
@@ -62,7 +62,7 @@ module Daemonization
   
       # Prevent the possibility of acquiring a controlling terminal
       trap 'SIGHUP', 'IGNORE'
-      exit if pid = safe_fork
+      exit if pid = safefork
   
       wr.write Process.pid
       wr.close
@@ -90,7 +90,7 @@ module Daemonization
     srand 
     
      # Fork and exit from the parent
-    safe_fork and exit
+    safefork and exit
 
     # Detach from the controlling terminal
     unless sess_id = Process.setsid
@@ -99,7 +99,7 @@ module Daemonization
 
     # Prevent the possibility of acquiring a controlling terminal
     trap 'SIGHUP', 'IGNORE'
-    exit if pid = safe_fork
+    exit if pid = safefork
     
     $0 = app_name if app_name
     

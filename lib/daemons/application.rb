@@ -78,9 +78,9 @@ module Daemons
     # this function is only used to daemonize the currently running process (Daemons.daemonize)
     def start_none
       unless options[:ontop]
-        Daemonization.daemonize(output_logfile, @group.app_name)
+        Daemonize.daemonize(output_logfile, @group.app_name)
       else
-        Daemonization.simulate(output_logfile)
+        Daemonize.simulate(output_logfile)
       end
       
       @pid.pid = Process.pid
@@ -125,9 +125,9 @@ module Daemons
       end
       
       unless options[:ontop]
-        Daemonization.daemonize(output_logfile, @group.app_name)
+        Daemonize.daemonize(output_logfile, @group.app_name)
       else
-        Daemonization.simulate(output_logfile)
+        Daemonize.simulate(output_logfile)
       end
       
       # note that we cannot remove the pid file if we run in :ontop mode (i.e. 'ruby ctrl_exec.rb run')
@@ -142,9 +142,9 @@ module Daemons
     
     def start_load
       unless options[:ontop]
-        Daemonization.daemonize(output_logfile, @group.app_name)
+        Daemonize.daemonize(output_logfile, @group.app_name)
       else
-        Daemonization.simulate(output_logfile)
+        Daemonize.simulate(output_logfile)
       end
       
       @pid.pid = Process.pid
@@ -255,10 +255,10 @@ module Daemons
       end
       
       unless options[:ontop]
-        Daemonization.call_as_daemon(myproc, output_logfile, @group.app_name)
+        Daemonize.call_as_daemon(myproc, output_logfile, @group.app_name)
         
       else
-        Daemonization.simulate(output_logfile)
+        Daemonize.simulate(output_logfile)
         
         myproc.call
         
@@ -268,7 +268,7 @@ module Daemons
 # why did we use the code below??
         # unless pid = Process.fork
         #   @pid.pid = pid
-        #   Daemonization.simulate(logfile)
+        #   Daemonize.simulate(logfile)
         #   options[:proc].call
         #   exit
         # else

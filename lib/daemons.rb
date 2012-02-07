@@ -66,9 +66,9 @@ require 'timeout'
 #
 module Daemons
 
-  VERSION = "1.1.7"
+  VERSION = "1.1.8"
   
-  require 'daemons/daemonization'
+  require 'daemons/daemonize'
   
   
   # Passes control to Daemons.
