@@ -76,6 +76,9 @@ module Daemonize
 
       redirect_io(logfile_name)  
     
+      # Split rand streams between spawning and daemonized process
+      srand
+      
       block.call
       
       exit
@@ -86,10 +89,7 @@ module Daemonize
   
   # Transform the current process into a daemon
   def daemonize(logfile_name = nil, app_name = nil)
-    # Split rand streams between spawning and daemonized process
-    srand 
-    
-     # Fork and exit from the parent
+    # Fork and exit from the parent
     safefork and exit
 
     # Detach from the controlling terminal
@@ -109,6 +109,9 @@ module Daemonize
     close_io()
 
     redirect_io(logfile_name)
+    
+    # Split rand streams between spawning and daemonized process
+    srand
     
     return sess_id
   end

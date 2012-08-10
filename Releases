@@ -1,5 +1,10 @@
 = Daemons Release History
 
+== Release 1.1.9: August 10, 2012
+
+* daemonize.rb: do srand in the forked child process both in daemonize and call_as_daemon 
+  (thanks to Andrew Havens).
+
 == Release 1.1.8: February 7, 2012
 
 * rename to daemonization.rb to daemonize.rb (and Daemonization to Daemonize) to 

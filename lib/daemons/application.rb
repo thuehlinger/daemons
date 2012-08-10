@@ -1,6 +1,7 @@
 require 'daemons/pidfile'
 require 'daemons/pidmem'
 require 'daemons/change_privilege'
+require 'daemons/daemonize'
 
 require 'timeout'
 
