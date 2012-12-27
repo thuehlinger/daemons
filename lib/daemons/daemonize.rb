@@ -23,14 +23,22 @@ module Daemonize
   # Simulate the daemonization process (:ontop mode)
   # NOTE: STDOUT and STDERR will not be redirected to the logfile, 
   # because in :ontop mode, we normally want to see the output
-  def simulate(logfile_name = nil)
+  def simulate(logfile_name = nil, app_name = nil)
+    $0 = app_name if app_name
+    
+    # Release old working directory
+    Dir.chdir "/"  
+    
     # Release old working directory
     Dir.chdir "/"   
 
     close_io()
 
-    # Free STDIN and point them somewhere sensible
-    begin; STDIN.reopen "/dev/null"; rescue ::Exception; end       
+    # Free STDIN and point it to somewhere sensible
+    begin; STDIN.reopen "/dev/null"; rescue ::Exception; end  
+    
+    # Split rand streams between spawning and daemonized process
+    srand     
   end
   module_function :simulate
   
