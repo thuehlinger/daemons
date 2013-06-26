@@ -1,3 +1,4 @@
+require 'daemons/exceptions'
 
 
 module Daemons
@@ -14,6 +15,8 @@ module Daemons
       begin
         Process.kill(0, pid)
         return true
+      rescue TimeoutError
+        raise
       rescue Errno::ESRCH
         return false
       rescue ::Exception   # for example on EPERM (process exists but does not belong to us)

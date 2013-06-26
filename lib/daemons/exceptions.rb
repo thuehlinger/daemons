@@ -25,4 +25,7 @@ module Daemons
     
   end
   
+  class TimeoutError < Error
+  end
+  
 end

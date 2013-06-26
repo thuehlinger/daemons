@@ -7,12 +7,10 @@ require 'daemons/cmdline'
 require 'daemons/exceptions'
 require 'daemons/monitor'
 
-
 require 'daemons/application'
 require 'daemons/application_group'
 require 'daemons/controller'
 
-require 'timeout'
 
 # All functions and classes that Daemons provides reside in this module.
 #
@@ -66,7 +64,7 @@ require 'timeout'
 #
 module Daemons
 
-  VERSION = "1.1.9"
+  VERSION = "1.1.10"
   
   require 'daemons/daemonize'
   

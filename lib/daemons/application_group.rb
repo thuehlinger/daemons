@@ -141,12 +141,14 @@ module Daemons
     private :setup_app
     
     def create_monitor(an_app)
-      return if @monitor
+      if @monitor and options[:monitor]
+        @monitor.stop
+        @monitor = nil
+      end
       
       if options[:monitor]
         @monitor = Monitor.new(an_app)
-
-        @monitor.start(@applications)
+        @monitor.start(self)
       end
     end
     
@@ -162,7 +164,11 @@ module Daemons
     end
     
     def stop_all(no_wait = false)
-      @monitor.stop if @monitor
+      if @monitor
+        @monitor.stop 
+        @monitor = nil
+        setup
+      end
       
       threads = []
       

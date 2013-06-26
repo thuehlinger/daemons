@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.name = %q{daemons}
   
   
-  s.version = "1.1.9"
-  s.date = %q{2012-08-10}
+  s.version = "1.1.10"
+  s.date = %q{2013-06-26}
   
   
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=

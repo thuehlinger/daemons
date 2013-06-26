@@ -2,6 +2,7 @@ require 'daemons/pidfile'
 require 'daemons/pidmem'
 require 'daemons/change_privilege'
 require 'daemons/daemonize'
+require 'daemons/exceptions'
 
 require 'timeout'
 
@@ -280,10 +281,13 @@ module Daemons
     end
     
     
-    def start
+    def start(restart = false)
       change_privilege
-      @group.create_monitor(@group.applications[0] || self) unless options[:ontop]  # we don't monitor applications in the foreground
       
+      if not restart
+        @group.create_monitor(self) unless options[:ontop]  # we don't monitor applications in the foreground
+      end
+        
       case options[:mode]
         when :none
           # this is only used to daemonize the currently running process
@@ -402,12 +406,12 @@ module Daemons
           STDOUT.flush
           
           begin
-            Timeout::timeout(@force_kill_waittime) {
+            Timeout::timeout(@force_kill_waittime, TimeoutError) {
               while Pid.running?(pid)
                 sleep(0.2)
               end
             }
-          rescue Timeout::Error
+          rescue TimeoutError
             puts "#{self.group.app_name}: process with pid #{pid} won't stop, we forcefully kill it..."
             STDOUT.flush
             
@@ -417,12 +421,12 @@ module Daemons
             end
             
             begin
-              Timeout::timeout(20) {
+              Timeout::timeout(20, TimeoutError) {
                 while Pid.running?(pid)
                   sleep(1)
                 end
               }
-            rescue Timeout::Error
+            rescue TimeoutError
               puts "#{self.group.app_name}: unable to forcefully kill process with pid #{pid}."
               STDOUT.flush
             end

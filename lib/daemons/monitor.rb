@@ -1,3 +1,5 @@
+require 'daemons/exceptions'
+
 
 module Daemons
 
@@ -38,29 +40,33 @@ module Daemons
       end
     end
     
-    def watch(applications)
-      sleep(30)
+    def watch(application_group)
+      sleep(5)
       
       loop do
-        applications.each {|a|
-          sleep(10)
-          
+        application_group.applications.each {|a|
           unless a.running?
             a.zap!
             
-            Process.detach(fork { a.start })
+            sleep(1)
             
-            sleep(10)
+            Process.detach(fork { a.start(restart=true) })
+            
+            sleep(5)
+            
+            #application_group.setup
           end
         }
         
-        sleep(30)
+        #sleep(5)
+        #application_group.setup
+        #sleep(30)
       end
     end
     private :watch
     
     
-    def start_with_pidfile(applications)
+    def start_with_pidfile(application_group)
       fork do
         Daemonize.daemonize(nil, @app_name)
         
@@ -81,7 +87,7 @@ module Daemons
   #           exit
   #         }
           
-          watch(applications)
+          watch(application_group)
         rescue ::Exception => e
           begin
             File.open(@app.logfile, 'a') {|f|
@@ -98,19 +104,19 @@ module Daemons
     end
     private :start_with_pidfile
     
-    def start_without_pidfile(applications)
-      Thread.new { watch(applications) }
+    def start_without_pidfile(application_group)
+      Thread.new { watch(application_group) }
     end
     private :start_without_pidfile
     
     
-    def start(applications)
-      return if applications.empty?
+    def start(application_group)
+      return if application_group.applications.empty?
       
       if @pid.kind_of?(PidFile)
-        start_with_pidfile(applications)
+        start_with_pidfile(application_group)
       else
-        start_without_pidfile(applications)
+        start_without_pidfile(application_group)
       end
     end
     
@@ -119,7 +125,7 @@ module Daemons
       begin
         pid = @pid.pid
         Process.kill(Application::SIGNAL, pid)
-		Timeout::timeout(5) {      
+		    Timeout::timeout(5, TimeoutError) {      
           while Pid.running?(pid)
             sleep(0.1)
           end

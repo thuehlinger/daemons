@@ -1,4 +1,4 @@
-= Daemons Version 1.1.9
+= Daemons Version 1.1.10
 
 (See Releases for release-specific information)
 
@@ -181,12 +181,12 @@ The RDoc documentation is also online at http://daemons.rubyforge.org
 
 == Author
 
-Written 2005-2010 by Thomas Uehlinger <mailto:th.uehlinger@gmx.ch>.
+Written 2005-2013 by Thomas Uehlinger <mailto:th.uehlinger@gmx.ch>.
 Anonymous SVN checkout is available with "svn checkout http://daemons.rubyforge.org/svn/".
 
 == License
 
-Copyright (c) 2005-2012 Thomas Uehlinger
+Copyright (c) 2005-2013 Thomas Uehlinger
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -211,4 +211,4 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 == Feedback and other resources
 
-At http://rubyforge.org/projects/daemons.
+At http://rubyforge.org/projects/daemons .

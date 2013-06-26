@@ -76,7 +76,7 @@ module Daemons
           @number += 1
         end
         
-        if @number == 1024
+        if @number >= 1024
           raise RuntimeException('cannot run more than 1024 instances of the application')
         end
       end

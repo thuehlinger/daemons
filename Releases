@@ -1,5 +1,11 @@
 = Daemons Release History
 
+== Release 1.1.10: June 26, 2013
+
+* fix Pid.running? rescuing timeout exceptions (thanks to Geraud Boyer)
+* monitor.rb/application.rb/application_group.rb: handle :monitor and :multiple in combination correctly
+  (thanks to Prakash Murthy).
+
 == Release 1.1.9: August 10, 2012
 
 * daemonize.rb: do srand in the forked child process both in daemonize and call_as_daemon 
