@@ -5,6 +5,7 @@
 * fix Pid.running? rescuing timeout exceptions (thanks to Geraud Boyer)
 * monitor.rb/application.rb/application_group.rb: handle :monitor and :multiple in combination correctly
   (thanks to Prakash Murthy).
+* pidfile.rb: Handle invalid or empty pid files instead of returning pid 0 (thanks to Aaron Stone)
 
 == Release 1.1.9: August 10, 2012
 
