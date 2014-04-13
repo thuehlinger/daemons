@@ -1,8 +1,8 @@
 require 'optparse'
 require 'optparse/time'
 
-
-require 'daemons/pidfile'  
+require 'daemons/version'
+require 'daemons/pidfile'
 require 'daemons/cmdline'
 require 'daemons/exceptions'
 require 'daemons/monitor'
@@ -64,11 +64,8 @@ require 'daemons/controller'
 #
 module Daemons
 
-  VERSION = "1.1.10"
-  
   require 'daemons/daemonize'
-  
-  
+
   # Passes control to Daemons.
   # This is used in wrapper-scripts that are supposed to control other ruby scripts or
   # external applications. Control is completely passed to the daemons library.
