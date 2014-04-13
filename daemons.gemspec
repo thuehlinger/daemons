@@ -21,14 +21,5 @@ Gem::Specification.new do |s|
     monitoring and automatic restarting of your processes if they crash.
   EOF
 
-  s.files = [
-    "Rakefile",
-    "Releases",
-    "README.md",
-    "LICENSE",
-    "setup.rb",
-    "lib/*.rb",
-    "lib/**/*.rb",
-    "examples/**/*.rb",
-  ]
+  s.files = `git ls-files README.md LICENSE Releases lib`.split
 end
