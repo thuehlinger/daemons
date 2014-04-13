@@ -24,8 +24,7 @@ Gem::Specification.new do |s|
   s.files = [
     "Rakefile",
     "Releases",
-    "TODO",
-    "README",
+    "README.md",
     "LICENSE",
     "setup.rb",
     "lib/*.rb",
