@@ -8,7 +8,6 @@ end
 
 require 'daemons'
 
-           
 Daemons.run_proc('ctrl_proc_simple.rb') do
   loop do
     puts 'ping from proc!'

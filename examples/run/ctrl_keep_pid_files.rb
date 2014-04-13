@@ -8,10 +8,8 @@ end
 
 require 'daemons'
 
-
 options = {
   :keep_pid_files => true
 }
-
 
 Daemons.run(File.join(File.dirname(__FILE__), 'myserver.rb'), options)

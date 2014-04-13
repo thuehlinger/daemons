@@ -8,15 +8,13 @@ end
 
 require 'daemons'
 
-
 options = {
   :log_output => true,
-  :multiple => true, 
+  :multiple => true,
 }
 
-
 Daemons.run_proc('ctrl_proc_multiple.rb', options) do
-  puts "hello"
+  puts 'hello'
   sleep(5)
-  puts "done"
+  puts 'done'
 end
