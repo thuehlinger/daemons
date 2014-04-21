@@ -6,22 +6,18 @@ else
   begin; require 'rubygems'; rescue ::Exception; end
 end
 
-
-
 require 'daemons'
-
 
 options = {
   :log_output => true
 }
 
-
 testfile = File.expand_path(__FILE__) + '.txt'
 
 Daemons.daemonize(options)
 
-puts "some output..."
+puts 'some output...'
 
-File.open(testfile, 'w') {|f|
-  f.write("test")
-}
+File.open(testfile, 'w') do |f|
+  f.write('test')
+end

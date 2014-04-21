@@ -11,7 +11,6 @@ require 'optparse'
 require 'logger'
 require 'ostruct'
 
-
 class MyApp < Logger::Application
   def initialize(args)
     super(self.class)
@@ -19,15 +18,15 @@ class MyApp < Logger::Application
     opts = OptionParser.new do |opts|
       opts.banner = 'Usage: myapp [options]'
       opts.separator ''
-      opts.on('-N','--no-daemonize',"Don't run as a daemon") do
+      opts.on('-N', '--no-daemonize', "Don't run as a daemon") do
         @options.daemonize = false
       end
     end
     @args = opts.parse!(args)
   end
-  
+
   def run
-    Daemons.run_proc('myapp',{:ARGV => @args, :ontop => !@options.daemonize}) do
+    Daemons.run_proc('myapp', :ARGV => @args, :ontop => !@options.daemonize) do
       puts "@options.daemonize: #{@options.daemonize}"
       STDOUT.sync = true
       loop do
@@ -37,7 +36,6 @@ class MyApp < Logger::Application
     end
   end
 end
-
 
 myapp = MyApp.new(ARGV)
 myapp.run

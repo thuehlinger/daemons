@@ -8,7 +8,6 @@ end
 
 require 'daemons'
 
-
 options = {
   :log_output => true,
   :backtrace => true

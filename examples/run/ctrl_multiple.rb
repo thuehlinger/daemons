@@ -8,7 +8,6 @@ end
 
 require 'daemons'
 
-
 options = {
   :multiple => true
 }
