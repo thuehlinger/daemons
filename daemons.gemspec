@@ -3,9 +3,9 @@ require File.expand_path('../lib/daemons/version', __FILE__)
 Gem::Specification.new do |s|
   s.name = %q{daemons}
   s.version = Daemons::VERSION
-  s.date = %q{2013-06-26}
+  s.date = %q{2014-04-21}
   s.authors = ["Thomas Uehlinger"]
-  s.email = %q{th.uehlinger@gmx.ch}
+  s.email = %q{thomas.uehinger@gmail.com}
   s.homepage = %q{http://rubygems.org/gems/daemons}
   s.summary = %q{A toolkit to create and control daemons in different ways}
   s.description = <<-EOF

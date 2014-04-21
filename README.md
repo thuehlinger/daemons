@@ -171,4 +171,4 @@ For further documentation, refer to the module documentation of Daemons.
 Author
 ------
 
-Written 2005-2013 by Thomas Uehlinger <th.uehlinger@gmx.ch>
+Written 2005-2014 by Thomas Uehlinger <thomas.uehlinger@gmail.com>, 2014 by Aaron Stone <aaron@serendipity.cx>.
