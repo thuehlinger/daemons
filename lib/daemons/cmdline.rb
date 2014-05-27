@@ -1,4 +1,3 @@
-
 module Daemons
   class Optparse
     attr_reader :usage

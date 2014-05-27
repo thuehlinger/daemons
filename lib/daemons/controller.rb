@@ -66,7 +66,7 @@ module Daemons
             sleep(1)
             @group.start_all
           else
-            puts 'Warning: no instances running. Starting...'
+            $stderr.puts 'Warning: no instances running. Starting...'
             @group.new_application.start
           end
         when 'reload'
@@ -78,15 +78,11 @@ module Daemons
             @group.show_status
             exit 3 if not @group.running?   # exit with status 3 to indicate that no apps are running
           else
-            puts "#{@group.app_name}: no instances running"
+            $stderr.puts "#{@group.app_name}: no instances running"
             exit 3                          # exit with status 3 to indicate that no apps are running
           end
         when nil
           fail CmdException.new('no command given')
-          # puts "ERROR: No command given"; puts
-
-          # print_usage()
-          # raise('usage function not implemented')
         else
           fail Error.new("command '#{@command}' not implemented")
       end
