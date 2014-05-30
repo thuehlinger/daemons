@@ -46,8 +46,6 @@ module Daemons
 
       setup_options
 
-      # pp @options
-
       @group = ApplicationGroup.new(@app_name, @options)
       @group.controller_argv = @controller_part
       @group.app_argv = @app_part
@@ -78,8 +76,10 @@ module Daemons
         when 'status'
           unless @group.applications.empty?
             @group.show_status
+            exit 3 if not @group.running?   # exit with status 3 to indicate that no apps are running
           else
             puts "#{@group.app_name}: no instances running"
+            exit 3                          # exit with status 3 to indicate that no apps are running
           end
         when nil
           fail CmdException.new('no command given')

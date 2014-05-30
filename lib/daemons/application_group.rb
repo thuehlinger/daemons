@@ -192,5 +192,12 @@ module Daemons
     def show_status
       @applications.each { |a| a.show_status }
     end
+    
+    # Check whether at least one of the applications in the group is running. If yes, return true.
+    def running?
+      @applications.each { |a| return true if a.running? }
+      return false
+    end
+    
   end
 end
