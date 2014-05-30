@@ -33,6 +33,9 @@ module Daemons
     def self.find_files(dir, progname, delete = false)
       files = Dir[File.join(dir, "#{progname}*.pid")]
 
+      # The glob is a bit too loose, i.e. progname = 'the_application_worker' will match the pid for the_application_worker_with_more.pid, which it should not.
+      files.delete_if { |f| f !~ /#{progname}\d*\.pid/ }
+
       files.delete_if { |f| not (File.file?(f) and File.readable?(f)) }
       if delete
         files.delete_if do |f|
