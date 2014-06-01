@@ -66,7 +66,7 @@ module Daemons
             sleep(1)
             @group.start_all
           else
-            $stderr.puts 'Warning: no instances running. Starting...'
+            $stderr.puts "#{@group.app_name}: warning: no instances running. Starting..."
             @group.new_application.start
           end
         when 'reload'
