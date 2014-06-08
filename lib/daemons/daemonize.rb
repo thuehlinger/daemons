@@ -126,21 +126,14 @@ module Daemonize
     # Part I: close all IO objects (except for STDIN/STDOUT/STDERR)
     ObjectSpace.each_object(IO) do |io|
       unless [STDIN, STDOUT, STDERR].include?(io)
-        begin
-          unless io.closed?
-            io.close
-          end
-        rescue ::Exception
-        end
+        io.close rescue nil
       end
     end
 
     # Make sure all input/output streams are closed
     # Part II: close all file decriptors (except for STDIN/STDOUT/STDERR)
-    ios = Array.new(8192) { |i| IO.for_fd(i) rescue nil }.compact
-    ios.each do |io|
-      next if io.fileno < 3
-      io.close
+    3.upto(8192) do |i|
+      IO.for_fd(i).close rescue nil
     end
   end
   module_function :close_io
