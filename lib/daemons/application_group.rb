@@ -94,14 +94,9 @@ module Daemons
     end
 
     def find_applications_by_pidfiles(dir)
-      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files)
-
-      # pp pid_files
-
       @monitor = Monitor.find(dir, app_name + '_monitor')
 
-      pid_files.reject! { |f| f =~ /_monitor.pid$/ }
-
+      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files)
       pid_files.map do |f|
         app = Application.new(self, {}, PidFile.existing(f))
         setup_app(app)
