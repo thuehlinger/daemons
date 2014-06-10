@@ -27,9 +27,6 @@ module Daemonize
     # Release old working directory
     Dir.chdir '/'
 
-    # Release old working directory
-    Dir.chdir '/'
-
     close_io
 
     # Free STDIN and point it to somewhere sensible
