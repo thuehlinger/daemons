@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.date = %q{2014-04-21}
   s.authors = ["Thomas Uehlinger"]
   s.email = %q{thomas.uehinger@gmail.com}
-  s.homepage = %q{http://rubygems.org/gems/daemons}
+  s.homepage = %q{https://github.com/thuehlinger/daemons}
   s.summary = %q{A toolkit to create and control daemons in different ways}
   s.description = <<-EOF
     Daemons provides an easy way to wrap existing ruby scripts (for example a
