@@ -130,6 +130,9 @@ module Daemons
     def setup_app(app)
       app.controller_argv = @controller_argv
       app.app_argv = @app_argv
+      if @options[:show_status_callback]
+        app.show_status_callback = @options[:show_status_callback]
+      end
     end
     private :setup_app
 

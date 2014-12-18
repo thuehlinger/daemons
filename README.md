@@ -168,6 +168,38 @@ end
 
 For further documentation, refer to the module documentation of Daemons.
 
+Displaying daemon status
+------------------------
+
+When daemonizing a process using a wrapper script, as examples 1 and 2 above,
+the status can be shown using
+
+``` ruby
+$ ruby myproc_control.rb status
+```
+
+By default this will display whether or not the daemon is running and, if it
+is, its PID.
+
+A custom message can be shown with
+
+``` ruby
+def custom_show_status(app)
+  # Display the default status information
+  app.default_show_status
+
+  puts
+  puts "PS information"
+  system("ps -p #{app.pid.pid.to_s}")
+
+  puts
+  puts "Size of log files"
+  system("du -hs /path/to/logs")
+end
+
+Daemons.run('myserver.rb', { show_status_callback: :custom_show_status })
+```
+
 Author
 ------
 
