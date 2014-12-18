@@ -31,6 +31,8 @@ module Daemons
 
       @force_kill_waittime = @options[:force_kill_waittime] || 20
 
+      @show_status_callback = method(:default_show_status)
+
       unless @pid = pid
         if @options[:no_pidfiles]
           @pid = PidMem.new
@@ -40,6 +42,10 @@ module Daemons
           @pid = PidMem.new
         end
       end
+    end
+
+    def show_status_callback=(function)
+      @show_status_callback = method(function)
     end
 
     def change_privilege
@@ -444,9 +450,13 @@ module Daemons
     end
 
     def show_status
-      running = self.running?
+      @show_status_callback.call(self)
+    end
 
-      puts "#{group.app_name}: #{running ? '' : 'not '}running#{(running and @pid.exist?) ? ' [pid ' + @pid.pid.to_s + ']' : ''}#{(@pid.exist? and not running) ? ' (but pid-file exists: ' + @pid.pid.to_s + ')' : ''}"
+    def default_show_status(daemon = self)
+      running = daemon.running?
+
+      puts "#{group.app_name}: #{running ? '' : 'not '}running#{(running and daemon.pid.exist?) ? ' [pid ' + daemon.pid.pid.to_s + ']' : ''}#{(daemon.pid.exist? and not running) ? ' (but pid-file exists: ' + daemon.pid.pid.to_s + ')' : ''}"
     end
 
     # This function implements a (probably too simle) method to detect
