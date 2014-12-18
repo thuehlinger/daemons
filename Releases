@@ -2,6 +2,7 @@
 
 == Release 1.1.10: June 26, 2013
 
+* allow for custom statis messages (thanks to Joseph Haig)
 * fix Pid.running? rescuing timeout exceptions (thanks to Geraud Boyer)
 * monitor.rb/application.rb/application_group.rb: handle :monitor and :multiple in combination correctly
   (thanks to Prakash Murthy).
