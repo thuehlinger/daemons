@@ -70,12 +70,28 @@ module Daemons
       logdir
     end
 
+    def output_logfilename
+      filename = options[:output_logfilename]
+      unless filename
+        filename = @group.app_name + '.output'
+      end
+      filename
+    end
+    
     def output_logfile
-      (options[:log_output] && logdir) ? File.join(logdir, @group.app_name + '.output') : nil
+      (options[:log_output] && logdir) ? File.join(logdir, output_logfilename) : nil
     end
 
+    def logfilename
+      filename = options[:logfilename]
+      unless filename
+        filename = @group.app_name + '.log'
+      end
+      filename
+    end
+    
     def logfile
-      logdir ? File.join(logdir, @group.app_name + '.log') : nil
+      logdir ? File.join(logdir, logfilename) : nil
     end
 
     # this function is only used to daemonize the currently running process (Daemons.daemonize)
@@ -257,19 +273,6 @@ module Daemons
         Daemonize.simulate(output_logfile)
 
         myproc.call
-
-# why did we use this??
-#         Thread.new(&options[:proc])
-
-# why did we use the code below??
-        # unless pid = Process.fork
-        #   @pid.pid = pid
-        #   Daemonize.simulate(logfile)
-        #   options[:proc].call
-        #   exit
-        # else
-        #   Process.detach(@pid.pid)
-        # end
       end
       started
     end
@@ -302,22 +305,6 @@ module Daemons
         STDOUT.flush
       end
     end
-
-#     def run
-#       if @group.controller.options[:exec]
-#         run_via_exec()
-#       else
-#         run_via_load()
-#       end
-#     end
-#
-#     def run_via_exec
-#
-#     end
-#
-#     def run_via_load
-#
-#     end
 
     def reload
       if @pid.pid == 0

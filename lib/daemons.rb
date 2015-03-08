@@ -109,7 +109,9 @@ module Daemons
   # <tt>:monitor</tt>::   Monitor the programs and restart crashed instances
   # <tt>:log_dir</tt>::   A specific directory to put the log files into (when not given, resort to the default
   #                       location as derived from the :dir_mode and :dir options
-  # <tt>:log_output</tt>:: When given (i.e. set to true), redirect both STDOUT and STDERR to a logfile named '[app_name].output' in the pid-file directory
+  # <tt>:logfilename</tt>:: Specifiy a custom log file name
+  # <tt>:log_output</tt>:: When given (i.e. set to true), redirect both STDOUT and STDERR to a logfile named '[app_name].output' (or as given in :output_logfilename) in the pid-file directory
+  # <tt>:output_logfilename</tt>:: Specifiy a custom output redirection file name
   # <tt>:keep_pid_files</tt>:: When given do not delete lingering pid-files (files for which the process is no longer running).
   # <tt>:hard_exit</tt>:: When given use exit! to end a daemons instead of exit (this will for example
   #                       not call at_exit handlers).
@@ -119,15 +121,17 @@ module Daemons
   #
   # === Example:
   #   options = {
-  #     :app_name   => "my_app",
-  #     :ARGV       => ['start', '-f', '--', 'param_for_myscript']
-  #     :dir_mode   => :script,
-  #     :dir        => 'pids',
-  #     :multiple   => true,
-  #     :ontop      => true,
-  #     :mode       => :exec,
-  #     :backtrace  => true,
-  #     :monitor    => true
+  #     :app_name           => "my_app",
+  #     :ARGV               => ['start', '-f', '--', 'param_for_myscript']
+  #     :dir_mode           => :script,
+  #     :dir                => 'pids',
+  #     :multiple           => true,
+  #     :ontop              => true,
+  #     :mode               => :exec,
+  #     :backtrace          => true,
+  #     :monitor            => true,
+  #     :logfilename        => 'custom_logfile.log',
+  #     :output_logfilename => 'custom_outputfile.txt'
   #   }
   #
   #   Daemons.run(File.join(File.dirname(__FILE__), 'myscript.rb'), options)
