@@ -208,8 +208,6 @@ module Daemons
 
       myproc = proc do
 
-        @pid.pid = Process.pid
-
         # We need this to remove the pid-file if the applications exits by itself.
         # Note that <tt>at_text</tt> will only be run if the applications exits by calling
         # <tt>exit</tt>, and not if it calls <tt>exit!</tt> (so please don't call <tt>exit!</tt>
@@ -249,14 +247,11 @@ module Daemons
             exit
           end
         end
-
-        started
-
         p.call
       end
 
       unless options[:ontop]
-        Daemonize.call_as_daemon(myproc, output_logfile, @group.app_name)
+        @pid.pid = Daemonize.call_as_daemon(myproc, output_logfile, @group.app_name)
 
       else
         Daemonize.simulate(output_logfile)
@@ -276,6 +271,7 @@ module Daemons
         #   Process.detach(@pid.pid)
         # end
       end
+      started
     end
 
     def start(restart = false)
