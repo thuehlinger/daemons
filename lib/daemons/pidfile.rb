@@ -31,10 +31,8 @@ module Daemons
     attr_reader :dir, :progname, :multiple, :number
 
     def self.find_files(dir, progname, delete = false)
-      files = Dir[File.join(dir, "#{progname}*.pid")]
-
-      # The glob is a bit too loose, i.e. progname = 'the_application_worker' will match the pid for the_application_worker_with_more.pid, which it should not.
-      files.delete_if { |f| f !~ /#{progname}\d*\.pid/ }
+      files = Dir[File.join(dir, "#{progname}_num*.pid")]
+      files = Dir[File.join(dir, "#{progname}.pid")] if files.size == 0
 
       files.delete_if { |f| not (File.file?(f) and File.readable?(f)) }
       if delete
@@ -83,7 +81,7 @@ module Daemons
     end
 
     def filename
-      File.join(@dir, "#{@progname}#{ @number || '' }.pid")
+      File.join(@dir, "#{@progname}#{@number ? '_num' + @number.to_s : '' }.pid")
     end
 
     def exist?

@@ -23,32 +23,6 @@ module Daemons
       end
     end
 
-  #  def Pid.running?(pid, additional = nil)
-  #    match_pid = Regexp.new("^\\s*#{pid}\\s")
-  #    got_match = false
-  #
-  #    #ps_all = IO.popen('ps ax') # the correct syntax is without a dash (-) !
-  #    ps_in, ps_out, ps_err = Open3.popen3('ps ax') # the correct syntax is without a dash (-) !
-  #
-  #    return true unless ps_out.gets
-  #
-  #    begin
-  #      ps_out.each { |psline|
-  #        next unless psline =~ match_pid
-  #        got_match = true
-  #        got_match = false if additional and psline !~ /#{additional}/
-  #        break
-  #      }
-  #    ensure
-  #      begin; begin; ps_in.close; rescue ::Exception; end; begin; ps_out.close; rescue ::Exception; end; ps_err.close; rescue ::Exception; end
-  #    end
-  #
-  #    # an alternative would be to use the code below, but I don't know whether this is portable
-  #    # `ps axo pid=`.split.include? pid.to_s
-  #
-  #    return got_match
-  #  end
-
     # Returns the directory that should be used to write the pid file to
     # depending on the given mode.
     #
