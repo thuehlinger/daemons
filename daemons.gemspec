@@ -5,6 +5,7 @@ Gem::Specification.new do |s|
   s.version = Daemons::VERSION
   s.date = %q{2015-03-08}
   s.authors = ["Thomas Uehlinger"]
+  s.license = "MIT"
   s.email = %q{thomas.uehinger@gmail.com}
   s.homepage = %q{https://github.com/thuehlinger/daemons}
   s.summary = %q{A toolkit to create and control daemons in different ways}
