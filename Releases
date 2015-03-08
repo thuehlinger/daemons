@@ -1,7 +1,10 @@
 = Daemons Release History
 
-== Release 1.1.10: June 26, 2013
+== Release 1.2.0: March 8, 2015
 
+* add options for custum log file names.
+* change pid file name scheme to "#progname_num#{number}.pid" for multiple instances.
+* fix call_as_daemon not saving the PID (thanks Roberto Plancarte)
 * allow for custom statis messages (thanks to Joseph Haig)
 * fix Pid.running? rescuing timeout exceptions (thanks to Geraud Boyer)
 * monitor.rb/application.rb/application_group.rb: handle :monitor and :multiple in combination correctly
