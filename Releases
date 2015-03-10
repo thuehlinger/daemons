@@ -1,5 +1,9 @@
 = Daemons Release History
 
+== Release 1.2.1: March 10, 2015
+
+* increase version number to be able to re-push to rubygems
+
 == Release 1.2.0: March 8, 2015
 
 * add options for custum log file names.

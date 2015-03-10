@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
     monitoring and automatic restarting of your processes if they crash.
   EOF
 
-  s.files = `git ls-files README.md LICENSE Releases lib`.split
+  s.files = `git ls-files README.md LICENSE Releases lib examples`.split
 end
