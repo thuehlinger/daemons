@@ -107,7 +107,7 @@ module Daemons
       begin
         File.open(filename) do |f|
           p = f.gets.to_i
-          return nil if p == 0 # Otherwise an invalid pid file becomes pid 0
+          return nil if p == 0  # Otherwise an invalid pid file becomes pid 0
           return p
         end
       rescue ::Exception

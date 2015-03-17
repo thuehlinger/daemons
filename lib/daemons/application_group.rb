@@ -6,8 +6,6 @@ module Daemons
 
     attr_reader :monitor
 
-    # attr_reader :controller
-
     attr_reader :options
 
     attr_reader :applications
@@ -29,10 +27,7 @@ module Daemons
         @script = File.expand_path(options[:script])
       end
 
-      # @controller = controller
       @monitor = nil
-
-      # options = controller.options
 
       @multiple = options[:multiple] || false
 
@@ -42,7 +37,6 @@ module Daemons
       @keep_pid_files = options[:keep_pid_files] || false
       @no_pidfiles = options[:no_pidfiles] || false
 
-      # @applications = find_applications(pidfile_dir())
       @applications = []
     end
 

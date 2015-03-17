@@ -152,8 +152,7 @@ module Daemons
       @pid.pid = Process.pid
 
       ENV['DAEMONS_ARGV'] = @controller_argv.join(' ')
-      # haven't tested yet if this is really passed to the exec'd process...
-
+      
       started
       Kernel.exec(script, *(@app_argv || []))
     end
@@ -215,7 +214,7 @@ module Daemons
       ARGV.concat @app_argv if @app_argv
 
       started
-      # TODO: begin - rescue - end around this and exception logging
+      # TODO: exception logging
       load script
     end
 

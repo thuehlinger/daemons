@@ -18,8 +18,6 @@ module Daemons
         return false
       rescue ::Exception   # for example on EPERM (process exists but does not belong to us)
         return true
-      # rescue Errno::EPERM
-      #  return false
       end
     end
 

@@ -49,13 +49,9 @@ module Daemons
             Process.detach(fork { a.start(restart = true) })
 
             sleep(5)
-
-            # application_group.setup
           end
         end
 
-        # sleep(5)
-        # application_group.setup
         sleep(30)
       end
     end
@@ -67,21 +63,6 @@ module Daemons
 
         begin
           @pid.pid = Process.pid
-
-  #         at_exit {
-  # begin; @pid.cleanup; rescue ::Exception; end
-  #         }
-
-          # This part is needed to remove the pid-file if the application is killed by
-          # daemons or manually by the user.
-          # Note that the applications is not supposed to overwrite the signal handler for
-          # 'TERM'.
-          #
-  #         trap('TERM') {
-  # begin; @pid.cleanup; rescue ::Exception; end
-  #           exit
-  #         }
-
           watch(application_group)
         rescue ::Exception => e
           begin

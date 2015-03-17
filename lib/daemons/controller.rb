@@ -38,7 +38,6 @@ module Daemons
     # Note that this function should only update <tt>@options</tt> and no other variables.
     #
     def setup_options
-      # @options[:ontop] ||= true
     end
 
     def run

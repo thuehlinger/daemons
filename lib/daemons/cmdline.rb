@@ -9,10 +9,6 @@ module Daemons
       @opts = OptionParser.new do |opts|
         opts.banner = ''
 
-#         opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
-#           @options[:verbose] = v
-#         end
-
         opts.on('-t', '--ontop', 'Stay on top (does not daemonize)') do |t|
           @options[:ontop] = t
         end
@@ -25,16 +21,11 @@ module Daemons
           @options[:no_wait] = t
         end
 
-        # opts.separator ""
-        # opts.separator "Specific options:"
-
         opts.separator ''
         opts.separator 'Common options:'
 
         # No argument, shows at tail.  This will print an options summary
         opts.on_tail('-h', '--help', 'Show this message') do
-          # puts opts
-          # @usage =
           controller.print_usage
 
           exit
@@ -62,15 +53,12 @@ END
       end
     end
 
-    #
     # Return a hash describing the options.
     #
     def parse(args)
       # The options specified on the command line will be collected in *options*.
       # We set default values here.
-      # options = {}
-
-      # #pp args
+      
       @opts.parse(args)
 
       @options
