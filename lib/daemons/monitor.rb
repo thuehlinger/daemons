@@ -56,7 +56,7 @@ module Daemons
 
         # sleep(5)
         # application_group.setup
-        # sleep(30)
+        sleep(30)
       end
     end
     private :watch
