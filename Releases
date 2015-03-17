@@ -1,5 +1,9 @@
 = Daemons Release History
 
+== Release 1.2.2: March 17, 2015
+
+* fix 100% CPU usage bug when using monitor mode.
+
 == Release 1.2.1: March 10, 2015
 
 * increase version number to be able to re-push to rubygems
