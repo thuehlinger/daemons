@@ -99,6 +99,10 @@ module Daemons
       File.delete(filename) if pid == Process.pid
     end
 
+    def zap
+      File.delete(filename)
+    end
+    
     def pid
       begin
         File.open(filename) do |f|

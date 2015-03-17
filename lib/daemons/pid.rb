@@ -67,6 +67,10 @@ module Daemons
     # Cleanup method
     def cleanup
     end
+    
+    # Zap method
+    def zap
+    end
 
     # Exist? method
     def exist?

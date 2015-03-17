@@ -425,11 +425,11 @@ module Daemons
     end
 
     def zap
-      @pid.cleanup
+      @pid.zap
     end
 
     def zap!
-      begin; @pid.cleanup; rescue ::Exception; end
+      begin; @pid.zap; rescue ::Exception; end
     end
 
     def show_status

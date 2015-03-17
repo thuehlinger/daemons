@@ -124,13 +124,13 @@ module Daemons
             end
           end
       rescue ::Exception => e
-        puts "#{e} #{pid}"
+        puts "exception while trying to stop monitor process #{pid}: #{e}"
         puts 'deleting pid-file.'
       end
 
-      # We try to remove the pid-files by ourselves, in case the application
+      # We try to remove the pid-files by ourselves, in case the monitor
       # didn't clean it up.
-      begin; @pid.cleanup; rescue ::Exception; end
+      begin; @pid.zap; rescue ::Exception; end
     end
   end
 end
