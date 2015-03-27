@@ -8,14 +8,38 @@ module Daemons
     let(:options)  { Hash.new }
     let(:log_dir)  { nil }
     let(:dir_mode) { nil }
+    let(:user)     { nil }
     let(:options)  {
       {
-        log_dir: log_dir,
-        dir_mode: dir_mode
+        log_dir:  log_dir,
+        dir_mode: dir_mode,
+        user:     user,
+        group:    group
       }
     }
 
     before { application.instance_variable_set :@options, options }
+
+    describe '#change_privilege' do
+
+      before do
+        allow(CurrentProcess)
+          .to receive(:change_privilege)
+          .with(user, group)
+      end
+
+      context 'with :user' do
+        let(:user) { double :user }
+
+        before { application.change_privilege }
+
+        it 'changes privileges on the user' do
+          expect(CurrentProcess)
+            .to have_received(:change_privilege)
+            .with(user, group)
+        end
+      end
+    end
 
     describe '#logdir' do
       subject { application.logdir }
