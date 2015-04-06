@@ -146,11 +146,13 @@ module Daemons
       @monitor.stop if @monitor
       @monitor = nil
 
+      pids = []
       @applications.each do |a|
-        fork do
+        pids << fork do
           a.start
         end
       end
+      pids.each { |pid| Process.waitpid(pid) }
     end
 
     def stop_all(no_wait = false)
