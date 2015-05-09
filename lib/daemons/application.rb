@@ -76,13 +76,9 @@ module Daemons
     end
 
     def logfilename
-      filename = options[:logfilename]
-      unless filename
-        filename = @group.app_name + '.log'
-      end
-      filename
+      options[:logfilename] or "#{@group.app_name}.log"
     end
-    
+
     def logfile
       logdir ? File.join(logdir, logfilename) : nil
     end
