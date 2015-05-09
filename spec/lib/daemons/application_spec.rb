@@ -154,5 +154,23 @@ module Daemons
       end
     end
 
+    describe '#logfilename' do
+      subject { application.logfilename }
+
+      context 'when an logfilename is specified' do
+        let(:logfilename) {
+          'logname.log'
+        }
+        let(:additional_options) {
+          { logfilename: logfilename }
+        }
+
+        it { is_expected.to eq logfilename }
+      end
+
+      context 'when a logfilename is NOT specified' do
+        it { is_expected.to eq app_name + '.log' }
+      end
+    end
   end
 end
