@@ -72,7 +72,9 @@ module Daemons
     end
 
     def output_logfile
-      (options[:log_output] && logdir) ? File.join(logdir, output_logfilename) : nil
+      if log_output?
+        File.join logdir, output_logfilename
+      end
     end
 
     def logfilename
@@ -444,5 +446,10 @@ module Daemons
 
       false
     end
+
+    def log_output?
+      options[:log_output] && logdir
+    end
+    private :log_output?
   end
 end
