@@ -44,6 +44,11 @@ module Daemons
     end
 
     describe '#change_privilege' do
+    describe '#group' do
+      subject { application.group }
+      it { is_expected.to eq group }
+    end
+
 
       before do
         allow(CurrentProcess)
