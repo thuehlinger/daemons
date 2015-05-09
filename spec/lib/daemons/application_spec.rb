@@ -18,7 +18,11 @@ module Daemons
       }
     }
 
-    before { application.instance_variable_set :@options, options }
+    before do
+      allow(group)
+        .to receive(:options)
+        .and_return options
+    end
 
     describe '#app_argv' do
       let(:app_argv) { "some value" }
