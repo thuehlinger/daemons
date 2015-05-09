@@ -20,6 +20,11 @@ module Daemons
 
     before { application.instance_variable_set :@options, options }
 
+    describe '#app_argv' do
+      subject { application.app_argv }
+      it { is_expected.to be_nil }
+    end
+
     describe '#change_privilege' do
 
       before do
