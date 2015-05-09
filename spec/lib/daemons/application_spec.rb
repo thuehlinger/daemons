@@ -43,7 +43,6 @@ module Daemons
       it { is_expected.to be_a PidMem }
     end
 
-    describe '#change_privilege' do
     describe '#group' do
       subject { application.group }
       it { is_expected.to eq group }
@@ -54,7 +53,29 @@ module Daemons
       it { is_expected.to eq options }
     end
 
+    describe '#show_status_callback=' do
+      context 'when the Daemons::Application responds to the supplied method' do
+        let(:callback_method) { :inspect }
 
+        it 'sets the callback method on the instance' do
+          expect {
+            subject.show_status_callback = callback_method
+          }.not_to raise_error
+        end
+      end
+
+      context 'when it does NOT respond' do
+        let(:callback_method) { :non_existant_method }
+
+        it 'raises a NameError' do
+          expect {
+            subject.show_status_callback = callback_method
+          }.to raise_error NameError
+        end
+      end
+    end
+
+    describe '#change_privilege' do
       before do
         allow(CurrentProcess)
           .to receive(:change_privilege)
