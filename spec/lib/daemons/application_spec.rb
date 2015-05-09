@@ -30,6 +30,11 @@ module Daemons
       it { is_expected.to be_nil }
     end
 
+    describe '#pid' do
+      subject { application.pid }
+      it { is_expected.to be_a PidMem }
+    end
+
     describe '#change_privilege' do
 
       before do
