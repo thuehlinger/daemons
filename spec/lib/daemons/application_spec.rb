@@ -30,8 +30,12 @@ module Daemons
     end
 
     describe '#controller_argv' do
-      subject { application.controller_argv }
-      it { is_expected.to be_nil }
+      let(:controller_argv) { "some value" }
+
+      it 'allows an arbitrary value to be set' do
+        application.controller_argv = controller_argv
+        expect(application.controller_argv).to eq controller_argv
+      end
     end
 
     describe '#pid' do
