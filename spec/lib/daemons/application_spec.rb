@@ -49,6 +49,11 @@ module Daemons
       it { is_expected.to eq group }
     end
 
+    describe '#options' do
+      subject { application.options }
+      it { is_expected.to eq options }
+    end
+
 
       before do
         allow(CurrentProcess)
