@@ -157,7 +157,6 @@ module Daemons
     describe '#output_logfile' do
       subject { application.output_logfile }
 
-      let(:log_output) { false }
       let(:log_dir) { nil }
       let(:additional_options) {
         {
@@ -167,6 +166,7 @@ module Daemons
       }
 
       context 'when log_output is off' do
+        let(:log_output) { false }
         it { is_expected.to be_nil }
       end
 
@@ -201,12 +201,12 @@ module Daemons
     describe '#logfile' do
       subject { application.logfile }
 
-      let(:log_dir) { nil }
       let(:additional_options) {
         { log_dir: log_dir }
       }
 
       context 'when log_dir is nil' do
+        let(:log_dir) { nil }
         it { is_expected.to be_nil }
       end
 
