@@ -173,7 +173,7 @@ module Daemons
       context 'when log_output is on and log_dir is set' do
         let(:log_output) { true }
         let(:log_dir) { '/path/to/log' }
-        let(:output_logfile) { "#{log_dir}/#{app_name}.output" }
+        let(:output_logfile) { File.join log_dir, application.output_logfilename }
 
         it { is_expected.to eq output_logfile }
       end
