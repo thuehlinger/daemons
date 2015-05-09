@@ -68,13 +68,9 @@ module Daemons
     end
 
     def output_logfilename
-      filename = options[:output_logfilename]
-      unless filename
-        filename = @group.app_name + '.output'
-      end
-      filename
+      options[:output_logfilename] or "#{@group.app_name}.output"
     end
-    
+
     def output_logfile
       (options[:log_output] && logdir) ? File.join(logdir, output_logfilename) : nil
     end
@@ -149,7 +145,7 @@ module Daemons
       @pid.pid = Process.pid
 
       ENV['DAEMONS_ARGV'] = @controller_argv.join(' ')
-      
+
       started
       Kernel.exec(script, *(@app_argv || []))
     end
