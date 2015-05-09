@@ -82,7 +82,9 @@ module Daemons
     end
 
     def logfile
-      logdir ? File.join(logdir, logfilename) : nil
+      if logdir
+        File.join logdir, logfilename
+      end
     end
 
     # this function is only used to daemonize the currently running process (Daemons.daemonize)
