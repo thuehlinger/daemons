@@ -197,5 +197,25 @@ module Daemons
         it { is_expected.to eq app_name + '.log' }
       end
     end
+
+    describe '#logfile' do
+      subject { application.logfile }
+
+      let(:log_dir) { nil }
+      let(:additional_options) {
+        { log_dir: log_dir }
+      }
+
+      context 'when log_dir is nil' do
+        it { is_expected.to be_nil }
+      end
+
+      context 'when log_dir is set' do
+        let(:log_dir) { '/path/to/log' }
+        let(:logfile) { File.join log_dir, application.logfilename }
+
+        it { is_expected.to eq logfile }
+      end
+    end
   end
 end
