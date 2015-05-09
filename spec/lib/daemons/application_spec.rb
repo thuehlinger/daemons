@@ -21,8 +21,12 @@ module Daemons
     before { application.instance_variable_set :@options, options }
 
     describe '#app_argv' do
-      subject { application.app_argv }
-      it { is_expected.to be_nil }
+      let(:app_argv) { "some value" }
+
+      it 'allows an arbitrary value to be set' do
+        application.app_argv = app_argv
+        expect(application.app_argv).to eq app_argv
+      end
     end
 
     describe '#controller_argv' do
