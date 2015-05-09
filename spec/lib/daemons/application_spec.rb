@@ -154,6 +154,31 @@ module Daemons
       end
     end
 
+    describe '#output_logfile' do
+      subject { application.output_logfile }
+
+      let(:log_output) { false }
+      let(:log_dir) { nil }
+      let(:additional_options) {
+        {
+          log_output: log_output,
+          log_dir: log_dir
+        }
+      }
+
+      context 'when log_output is off' do
+        it { is_expected.to be_nil }
+      end
+
+      context 'when log_output is on and log_dir is set' do
+        let(:log_output) { true }
+        let(:log_dir) { '/path/to/log' }
+        let(:output_logfile) { "#{log_dir}/#{app_name}.output" }
+
+        it { is_expected.to eq output_logfile }
+      end
+    end
+
     describe '#logfilename' do
       subject { application.logfilename }
 
