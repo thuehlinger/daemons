@@ -63,11 +63,8 @@ module Daemons
     end
 
     def logdir
-      logdir = options[:log_dir]
-      unless logdir
-        logdir = options[:dir_mode] == :system ? '/var/log' : pidfile_dir
-      end
-      logdir
+      options[:log_dir] or
+        options[:dir_mode] == :system ? '/var/log' : pidfile_dir
     end
 
     def output_logfilename
