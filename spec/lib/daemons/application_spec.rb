@@ -2,9 +2,10 @@ require 'spec_helper'
 
 module Daemons
   describe Application do
-    subject(:application) { described_class.new group }
+    subject(:application) { described_class.new group, additional_options }
 
-    let(:group)    { ApplicationGroup.new 'my_app' }
+    let(:app_name) { 'my_app' }
+    let(:group)    { ApplicationGroup.new app_name }
     let(:options)  { Hash.new }
     let(:log_dir)  { nil }
     let(:dir_mode) { nil }
@@ -16,6 +17,9 @@ module Daemons
         user:     user,
         group:    group
       }
+    }
+    let(:additional_options) {
+      {}
     }
 
     before do
@@ -130,5 +134,25 @@ module Daemons
         end
       end
     end
+
+    describe '#output_logfilename' do
+      subject { application.output_logfilename }
+
+      context 'when an output_logfilename is specified' do
+        let(:output_logfilename) {
+          'logname.log'
+        }
+        let(:additional_options) {
+          { output_logfilename: output_logfilename }
+        }
+
+        it { is_expected.to eq output_logfilename }
+      end
+
+      context 'when an output_logfilename is NOT specified' do
+        it { is_expected.to eq app_name + '.output' }
+      end
+    end
+
   end
 end
