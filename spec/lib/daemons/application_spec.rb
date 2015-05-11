@@ -9,6 +9,7 @@ module Daemons
     let(:options)  { Hash.new }
     let(:log_dir)  { nil }
     let(:dir_mode) { nil }
+    let(:dir)      { nil }
     let(:user)     { nil }
     let(:options)  {
       {
@@ -100,6 +101,97 @@ module Daemons
             .to have_received(:change_privilege)
             .with(user, group)
         end
+      end
+    end
+
+    describe '#dir_mode' do
+      subject { application.dir_mode }
+
+      let(:dir_mode) { :mode }
+
+      context 'when @dir_mode is set' do
+        before { application.instance_variable_set :@dir_mode, dir_mode }
+
+        it { is_expected.to eq dir_mode }
+      end
+
+      context 'when @dir_mode is not set' do
+        let(:dir_mode) { :group_mode }
+
+        before do
+          allow(application.group)
+            .to receive(:dir_mode)
+            .and_return dir_mode
+        end
+
+        it { is_expected.to eq dir_mode }
+      end
+    end
+
+    describe '#dir' do
+      subject { application.dir }
+
+      let(:dir) { '/path/to' }
+
+      context 'when @dir is set' do
+        before { application.instance_variable_set :@dir, dir }
+
+        it { is_expected.to eq dir }
+      end
+
+      context 'when @dir is not set' do
+        let(:dir) { '/group/path/to' }
+
+        before do
+          allow(application.group)
+            .to receive(:dir)
+            .and_return dir
+        end
+
+        it { is_expected.to eq dir }
+      end
+    end
+
+    describe '#script' do
+      subject { application.script }
+
+      let(:script) { 'my_app_script.rb' }
+
+      context 'when @script is set' do
+        before { application.instance_variable_set :@script, script }
+
+        it { is_expected.to eq script }
+      end
+
+      context 'when @script is not set' do
+        let(:script) { 'my_app_group_script.rb' }
+
+        before do
+          allow(application.group)
+            .to receive(:script)
+            .and_return script
+        end
+
+        it { is_expected.to eq script }
+      end
+    end
+
+    describe '#pidfile_dir' do
+      let(:dir_mode) { application.dir_mode }
+      let(:dir)      { application.dir }
+      let(:script)   { application.script }
+      let(:pidfile_dir) { '/path/to/pid' }
+
+      before do
+        allow(Pid).to receive(:dir)
+      end
+
+      it 'delegates to Pid' do
+        application.pidfile_dir
+
+        expect(Pid)
+          .to have_received(:dir)
+          .with(dir_mode, dir, script)
       end
     end
 

@@ -55,11 +55,11 @@ module Daemons
     end
 
     def script
-      @script || @group.script
+      @script or group.script
     end
 
     def pidfile_dir
-      Pid.dir(@dir_mode || @group.dir_mode, @dir || @group.dir, @script || @group.script)
+      Pid.dir dir_mode, dir, script
     end
 
     def logdir
@@ -449,9 +449,18 @@ module Daemons
       false
     end
 
+    private
+
     def log_output?
       options[:log_output] && logdir
     end
-    private :log_output?
+
+    def dir_mode
+      @dir_mode or group.dir_mode
+    end
+
+    def dir
+      @dir or group.dir
+    end
   end
 end
