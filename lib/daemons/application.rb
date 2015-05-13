@@ -442,11 +442,7 @@ module Daemons
     # system.
     #
     def running?
-      if @pid.exist?
-        return Pid.running?(@pid.pid)
-      end
-
-      false
+      @pid.exist? and Pid.running? @pid.pid
     end
 
     private
