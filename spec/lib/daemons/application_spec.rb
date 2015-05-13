@@ -261,5 +261,45 @@ module Daemons
         it { is_expected.to eq logfile }
       end
     end
+
+    describe '#running?' do
+      let(:pid) { application.instance_variable_get :@pid }
+
+      before do
+        allow(pid)
+          .to receive(:exist?)
+          .and_return pid_exist?
+      end
+
+      context 'when the pid exists' do
+        let(:exist?) { true }
+        let(:running?) { true }
+
+        before do
+          allow(Pid)
+            .to receive(:running?)
+            .and_return running?
+        end
+
+        context 'when @pid exists' do
+          let(:pid_exist?) { true }
+          it { expect(application).to be_running }
+
+          context 'when not running' do
+            let(:running?) { false }
+            it { expect(application).to_not be_running }
+          end
+        end
+
+        context 'when @pid does NOT exists' do
+          let(:pid_exist?) { false }
+          it { expect(application).to_not be_running }
+        end
+      end
+
+      context 'when the pid does NOT exist' do
+        let(:exist?) { false }
+      end
+    end
   end
 end
