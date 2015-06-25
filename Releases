@@ -1,5 +1,9 @@
 = Daemons Release History
 
+== Release 1.2.3: June 25, 2015
+
+* fix: ApplicationGroup now waits on subprocesses in start_all (thanks to tobithiel)
+
 == Release 1.2.2: March 17, 2015
 
 * fix 100% CPU usage bug when using monitor mode.
