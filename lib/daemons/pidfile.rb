@@ -40,8 +40,8 @@ module Daemons
           pid = File.open(f) { |h| h.read }.to_i
           rsl =  !Pid.running?(pid)
           if rsl
-            puts "pid-file for killed process #{pid} found (#{f}), deleting."
             begin; File.unlink(f); rescue ::Exception; end
+            yield(pid, f) if block_given?
           end
           rsl
         end
