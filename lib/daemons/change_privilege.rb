@@ -2,8 +2,6 @@ require 'daemons/etc_extension'
 
 class CurrentProcess
   def self.change_privilege(user, group = user)
-    puts "Changing process privilege to #{user}:#{group}"
-
     uid, gid = Process.euid, Process.egid
     target_uid = Etc.getpwnam(user).uid
     target_gid = Etc.getgrnam(group).gid
