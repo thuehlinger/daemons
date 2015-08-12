@@ -37,7 +37,7 @@ module Daemons
     end
 
     def forcefully_stopping_process(app_name, pid)
-      putput_message "#{app_name}: process with pid #{pid} won't stop, we forcefully kill it..." 
+      output_message "#{app_name}: process with pid #{pid} won't stop, we forcefully kill it..." 
     end
 
     def cannot_stop_process(app_name, pid)
