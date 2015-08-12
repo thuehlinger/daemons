@@ -94,6 +94,7 @@ module Daemons
       pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files) do |pid, file| 
         reporter.deleted_found_pidfile(pid, file)
       end
+
       pid_files.map do |f|
         app = Application.new(self, {}, PidFile.existing(f))
         setup_app(app)
