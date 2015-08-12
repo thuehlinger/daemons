@@ -90,7 +90,10 @@ module Daemons
     def find_applications_by_pidfiles(dir)
       @monitor = Monitor.find(dir, app_name + '_monitor')
 
-      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files) { |pid, file| Reporter.new(options).deleted_found_pidfile(pid, file) }
+      reporter = Reporter.new(options)
+      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files) do |pid, file| 
+        reporter.deleted_found_pidfile(pid, file)
+      end
 
       pid_files.map do |f|
         app = Application.new(self, {}, PidFile.existing(f))
