@@ -39,7 +39,7 @@ module Daemons
         when :script
           return File.expand_path(File.join(File.dirname(script), dir))
         when :system
-          return '/var/run'
+          return dir || '/var/run'
         else
           fail Error.new("pid file mode '#{dir_mode}' not implemented")
       end
@@ -65,7 +65,7 @@ module Daemons
     # Cleanup method
     def cleanup
     end
-    
+
     # Zap method
     def zap
     end
