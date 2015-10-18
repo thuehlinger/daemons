@@ -3,6 +3,7 @@ require 'daemons/pidmem'
 require 'daemons/change_privilege'
 require 'daemons/daemonize'
 require 'daemons/exceptions'
+require 'daemons/reporter'
 
 require 'timeout'
 
@@ -33,6 +34,8 @@ module Daemons
 
       @show_status_callback = method(:default_show_status)
 
+      @report = Reporter.new(@options)
+
       unless @pid = pid
         if @options[:no_pidfiles]
           @pid = PidMem.new
@@ -51,7 +54,10 @@ module Daemons
     def change_privilege
       user = options[:user]
       group = options[:group]
-      CurrentProcess.change_privilege(user, group) if user
+      if user
+        @report.changing_process_privilege(user, group)
+        CurrentProcess.change_privilege(user, group)
+      end
     end
 
     def script
@@ -132,7 +138,7 @@ module Daemons
 
     def start_exec
       if options[:backtrace]
-        puts 'option :backtrace is not supported with :mode => :exec, ignoring'
+        @report.backtrace_not_supported
       end
 
       unless options[:ontop]
@@ -293,8 +299,7 @@ module Daemons
 
     def started
       if pid = @pid.pid
-        puts "#{group.app_name}: process with pid #{pid} started."
-        STDOUT.flush
+        @report.process_started(group.app_name, pid)
       end
     end
 
@@ -366,13 +371,13 @@ module Daemons
       begin
         Process.kill(SIGNAL, pid)
       rescue Errno::ESRCH => e
-        puts "#{e} #{pid}"
-        puts 'deleting pid-file.'
+        @report.output_message("#{e} #{pid}")
+        @report.output_message('deleting pid-file.')
       end
 
       unless no_wait
         if @force_kill_waittime > 0
-          puts "#{group.app_name}: trying to stop process with pid #{pid}..."
+          @report.stopping_process(group.app_name, pid)
           STDOUT.flush
 
           begin
@@ -382,7 +387,7 @@ module Daemons
               end
             end
           rescue TimeoutError
-            puts "#{group.app_name}: process with pid #{pid} won't stop, we forcefully kill it..."
+            @report.forcefully_stopping_process(group.app_name, pid)
             STDOUT.flush
 
             begin
@@ -397,7 +402,7 @@ module Daemons
                 end
               end
             rescue TimeoutError
-              puts "#{group.app_name}: unable to forcefully kill process with pid #{pid}."
+              @report.cannot_stop_process(group.app_name, pid)
               STDOUT.flush
             end
           end
@@ -411,7 +416,7 @@ module Daemons
         # didn't clean it up.
         begin; @pid.cleanup; rescue ::Exception; end
 
-        puts "#{group.app_name}: process with pid #{pid} successfully stopped."
+        @report.stopped_process
         STDOUT.flush
       end
     end
@@ -431,7 +436,7 @@ module Daemons
     def default_show_status(daemon = self)
       running = daemon.running?
 
-      puts "#{group.app_name}: #{running ? '' : 'not '}running#{(running and daemon.pid.exist?) ? ' [pid ' + daemon.pid.pid.to_s + ']' : ''}#{(daemon.pid.exist? and not running) ? ' (but pid-file exists: ' + daemon.pid.pid.to_s + ')' : ''}"
+      @report.status(group.app_name, running, daemon.pid.exist?, daemon.pid.pid.to_s)
     end
 
     # This function implements a (probably too simle) method to detect
