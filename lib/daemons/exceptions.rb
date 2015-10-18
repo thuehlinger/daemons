@@ -1,6 +1,5 @@
-
 module Daemons
-  class Exception < ::RuntimeError
+  class Exception < RuntimeError
   end
 
   class RuntimeException < Exception

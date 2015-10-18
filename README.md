@@ -1,5 +1,6 @@
 Ruby Daemons
 ============
+[![Code Climate](https://codeclimate.com/github/acuppy/daemons/badges/gpa.svg)](https://codeclimate.com/github/acuppy/daemons)[![Test Coverage](https://circleci.com/gh/acuppy/daemons.svg?style=shield&circle-token=a4f96fd41f7682661d6543e30207427ac8870c0d)](https://circleci.com/gh/acuppy/daemons)
 
 Daemons provides an easy way to wrap existing ruby scripts (for example a self-written server)
 to be _run as a daemon_ and to be _controlled by simple start/stop/restart commands_.

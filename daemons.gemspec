@@ -23,4 +23,8 @@ Gem::Specification.new do |s|
   EOF
 
   s.files = `git ls-files README.md LICENSE Releases lib examples`.split
+
+  s.add_development_dependency 'rspec', '~> 3.1'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'pry-byebug'
 end

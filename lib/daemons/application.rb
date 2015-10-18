@@ -55,43 +55,36 @@ module Daemons
     end
 
     def script
-      @script || @group.script
+      @script or group.script
     end
 
     def pidfile_dir
-      Pid.dir(@dir_mode || @group.dir_mode, @dir || @group.dir, @script || @group.script)
+      Pid.dir dir_mode, dir, script
     end
 
     def logdir
-      logdir = options[:log_dir]
-      unless logdir
-        logdir = options[:dir_mode] == :system ? '/var/log' : pidfile_dir
-      end
-      logdir
+      options[:log_dir] or
+        options[:dir_mode] == :system ? '/var/log' : pidfile_dir
     end
 
     def output_logfilename
-      filename = options[:output_logfilename]
-      unless filename
-        filename = @group.app_name + '.output'
-      end
-      filename
+      options[:output_logfilename] or "#{@group.app_name}.output"
     end
-    
+
     def output_logfile
-      (options[:log_output] && logdir) ? File.join(logdir, output_logfilename) : nil
+      if log_output?
+        File.join logdir, output_logfilename
+      end
     end
 
     def logfilename
-      filename = options[:logfilename]
-      unless filename
-        filename = @group.app_name + '.log'
-      end
-      filename
+      options[:logfilename] or "#{@group.app_name}.log"
     end
-    
+
     def logfile
-      logdir ? File.join(logdir, logfilename) : nil
+      if logdir
+        File.join logdir, logfilename
+      end
     end
 
     # this function is only used to daemonize the currently running process (Daemons.daemonize)
@@ -152,7 +145,7 @@ module Daemons
       @pid.pid = Process.pid
 
       ENV['DAEMONS_ARGV'] = @controller_argv.join(' ')
-      
+
       started
       Kernel.exec(script, *(@app_argv || []))
     end
@@ -449,11 +442,21 @@ module Daemons
     # system.
     #
     def running?
-      if @pid.exist?
-        return Pid.running?(@pid.pid)
-      end
+      @pid.exist? and Pid.running? @pid.pid
+    end
 
-      false
+    private
+
+    def log_output?
+      options[:log_output] && logdir
+    end
+
+    def dir_mode
+      @dir_mode or group.dir_mode
+    end
+
+    def dir
+      @dir or group.dir
     end
   end
 end
