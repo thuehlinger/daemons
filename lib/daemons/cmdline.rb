@@ -12,6 +12,10 @@ module Daemons
         opts.on('-t', '--ontop', 'Stay on top (does not daemonize)') do |t|
           @options[:ontop] = t
         end
+        
+        opts.on('-s', '--shush', 'Silent mode (no output to the terminal)') do |t|
+          @options[:shush] = t
+        end
 
         opts.on('-f', '--force', 'Force operation') do |t|
           @options[:force] = t

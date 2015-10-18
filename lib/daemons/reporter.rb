@@ -49,7 +49,7 @@ module Daemons
     end
 
     def status(app_name, running, pid_exists, pid)
-      output_message "#{group.app_name}: #{running ? '' : 'not '}running#{(running and daemon.pid.exist?) ? ' [pid ' + daemon.pid.pid.to_s + ']' : ''}#{(daemon.pid.exist? and not running) ? ' (but pid-file exists: ' + daemon.pid.pid.to_s + ')' : ''}"
+      output_message "#{app_name}: #{running ? '' : 'not '}running#{(running and pid_exists) ? ' [pid ' + pid.to_s + ']' : ''}#{(pid_exists and not running) ? ' (but pid-file exists: ' + pid.to_s + ')' : ''}"
     end
   end
 end

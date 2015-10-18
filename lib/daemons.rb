@@ -101,6 +101,7 @@ module Daemons
   #                       same time
   # <tt>:ontop</tt>::     When given (i.e. set to true), stay on top, i.e. do not daemonize the application
   #                       (but the pid-file and other things are written as usual)
+  # <tt>:shush</tt>::     When given (i.e. set to true), turn on silent mode (no output to the terminal)
   # <tt>:mode</tt>::      <tt>:load</tt> Load the script with <tt>Kernel.load</tt>;
   #                       note that :stop_proc only works for the :load (and :proc) mode.
   #                       <tt>:exec</tt> Execute the script file with <tt>Kernel.exec</tt>
@@ -127,6 +128,7 @@ module Daemons
   #     :dir                => 'pids',
   #     :multiple           => true,
   #     :ontop              => true,
+  #     :shush              => false,
   #     :mode               => :exec,
   #     :backtrace          => true,
   #     :monitor            => true,

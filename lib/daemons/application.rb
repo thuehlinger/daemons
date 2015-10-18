@@ -416,7 +416,7 @@ module Daemons
         # didn't clean it up.
         begin; @pid.cleanup; rescue ::Exception; end
 
-        @report.stopped_process
+        @report.stopped_process(group.app_name, pid)
         STDOUT.flush
       end
     end
