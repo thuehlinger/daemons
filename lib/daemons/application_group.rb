@@ -69,7 +69,7 @@ module Daemons
         if x && x.chomp!
           processes = x.split(/\n/).compact
           processes = processes.delete_if do |p|
-            pid, name, add = p.split(/\s/)
+            _pid, name, add = p.split(/\s/)
             # We want to make sure that the first part of the process name matches
             # so that app_name matches app_name_22
 

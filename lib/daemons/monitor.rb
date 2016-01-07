@@ -46,7 +46,7 @@ module Daemons
 
             sleep(1)
 
-            Process.detach(fork { a.start(restart = true) })
+            Process.detach(fork { a.start(true) })
 
             sleep(5)
           end
