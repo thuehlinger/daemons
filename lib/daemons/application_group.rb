@@ -91,7 +91,7 @@ module Daemons
       @monitor = Monitor.find(dir, app_name + '_monitor')
 
       reporter = Reporter.new(options)
-      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files) do |pid, file| 
+      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files) do |pid, file|
         reporter.deleted_found_pidfile(pid, file)
       end
 
@@ -141,7 +141,7 @@ module Daemons
       end
 
       if options[:monitor]
-        @monitor = Monitor.new(an_app)
+        @monitor = Monitor.new(an_app, options[:timeout])
         @monitor.start(self)
       end
     end
@@ -190,12 +190,12 @@ module Daemons
     def show_status
       @applications.each { |a| a.show_status }
     end
-    
+
     # Check whether at least one of the applications in the group is running. If yes, return true.
     def running?
       @applications.each { |a| return true if a.running? }
       return false
     end
-    
+
   end
 end
