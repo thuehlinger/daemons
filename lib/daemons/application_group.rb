@@ -141,7 +141,9 @@ module Daemons
       end
 
       if options[:monitor]
-        @monitor = Monitor.new(an_app, options[:timeout])
+        opt = {}
+        opt[:timeout] = options[:timeout] if options[:timeout]
+        @monitor = Monitor.new(an_app, opt)
         @monitor.start(self)
       end
     end

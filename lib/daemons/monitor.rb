@@ -25,10 +25,10 @@ module Daemons
       nil
     end
 
-    def initialize(an_app, timeout = nil)
+    def initialize(an_app, options = {})
       @app = an_app
       @app_name = an_app.group.app_name + '_monitor'
-      @timeout = timeout || 30
+      @timeout = options[:timeout] || 30
 
       if an_app.pidfile_dir
         @pid = PidFile.new(an_app.pidfile_dir, @app_name, false)
