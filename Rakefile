@@ -9,7 +9,7 @@ desc 'Create the RDOC html files'
 rd = Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'html'
   rdoc.title    = 'Daemons'
-  rdoc.options << '--line-numbers' << '--inline-source' << '--main' << 'README.md'
+  rdoc.options << '--line-numbers' << '--main' << 'README.md'
   rdoc.rdoc_files.include('README.md', 'Releases', 'LICENSE')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
