@@ -1,3 +1,4 @@
 html/*
 Gemfile.lock
 coverage
+myserver*.rb

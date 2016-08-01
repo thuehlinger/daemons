@@ -78,7 +78,9 @@ module Daemons
     end
 
     def output_logfile
-      if log_output?
+      if log_output_syslog?
+        'SYSLOG'
+      elsif log_output?
         File.join logdir, output_logfilename
       end
     end
@@ -322,7 +324,7 @@ module Daemons
     # one cannot catch exceptions that are thrown in threads other than the main
     # thread.
     #
-    # This function searches for all exceptions in memory and outputs them to STDERR
+    # This function searches for all exceptions in memory and outputs them to $stderr
     # (if it is connected) and to a log file in the pid-file directory.
     #
     def exception_log
@@ -378,7 +380,7 @@ module Daemons
       unless no_wait
         if @force_kill_waittime > 0
           @report.stopping_process(group.app_name, pid)
-          STDOUT.flush
+          $stdout.flush
 
           begin
             Timeout.timeout(@force_kill_waittime, TimeoutError) do
@@ -388,7 +390,7 @@ module Daemons
             end
           rescue TimeoutError
             @report.forcefully_stopping_process(group.app_name, pid)
-            STDOUT.flush
+            $stdout.flush
 
             begin
               Process.kill('KILL', pid)
@@ -403,7 +405,7 @@ module Daemons
               end
             rescue TimeoutError
               @report.cannot_stop_process(group.app_name, pid)
-              STDOUT.flush
+              $stdout.flush
             end
           end
         end
@@ -417,7 +419,7 @@ module Daemons
         begin; @pid.cleanup; rescue ::Exception; end
 
         @report.stopped_process(group.app_name, pid)
-        STDOUT.flush
+        $stdout.flush
       end
     end
 
@@ -454,6 +456,10 @@ module Daemons
 
     def log_output?
       options[:log_output] && logdir
+    end
+
+    def log_output_syslog?
+      options[:log_output_syslog]
     end
 
     def dir_mode

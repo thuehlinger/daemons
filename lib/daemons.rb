@@ -47,7 +47,7 @@ require 'daemons/controller'
 #     the potential of acquiring a controlling terminal.
 # 4.  Changes the current working directory to "/".
 # 5.  Clears the file creation mask (sets +umask+ to 0000).
-# 6.  Closes file descriptors (reopens +STDOUT+ and +STDERR+ to point to a logfile if
+# 6.  Closes file descriptors (reopens +$stdout+ and +$stderr+ to point to a logfile if
 #     possible).
 #
 # So what does this mean for your daemons:
@@ -112,8 +112,9 @@ module Daemons
   # <tt>:log_dir</tt>::   A specific directory to put the log files into (when not given, resort to the default
   #                       location as derived from the :dir_mode and :dir options
   # <tt>:logfilename</tt>:: Specifiy a custom log file name
-  # <tt>:log_output</tt>:: When given (i.e. set to true), redirect both STDOUT and STDERR to a logfile named '[app_name].output' (or as given in :output_logfilename) in the pid-file directory
+  # <tt>:log_output</tt>:: When given (i.e. set to true), redirect both $stdout and $stderr to a logfile named '[app_name].output' (or as given in :output_logfilename) in the pid-file directory
   # <tt>:output_logfilename</tt>:: Specifiy a custom output redirection file name
+  # <tt>:log_output_syslog</tt>:: When set to true, redirect output into SYSLOG instead of the file. This overrides log_output setting.
   # <tt>:keep_pid_files</tt>:: When given do not delete lingering pid-files (files for which the process is no longer running).
   # <tt>:hard_exit</tt>:: When given use exit! to end a daemons instead of exit (this will for example
   #                       not call at_exit handlers).
@@ -276,7 +277,8 @@ module Daemons
   # <tt>:dir</tt>::       Used in combination with <tt>:dir_mode</tt> (description above)
   # <tt>:log_dir</tt>::   A specific directory to put the log files into (when not given, resort to the default
   #                       location as derived from the :dir_mode and :dir options
-  # <tt>:log_output</tt>:: When given (i.e. set to true), redirect both STDOUT and STDERR to a logfile named '[app_name].output' in the pid-file directory
+  # <tt>:log_output</tt>:: When given (i.e. set to true), redirect both $stdout and $stdout to a logfile named '[app_name].output' in the pid-file directory
+  # <tt>:log_output_syslog</tt>:: When set to true, redirect output into SYSLOG instead of the file. This overrides log_output setting.
   # -----
   #
   # === Example:
