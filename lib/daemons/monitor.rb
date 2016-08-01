@@ -28,7 +28,7 @@ module Daemons
     def initialize(an_app, options = {})
       @app = an_app
       @app_name = an_app.group.app_name + '_monitor'
-      @timeout = options[:timeout] || 30
+      @monitor_interval = options[:monitor_interval] || 30
 
       if an_app.pidfile_dir
         @pid = PidFile.new(an_app.pidfile_dir, @app_name, false)
@@ -53,7 +53,7 @@ module Daemons
           end
         end
 
-        sleep(@timeout)
+        sleep(@monitor_interval)
       end
     end
     private :watch
