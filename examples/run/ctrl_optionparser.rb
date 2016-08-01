@@ -28,7 +28,7 @@ class MyApp < Logger::Application
   def run
     Daemons.run_proc('myapp', :ARGV => @args, :ontop => !@options.daemonize) do
       puts "@options.daemonize: #{@options.daemonize}"
-      STDOUT.sync = true
+      $stdout.sync = true
       loop do
         print '.'
         sleep(2)

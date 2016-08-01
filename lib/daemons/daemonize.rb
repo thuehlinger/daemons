@@ -30,7 +30,7 @@ module Daemonize
     close_io
 
     # Free STDIN and point it to somewhere sensible
-    begin; STDIN.reopen '/dev/null'; rescue ::Exception; end
+    begin; $stdin.reopen '/dev/null'; rescue ::Exception; end
 
     # Split rand streams between spawning and daemonized process
     srand
@@ -122,7 +122,7 @@ module Daemonize
     # Make sure all input/output streams are closed
     # Part I: close all IO objects (except for STDIN/STDOUT/STDERR)
     ObjectSpace.each_object(IO) do |io|
-      unless [STDIN, STDOUT, STDERR].include?(io)
+      unless [$stdin, $stdout, $stderr].include?(io)
         io.close rescue nil
       end
     end
@@ -138,22 +138,31 @@ module Daemonize
   # Free STDIN/STDOUT/STDERR file descriptors and
   # point them somewhere sensible
   def redirect_io(logfile_name)
-    begin; STDIN.reopen '/dev/null'; rescue ::Exception; end
+    begin; $stdin.reopen '/dev/null'; rescue ::Exception; end
 
-    if logfile_name
+    if logfile_name == 'SYSLOG'
+      # attempt to use syslog via syslogio
       begin
-        STDOUT.reopen logfile_name, 'a'
-        File.chmod(0644, logfile_name)
-        STDOUT.sync = true
+        require 'syslogio'
+        $stdout = ::Daemons::SyslogIO.new($0, :local0, :info, $stdout)
+        $stderr = ::Daemons::SyslogIO.new($0, :local0, :err, $stderr)
+        # error out early so we can fallback to null
+        $stdout.puts "no logfile provided, output redirected to syslog"
       rescue ::Exception
-        begin; STDOUT.reopen '/dev/null'; rescue ::Exception; end
+        # on unsupported platforms simply reopen /dev/null
+        begin; $stdout.reopen '/dev/null'; rescue ::Exception; end
+        begin; $stderr.reopen '/dev/null'; rescue ::Exception; end
       end
+    elsif logfile_name
+      $stdout.reopen logfile_name, 'a'
+      File.chmod(0644, logfile_name)
+      $stdout.sync = true
+      begin; $stderr.reopen $stdout; rescue ::Exception; end
+      $stderr.sync = true
     else
-      begin; STDOUT.reopen '/dev/null'; rescue ::Exception; end
+      begin; $stdout.reopen '/dev/null'; rescue ::Exception; end
+      begin; $stderr.reopen '/dev/null'; rescue ::Exception; end
     end
-
-    begin; STDERR.reopen STDOUT; rescue ::Exception; end
-    STDERR.sync = true
   end
   module_function :redirect_io
 end
