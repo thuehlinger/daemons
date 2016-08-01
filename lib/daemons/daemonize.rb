@@ -29,7 +29,11 @@ module Daemonize
 
     close_io
 
+<<<<<<< HEAD
     # Free $stdin and point it to somewhere sensible
+=======
+    # Free STDIN and point it to somewhere sensible
+>>>>>>> 3fc4eff2fef1717d3757dd5cf2af0fd7e2ed4353
     begin; $stdin.reopen '/dev/null'; rescue ::Exception; end
 
     # Split rand streams between spawning and daemonized process
