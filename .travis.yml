@@ -10,5 +10,5 @@ matrix:
   include:
     - rvm: 2.0.0
       os: osx
-    - rvm: 2.2.5
+    - rvm: 2.2.3
       os: osx
