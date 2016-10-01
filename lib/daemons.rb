@@ -251,6 +251,7 @@ module Daemons
     options[:app_name] ||= 'proc'
     options[:proc] = Proc.new
     options[:mode] = :proc
+    options[:dir_mode] = :normal
 
     @group ||= ApplicationGroup.new(options[:app_name], options)
 
