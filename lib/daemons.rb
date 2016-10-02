@@ -238,23 +238,25 @@ module Daemons
   #   end
   #
   def call(options = {}, &block)
-    unless block_given?
-      fail 'Daemons.call: no block given'
-    end
-
-    options[:proc] = block
-    options[:mode] = :proc
-
-    options[:app_name] ||= 'proc'
-
-    @group ||= ApplicationGroup.new(options[:app_name], options)
-
-    new_app = @group.new_application(options)
+    new_app = Daemons.new(options, &block)
     new_app.start
-
     new_app
   end
   module_function :call
+
+  # Create a new Daemon application, like <tt>Daemons.call</tt>, but will not start it automatically
+  def new(options = {}, &block)
+    fail 'Daemons.call: no block given' unless block_given?
+
+    options[:app_name] ||= 'proc'
+    options[:proc] = Proc.new
+    options[:mode] = :proc
+
+    @group ||= ApplicationGroup.new(options[:app_name], options)
+
+    @group.new_application(options)
+  end
+  module_function :new
 
   # Daemonize the currently runnig process, i.e. the calling process will become a daemon.
   #
