@@ -100,9 +100,9 @@ module Daemons
     end
 
     def zap
-      File.delete(filename)
+      File.delete(filename) if exist?
     end
-    
+
     def pid
       begin
         File.open(filename) do |f|
