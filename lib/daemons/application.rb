@@ -416,7 +416,7 @@ module Daemons
       unless Pid.running?(pid)
         # We try to remove the pid-files by ourselves, in case the application
         # didn't clean it up.
-        begin; @pid.cleanup; rescue ::Exception; end
+        zap!
 
         @report.stopped_process(group.app_name, pid)
         $stdout.flush
