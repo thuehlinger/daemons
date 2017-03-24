@@ -1,5 +1,9 @@
 = Daemons Release History
 
+== Release 1.2.5: XXX
+
+* In Application#stop, call zap, not cleanup on the pidfile (thanks to wevanscfi)
+
 == Release 1.2.4: August 1, 2016
 
 * add :shush option
