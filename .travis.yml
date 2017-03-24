@@ -6,9 +6,14 @@ rvm:
   - 2.1
   - 2.2
   - 2.3.1
+  - 2.4
 matrix:
   include:
-    - rvm: 2.0.0
+    - rvm: 2.1
       os: osx
-    - rvm: 2.2.3
+    - rvm: 2.2
+      os: osx
+    - rvm: 2.3
+      os: osx
+    - rvm: 2.4
       os: osx
