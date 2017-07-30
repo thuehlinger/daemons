@@ -1,8 +1,9 @@
 = Daemons Release History
 
-== Release 1.2.5: XXX
+== Release 1.2.5: July 30, 2017
 
 * In Application#stop, call zap, not cleanup on the pidfile (thanks to wevanscfi)
+* Use File.expand_path on and output and log files (thanks to Dave Harris)
 
 == Release 1.2.4: August 1, 2016
 

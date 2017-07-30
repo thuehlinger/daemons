@@ -1,4 +1,9 @@
 html/*
 Gemfile.lock
+*.gem
+examples/*/*.log
+examples/*/*.txt
+examples/*/*.output
 coverage
 myserver*.rb
+HOWTO Release.md

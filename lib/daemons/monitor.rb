@@ -107,7 +107,7 @@ module Daemons
           end
       rescue ::Exception => e
         $stderr.puts "exception while trying to stop monitor process #{pid}: #{e}"
-        $stderr.puts 'deleting pid-file.'
+        $stderr.puts "deleting pid-file."
       end
 
       # We try to remove the pid-files by ourselves, in case the monitor
