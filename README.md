@@ -204,4 +204,4 @@ Daemons.run('myserver.rb', { show_status_callback: :custom_show_status })
 Author
 ------
 
-Written 2005-2016 by Thomas Uehlinger, 2014-2016 by Aaron Stone.
+Written 2005-2017 by Thomas Uehlinger, 2014-2016 by Aaron Stone.
