@@ -28,7 +28,7 @@ module Daemons
       @options = group.options.dup
       @options.update(add_options)
 
-      ['log_dir', 'logfilename', 'output_logfilename'].each do |k|
+      ['dir', 'log_dir', 'logfilename', 'output_logfilename'].each do |k|
         @options[k] = File.expand_path(@options[k]) if @options.key?(k)
       end
         

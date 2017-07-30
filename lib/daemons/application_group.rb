@@ -23,19 +23,22 @@ module Daemons
       @app_name = app_name
       @options = options
 
-      if options[:script]
-        @script = File.expand_path(options[:script])
+      if @options[:script]
+        @script = File.expand_path(@options[:script])
       end
 
       @monitor = nil
 
-      @multiple = options[:multiple] || false
+      @multiple = @options[:multiple] || false
 
-      @dir_mode = options[:dir_mode] || :script
-      @dir = options[:dir] || ''
+      @dir_mode = @options[:dir_mode] || :script
+      ['dir'].each do |k|
+        @options[k] = File.expand_path(@options[k]) if @options.key?(k)
+      end
+      @dir = @options[:dir] || ''
 
-      @keep_pid_files = options[:keep_pid_files] || false
-      @no_pidfiles = options[:no_pidfiles] || false
+      @keep_pid_files = @options[:keep_pid_files] || false
+      @no_pidfiles = @options[:no_pidfiles] || false
 
       @applications = []
     end
