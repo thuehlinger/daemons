@@ -61,7 +61,7 @@ module Daemons
           @group.stop_all(@options[:no_wait])
         when 'restart'
           unless @group.applications.empty?
-            @group.stop_all
+            @group.stop_all(@options[:no_wait])
             sleep(1)
             @group.start_all
           else
