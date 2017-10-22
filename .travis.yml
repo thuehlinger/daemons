@@ -15,3 +15,5 @@ matrix:
       os: osx
     - rvm: 2.3.3
       os: osx
+    - rvm: 2.3.4
+      os: osx
