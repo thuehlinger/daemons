@@ -3,7 +3,7 @@ require File.expand_path('../lib/daemons/version', __FILE__)
 Gem::Specification.new do |s|
   s.name = %q{daemons}
   s.version = Daemons::VERSION
-  s.date = %q{2017-07-30}
+  s.date = %q{2017-10-22}
   s.authors = ["Thomas Uehlinger"]
   s.license = "MIT"
   s.email = %q{thomas.uehinger@gmail.com}
@@ -27,5 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 0'
   s.add_development_dependency 'rspec', '~> 3.1'
   s.add_development_dependency 'simplecov', '~> 0'
-  s.add_development_dependency 'pry-byebug', '~> 3.0.0'
+  s.add_development_dependency 'pry-byebug', '~> 3.0', '>= 3.0.0'
 end
