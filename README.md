@@ -201,6 +201,11 @@ end
 Daemons.run('myserver.rb', { show_status_callback: :custom_show_status })
 ```
 
+Documenation
+-------------------
+
+Documentation can be found at http://www.rubydoc.info/gems/daemons.
+
 Author
 ------
 

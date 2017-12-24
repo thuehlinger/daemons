@@ -1,5 +1,9 @@
 = Daemons Release History
 
+== Release 1.2.6: December 24, 2017
+
+* Add links to rubydoc.info documentation.
+
 == Release 1.2.5: October 22, 2017
 
 * In Application#stop, call zap, not cleanup on the pidfile (thanks to wevanscfi)
