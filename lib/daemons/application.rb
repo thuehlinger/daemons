@@ -52,7 +52,12 @@ module Daemons
     end
 
     def show_status_callback=(function)
-      @show_status_callback = method(function)
+      @show_status_callback = 
+        if function.respond_to?(:call)
+          function
+        else
+          method(function)
+        end
     end
 
     def change_privilege
