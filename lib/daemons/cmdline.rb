@@ -25,6 +25,10 @@ module Daemons
           @options[:no_wait] = t
         end
 
+        opts.on('-w', '--force_kill_waittime SECONDS', Integer, 'Maximum time to wait for processes to stop before force-killing') do |t|
+          @options[:force_kill_waittime] = t
+        end
+
         opts.separator ''
         opts.separator 'Common options:'
 
