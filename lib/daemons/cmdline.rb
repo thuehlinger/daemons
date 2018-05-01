@@ -82,7 +82,7 @@ END
       puts '  stop          stop all instances of the application'
       puts '  restart       stop all instances and restart them afterwards'
       puts '  reload        send a SIGHUP to all instances of the application'
-      puts '  run           start the application and stay on top'
+      puts '  run           run the application in the foreground (same as start -t)'
       puts '  zap           set the application to a stopped state'
       puts '  status        show status (PID) of application instances'
       puts
