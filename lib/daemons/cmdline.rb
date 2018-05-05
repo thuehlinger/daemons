@@ -75,7 +75,7 @@ END
 
   class Controller
     def print_usage
-      puts <<~USAGE
+      puts <<-END.gsub(/^ {6}/, '')
       Usage: #{@app_name} <command> <options> -- <application options>
 
       * where <command> is one of:
