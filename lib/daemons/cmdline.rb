@@ -75,20 +75,21 @@ END
 
   class Controller
     def print_usage
-      puts "Usage: #{@app_name} <command> <options> -- <application options>"
-      puts
-      puts '* where <command> is one of:'
-      puts '  start         start an instance of the application'
-      puts '  stop          stop all instances of the application'
-      puts '  restart       stop all instances and restart them afterwards'
-      puts '  reload        send a SIGHUP to all instances of the application'
-      puts '  run           start the application and stay on top'
-      puts '  zap           set the application to a stopped state'
-      puts '  status        show status (PID) of application instances'
-      puts
-      puts '* and where <options> may contain several of the following:'
+      puts <<-USAGE.gsub(/^ {6}/, '')
+      Usage: #{@app_name} <command> <options> -- <application options>
 
-      puts @optparse.usage
+      * where <command> is one of:
+        start         start an instance of the application
+        stop          stop all instances of the application
+        restart       stop all instances and restart them afterwards
+        reload        send a SIGHUP to all instances of the application
+        run           run the application in the foreground (same as start -t)
+        zap           set the application to a stopped state
+        status        show status (PID) of application instances
+
+      * and where <options> may contain several of the following:
+      #{@optparse.usage}
+      USAGE
     end
 
     def catch_exceptions(&block)
