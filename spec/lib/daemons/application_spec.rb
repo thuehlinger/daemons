@@ -50,6 +50,34 @@ module Daemons
     describe '#pid' do
       subject { application.pid }
       it { is_expected.to be_a PidMem }
+
+      context 'when valid pid dir specified' do
+        before do
+          allow_any_instance_of(described_class)
+            .to receive(:dir_mode)
+            .and_return :system
+        end
+
+        context 'but :pid_delimiter and not provided' do
+          it 'the pid file uses default' do
+            expect(PidFile)
+              .to receive(:new)
+              .with('/var/run', group.app_name, group.multiple, nil)
+            subject
+          end
+        end
+        context 'and :pid_delimiter provided' do
+          let(:additional_options) {
+            { pid_delimiter: 'a.b' }
+          }
+          it 'is used for pid file' do
+            expect(PidFile)
+              .to receive(:new)
+              .with('/var/run', group.app_name, group.multiple, 'a.b')
+            subject
+          end
+        end
+      end
     end
 
     describe '#group' do

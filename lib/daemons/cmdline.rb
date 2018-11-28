@@ -12,7 +12,7 @@ module Daemons
         opts.on('-t', '--ontop', 'Stay on top (does not daemonize)') do |t|
           @options[:ontop] = t
         end
-        
+
         opts.on('-s', '--shush', 'Silent mode (no output to the terminal)') do |t|
           @options[:shush] = t
         end
@@ -27,6 +27,10 @@ module Daemons
 
         opts.on('-w', '--force_kill_waittime SECONDS', Integer, 'Maximum time to wait for processes to stop before force-killing') do |t|
           @options[:force_kill_waittime] = t
+        end
+
+        opts.on('--pid_delimiter STRING', 'Text used to separate process number in full process name and pid-file name') do |value|
+          @options[:pid_delimiter] = value
         end
 
         opts.separator ''
@@ -66,7 +70,7 @@ END
     def parse(args)
       # The options specified on the command line will be collected in *options*.
       # We set default values here.
-      
+
       @opts.parse(args)
 
       @options

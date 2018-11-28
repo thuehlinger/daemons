@@ -38,7 +38,10 @@ module Daemons
       @dir = @options[:dir] || ''
 
       @keep_pid_files = @options[:keep_pid_files] || false
+
       @no_pidfiles = @options[:no_pidfiles] || false
+
+      @pid_delimiter = @options[:pid_delimiter]
 
       @applications = []
     end
@@ -94,7 +97,7 @@ module Daemons
       @monitor = Monitor.find(dir, app_name + '_monitor')
 
       reporter = Reporter.new(options)
-      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files) do |pid, file|
+      pid_files = PidFile.find_files(dir, app_name, ! @keep_pid_files, @pid_delimiter) do |pid, file|
         reporter.deleted_found_pidfile(pid, file)
       end
 
