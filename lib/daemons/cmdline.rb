@@ -29,6 +29,10 @@ module Daemons
           @options[:force_kill_waittime] = t
         end
 
+        opts.on('--pid_delimiter STRING', 'Text used to separate process number in full process name and pid-file name') do |value|
+          @options[:pid_delimiter] = value
+        end
+
         opts.separator ''
         opts.separator 'Common options:'
 
