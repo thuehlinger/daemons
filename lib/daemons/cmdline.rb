@@ -36,6 +36,26 @@ module Daemons
         opts.separator ''
         opts.separator 'Common options:'
 
+        opts.on('-l', '--log_output', 'Enable input/output stream redirection') do |value|
+          @options[:log_output] = value
+        end
+
+        opts.on('--logfilename FILE', String, 'Custom log file name for exceptions') do |value|
+          @options[:logfilename] = value
+        end
+
+        opts.on('--output_logfilename FILE', String, 'Custom file name for input/output stream redirection log') do |value|
+          @options[:output_logfilename] = value
+        end
+
+        opts.on('--log_dir DIR', String, 'Directory for log files') do |value|
+          @options[:log_dir] = value
+        end
+
+        opts.on('--syslog', 'Enable redirect output into SYSLOG instead of the file') do |value|
+          @options[:log_output_syslog] = value
+        end
+
         # No argument, shows at tail.  This will print an options summary
         opts.on_tail('-h', '--help', 'Show this message') do
           controller.print_usage

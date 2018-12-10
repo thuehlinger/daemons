@@ -18,14 +18,33 @@ describe Daemons::Optparse do
       {given: ["-n"],                           expect: {no_wait: true}},
       {given: ["--no_wait"],                    expect: {no_wait: true}},
       {given: ["--pid_delimiter", "a.b"],       expect: {pid_delimiter: "a.b"}},
+      {given: ["--force_kill_waittime", "42"],  expect: {force_kill_waittime: 42}},
+      {given: ["-l"],                           expect: {log_output: true}},
+      {given: ["--log_output"],                 expect: {log_output: true}},
+      {given: ["--logfilename", "FILE"],        expect: {logfilename: "FILE"}},
+      {given: ["--output_logfilename", "FILE"], expect: {output_logfilename: "FILE"}},
+      {given: ["--log_dir", "/dir/"],           expect: {log_dir: "/dir/"}},
+      {given: ["--syslog"],                     expect: {log_output_syslog: true}},
       {given: [
-          "-t", "-s", "-f", "-n", "--pid_delimiter", "a.b"
+          "-t", "-s", "-f", "-n",
+          "--pid_delimiter", "a.b",
+          "--force_kill_waittime", "42",
+          "-l", "--logfilename", "LF",
+          "--output_logfilename", "OLF",
+          "--log_dir", "/dir/",
+          "--syslog"
         ], expect: {
           ontop: true,
           shush: true,
           force: true,
           no_wait: true,
-          pid_delimiter: "a.b"
+          pid_delimiter: "a.b",
+          force_kill_waittime: 42,
+          log_output: true,
+          log_output_syslog: true,
+          logfilename: "LF",
+          output_logfilename: "OLF",
+          log_dir: "/dir/"
         }
       }
     ].each do |test_options|
