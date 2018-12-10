@@ -209,4 +209,4 @@ Documentation can be found at http://www.rubydoc.info/gems/daemons.
 Author
 ------
 
-Written 2005-2017 by Thomas Uehlinger, 2014-2016 by Aaron Stone.
+Written 2005-2018 by Thomas Uehlinger, 2014-2016 by Aaron Stone.

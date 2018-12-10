@@ -1,5 +1,11 @@
 = Daemons Release History
 
+== Release 1.3.0: December 10, 2018
+
+* Make logging more configurable.
+* Add configuration options for pid file delimters, force_kill_waittime
+* All status callback to be anything callable.
+
 == Release 1.2.6: December 24, 2017
 
 * Add links to rubydoc.info documentation.
