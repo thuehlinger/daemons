@@ -31,7 +31,7 @@ module Daemons
       ['dir', 'log_dir', 'logfilename', 'output_logfilename'].each do |k|
         @options[k] = File.expand_path(@options[k]) if @options.key?(k)
       end
-        
+
       @dir_mode = @dir = @script = nil
 
       @force_kill_waittime = @options[:force_kill_waittime] || 20
@@ -44,7 +44,7 @@ module Daemons
         if @options[:no_pidfiles]
           @pid = PidMem.new
         elsif dir = pidfile_dir
-          @pid = PidFile.new(dir, @group.app_name, @group.multiple)
+          @pid = PidFile.new(dir, @group.app_name, @group.multiple, @options[:pid_delimiter])
         else
           @pid = PidMem.new
         end
@@ -52,7 +52,7 @@ module Daemons
     end
 
     def show_status_callback=(function)
-      @show_status_callback = 
+      @show_status_callback =
         if function.respond_to?(:call)
           function
         else

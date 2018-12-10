@@ -99,6 +99,7 @@ module Daemons
   # <tt>:dir</tt>::       Used in combination with <tt>:dir_mode</tt> (description above)
   # <tt>:multiple</tt>::  Specifies whether multiple instances of the same script are allowed to run at the
   #                       same time
+  # <tt>:pid_delimiter</tt>:: Specifies the separator used when enumerating multiple process names/pid-files. Default is '_num'.
   # <tt>:ontop</tt>::     When given (i.e. set to true), stay on top, i.e. do not daemonize the application
   #                       (but the pid-file and other things are written as usual)
   # <tt>:shush</tt>::     When given (i.e. set to true), turn on silent mode (no output to the terminal)
@@ -129,6 +130,7 @@ module Daemons
   #     :dir_mode           => :script,
   #     :dir                => 'pids',
   #     :multiple           => true,
+  #     :pid_delimiter      => '.n',
   #     :ontop              => true,
   #     :shush              => false,
   #     :mode               => :exec,
