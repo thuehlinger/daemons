@@ -48,7 +48,7 @@ module Daemons
           @options[:log_dir] = value
         end
 
-        opts.on('--syslog', 'Enable redirect output into SYSLOG instead of the file') do |value|
+        opts.on('--syslog', 'Enable output redirction into SYSLOG instead of a file') do |value|
           @options[:log_output_syslog] = value
         end
 
