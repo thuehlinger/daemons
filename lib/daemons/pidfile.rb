@@ -29,7 +29,7 @@ module Daemons
   #
   class PidFile < Pid
     DEFAULT_PID_DELIMITER = '_num'
-    attr_reader :dir, :progname, :multiple, :number
+    attr_reader :dir, :progname, :multiple, :number, :pid_delimiter
 
     def self.find_files(dir, progname, delete = false, pid_delimiter = nil)
       files = Dir[File.join(dir, "#{progname}#{pid_delimiter || DEFAULT_PID_DELIMITER}*.pid")]
