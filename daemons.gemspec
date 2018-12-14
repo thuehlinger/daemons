@@ -3,7 +3,6 @@ require File.expand_path('../lib/daemons/version', __FILE__)
 Gem::Specification.new do |s|
   s.name = %q{daemons}
   s.version = Daemons::VERSION
-  s.date = %q{2017-12-24}
   s.authors = ["Thomas Uehlinger"]
   s.license = "MIT"
   s.email = %q{thomas.uehinger@gmail.com}

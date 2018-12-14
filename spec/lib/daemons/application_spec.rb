@@ -77,6 +77,13 @@ module Daemons
             subject
           end
         end
+        context 'group with multiple processes is provided' do
+          let(:group) { ApplicationGroup.new app_name, multiple: true }
+
+          it 'uses the number in filename' do
+            expect(subject.filename).to eq "/var/run/#{group.app_name}_num0.pid"
+          end
+        end
       end
     end
 
