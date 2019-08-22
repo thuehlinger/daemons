@@ -203,7 +203,7 @@ module Daemons
           if $daemons_stop_proc
             $daemons_stop_proc.call
           end
-          rescue ::Exception
+        rescue ::Exception
         end
 
         begin; @pid.cleanup; rescue ::Exception; end
@@ -260,7 +260,7 @@ module Daemons
             if $daemons_stop_proc
               $daemons_stop_proc.call
             end
-            rescue ::Exception
+          rescue ::Exception
           end
 
           begin; @pid.cleanup; rescue ::Exception; end
