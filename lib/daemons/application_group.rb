@@ -83,7 +83,7 @@ module Daemons
           end
           pids = processes.map { |p| p.split(/\s/)[0].to_i }
         end
-        rescue ::Exception
+      rescue ::Exception
       end
 
       pids.map do |f|
