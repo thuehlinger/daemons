@@ -36,6 +36,8 @@ module Daemons
 
       @force_kill_waittime = @options[:force_kill_waittime] || 20
 
+      @signals_and_waits = parse_signals_and_waits(@options[:signals_and_waits])
+
       @show_status_callback = method(:default_show_status)
 
       @report = Reporter.new(@options)
@@ -373,6 +375,7 @@ module Daemons
         return
       end
 
+      # confusing: pid is also a attribute_reader
       pid = @pid.pid
 
       # Catch errors when trying to kill a process that doesn't
@@ -380,45 +383,10 @@ module Daemons
       # restarted by the monitor yet. By catching the error, we allow the
       # pid file clean-up to occur.
       begin
-        Process.kill(SIGNAL, pid)
+        wait_and_retry_kill_harder(pid, @signals_and_waits, no_wait)
       rescue Errno::ESRCH => e
         @report.output_message("#{e} #{pid}")
         @report.output_message('deleting pid-file.')
-      end
-
-      unless no_wait
-        if @force_kill_waittime > 0
-          @report.stopping_process(group.app_name, pid)
-          $stdout.flush
-
-          begin
-            Timeout.timeout(@force_kill_waittime, TimeoutError) do
-              while Pid.running?(pid)
-                sleep(0.2)
-              end
-            end
-          rescue TimeoutError
-            @report.forcefully_stopping_process(group.app_name, pid)
-            $stdout.flush
-
-            begin
-              Process.kill('KILL', pid)
-            rescue Errno::ESRCH
-            end
-
-            begin
-              Timeout.timeout(20, TimeoutError) do
-                while Pid.running?(pid)
-                  sleep(1)
-                end
-              end
-            rescue TimeoutError
-              @report.cannot_stop_process(group.app_name, pid)
-              $stdout.flush
-            end
-          end
-        end
-
       end
 
       sleep(0.1)
@@ -428,7 +396,30 @@ module Daemons
         zap!
 
         @report.stopped_process(group.app_name, pid)
-        $stdout.flush
+      end
+    end
+
+    # @param Hash remaing_signals
+    # @param Boolean no_wait Send first Signal and return
+    def wait_and_retry_kill_harder(pid, remaining_signals, no_wait = false)
+      sig_wait = remaining_signals.shift
+      sig      = sig_wait[:sig]
+      wait     = sig_wait[:wait]
+      Process.kill(sig, pid)
+      return if no_wait || !wait.positive?
+
+      @report.stopping_process(group.app_name, pid, sig, wait)
+
+      begin
+        Timeout.timeout(wait, TimeoutError) do
+          sleep(0.2) while Pid.running?(pid)
+        end
+      rescue TimeoutError
+        if remaining_signals.any?
+          wait_and_retry_kill_harder(pid, remaining_signals)
+        else
+          @report.cannot_stop_process(group.app_name, pid)
+        end
       end
     end
 
@@ -477,6 +468,16 @@ module Daemons
 
     def dir
       @dir or group.dir
+    end
+
+    def parse_signals_and_waits(argv)
+      unless argv
+        return [
+          { sig: 'TERM', wait: @force_kill_waittime },
+          { sig: 'KILL', wait: 20 }
+        ]
+      end
+      argv.split('|').collect{ |part| splitted = part.split(':'); {sig: splitted[0], wait: splitted[1].to_i}}
     end
   end
 end

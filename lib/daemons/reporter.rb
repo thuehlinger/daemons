@@ -32,20 +32,19 @@ module Daemons
       output_message 'option :backtrace is not supported with :mode => :exec, ignoring'
     end
 
-    def stopping_process(app_name, pid)
-      output_message "#{app_name}: trying to stop process with pid #{pid}..."
-    end
-
-    def forcefully_stopping_process(app_name, pid)
-      output_message "#{app_name}: process with pid #{pid} won't stop, we forcefully kill it..." 
+    def stopping_process(app_name, pid, sig, wait)
+      output_message "#{app_name}: trying to stop process with pid #{pid}#{' forcefully :(' if sig == 'KILL'} sending #{sig} and waiting #{wait}s ..."
+      $stdout.flush
     end
 
     def cannot_stop_process(app_name, pid)
       output_message "#{app_name}: unable to forcefully kill process with pid #{pid}."
+      $stdout.flush
     end
 
     def stopped_process(app_name, pid)
       output_message "#{app_name}: process with pid #{pid} successfully stopped."
+      $stdout.flush
     end
 
     def status(app_name, running, pid_exists, pid)
