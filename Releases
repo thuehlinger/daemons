@@ -1,5 +1,11 @@
 = Daemons Release History
 
+== Release 1.4.0: May 1, 2021
+
+* Allow for customization which signals are sent to stop process (thanks to philister)
+* Resolves mismatched indentations (thanks to Luis M Rodriguez)
+* Allow to use pry-byebug 3.8.0 (thanks to kamipo)
+
 == Release 1.3.1: December 14, 2018
 
 * Fix undefined local variable or method `pid_delimiter'
