@@ -28,6 +28,9 @@ module Daemons
         opts.on('-w', '--force_kill_waittime SECONDS', Integer, 'Maximum time to wait for processes to stop before force-killing') do |t|
           @options[:force_kill_waittime] = t
         end
+        opts.on('--signals_and_waits STRING', String, 'which signal to use to stop and how long to wait e.g. TERM:20|KILL:20') do |t|
+          @options[:signals_and_waits] = t
+        end
 
         opts.on('--pid_delimiter STRING', 'Text used to separate process number in full process name and pid-file name') do |value|
           @options[:pid_delimiter] = value

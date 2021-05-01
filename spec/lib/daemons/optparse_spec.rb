@@ -19,6 +19,7 @@ describe Daemons::Optparse do
       {given: ["--no_wait"],                    expect: {no_wait: true}},
       {given: ["--pid_delimiter", "a.b"],       expect: {pid_delimiter: "a.b"}},
       {given: ["--force_kill_waittime", "42"],  expect: {force_kill_waittime: 42}},
+      {given: ["--signals_and_waits", "TERM:20|KILL:20"],  expect: {signals_and_waits: "TERM:20|KILL:20"}},
       {given: ["-l"],                           expect: {log_output: true}},
       {given: ["--log_output"],                 expect: {log_output: true}},
       {given: ["--logfilename", "FILE"],        expect: {logfilename: "FILE"}},
