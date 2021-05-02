@@ -2,7 +2,6 @@ script: bundle exec rspec --format documentation
 language: ruby
 os:
   - linux
-  - osx
 dist: xenial
 osx_image: xcode12.2
 rvm:
