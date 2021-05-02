@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files README.md LICENSE Releases lib examples`.split
 
-  s.add_development_dependency 'rake', '~> 0'
+  s.add_development_dependency 'rake', '~> 12.3', '>= 12.3.3'
   s.add_development_dependency 'rspec', '~> 3.1'
   s.add_development_dependency 'simplecov', '~> 0'
   s.add_development_dependency 'pry-byebug', '~> 3.0'
