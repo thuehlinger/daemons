@@ -1,9 +1,9 @@
 script: bundle exec rspec --format documentation
 language: ruby
-sudo: false
 os:
   - linux
   - osx
+dist: xenial
 osx_image: xcode12.2
 rvm:
   - 2.0.0
@@ -15,4 +15,13 @@ rvm:
   - 2.6
   - 2.7
   - 3.0
-
+matrix:
+  include:
+    - rvm: 2.4
+      os: osx
+    - rvm: 2.5
+      os: osx
+    - rvm: 2.6
+      os: osx
+    - rvm: 2.7
+      os: osx
