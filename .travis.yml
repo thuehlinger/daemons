@@ -4,6 +4,7 @@ sudo: false
 os:
   - linux
   - osx
+osx_image: xcode12.2
 rvm:
   - 2.0.0
   - 2.1
