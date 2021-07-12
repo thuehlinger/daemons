@@ -251,7 +251,7 @@ module Daemons
     fail 'Daemons.call: no block given' unless block_given?
 
     options[:app_name] ||= 'proc'
-    options[:proc] = Proc.new
+    options[:proc] = Proc.new(&block)
     options[:mode] = :proc
     options[:dir_mode] = :normal
 
