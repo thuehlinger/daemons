@@ -1,5 +1,5 @@
-Ruby Daemons
-============
+# Ruby Daemons
+
 [![Build Status](https://travis-ci.org/thuehlinger/daemons.svg?branch=master)](https://travis-ci.org/thuehlinger/daemons)[![Code Climate](https://codeclimate.com/github/acuppy/daemons/badges/gpa.svg)](https://codeclimate.com/github/acuppy/daemons)[![Test Coverage](https://circleci.com/gh/acuppy/daemons.svg?style=shield&circle-token=a4f96fd41f7682661d6543e30207427ac8870c0d)](https://circleci.com/gh/acuppy/daemons)
 
 Daemons provides an easy way to wrap existing ruby scripts (for example a self-written server)
@@ -12,8 +12,7 @@ Besides this basic functionality, daemons offers many advanced features like _ex
 and logging (in case your ruby script crashes) and _monitoring_ and automatic restarting of your processes
 if they crash.
 
-Basic Usage
------------
+## Basic Usage
 
 You can use Daemons in four different ways:
 
@@ -45,7 +44,7 @@ Daemons.run('myserver.rb')
 
 And use it like this from the console:
 
-``` ruby
+``` sh
 $ ruby myserver_control.rb start
     (myserver.rb is now running in the background)
 $ ruby myserver_control.rb restart
@@ -55,17 +54,16 @@ $ ruby myserver_control.rb stop
 
 For testing purposes you can even run `myserver.rb` _without forking_ in the background:
 
-``` ruby
+``` sh
 $ ruby myserver_control.rb run
 ```
 
 An additional nice feature of Daemons is that you can pass _additional arguments_ to the script that
 should be daemonized by seperating them by two _hyphens_:
 
-``` ruby
+``` sh
 $ ruby myserver_control.rb start -- --file=anyfile --a_switch another_argument
 ```
-
 
 ### 2. Create wrapper scripts that include your server procs
 
@@ -96,7 +94,7 @@ end
 
 And use it like this from the console:
 
-``` ruby
+``` sh
 $ ruby myproc_control.rb start
     (myproc.rb is now running in the background)
 $ ruby myproc_control.rb restart
@@ -106,7 +104,7 @@ $ ruby myproc_control.rb stop
 
 For testing purposes you can even run `myproc.rb` _without forking_ in the background:
 
-``` ruby
+``` sh
 $ ruby myproc_control.rb run
 ```
 
@@ -169,13 +167,12 @@ end
 
 For further documentation, refer to the module documentation of Daemons.
 
-Displaying daemon status
-------------------------
+## Displaying daemon status
 
 When daemonizing a process using a wrapper script, as examples 1 and 2 above,
 the status can be shown using
 
-``` ruby
+``` sh
 $ ruby myproc_control.rb status
 ```
 
@@ -201,12 +198,10 @@ end
 Daemons.run('myserver.rb', { show_status_callback: :custom_show_status })
 ```
 
-Documentation
--------------------
+## Documentation
 
-Documentation can be found at http://www.rubydoc.info/gems/daemons.
+Documentation can be found at <http://www.rubydoc.info/gems/daemons>.
 
-Author
-------
+## Author
 
 Written 2005-2021 by Thomas Uehlinger, 2014-2016 by Aaron Stone.
