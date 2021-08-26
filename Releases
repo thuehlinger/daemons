@@ -1,5 +1,10 @@
 = Daemons Release History
 
+== Release 1.4.1: August 26, 2021
+
+* Fix :proc mode (pass &block explicitly) (thanks to Graham Rogers)
+* Fix style of REAMDE.md
+
 == Release 1.4.0: May 1, 2021
 
 * Allow for customization which signals are sent to stop process (thanks to philister)
