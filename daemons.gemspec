@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
 
   s.metadata = {
     "documentation_uri" => "http://www.rubydoc.info/gems/daemons",
+    "changelog_uri" => "https://github.com/thuehlinger/daemons/blob/master/Releases",
   }
 
   s.files = `git ls-files README.md LICENSE Releases lib examples`.split
