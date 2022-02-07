@@ -109,7 +109,7 @@ module Daemons
   # <tt>:backtrace</tt>:: Write a backtrace of the last exceptions to the file '[app_name].log' in the
   #                       pid-file directory if the application exits due to an uncaught exception
   # <tt>:monitor</tt>::   Monitor the programs and restart crashed instances
-  # <tt>:monitor_interval</tt>:: Interval in sesconds at which to check whether the instances are still running
+  # <tt>:monitor_interval</tt>:: Interval in seconds at which to check whether the instances are still running
   # <tt>:log_dir</tt>::   A specific directory to put the log files into (when not given, resort to the default
   #                       location as derived from the :dir_mode and :dir options
   # <tt>:logfilename</tt>:: Specifiy a custom log file name
@@ -217,7 +217,7 @@ module Daemons
   # <tt>:multiple</tt>::  Specifies whether multiple instances of the same script are allowed to run at the
   #                       same time
   # <tt>:monitor</tt>::   Monitor the programs and restart crashed instances
-  # <tt>:monitor_interval</tt>:: Interval in sesconds at which to check whether the instances are still running
+  # <tt>:monitor_interval</tt>:: Interval in seconds at which to check whether the instances are still running
   # <tt>:ontop</tt>::     When given, stay on top, i.e. do not daemonize the application
   # <tt>:backtrace</tt>:: Write a backtrace of the last exceptions to the file '[app_name].log' in the
   #                       pid-file directory if the application exits due to an uncaught exception
